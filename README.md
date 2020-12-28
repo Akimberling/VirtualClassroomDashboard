@@ -14,4 +14,3 @@ The Full Stack Application is going to be a C# ASP.Net internet application that
 ## Deliverables  
 The final product of this project will be a full stack application that provides a multi-tier platform for users such as: educators, admins, and students. Along with the application a Final Report with a full explanation of development and software, 3 User Manuals that include: 1 for educators, 1 for admin, and 1 for students, the source code for the project, and Demonstration will be provided. 
 
-##Documents can be found in code section
