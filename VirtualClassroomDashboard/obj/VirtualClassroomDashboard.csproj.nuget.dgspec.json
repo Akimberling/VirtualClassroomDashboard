@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Amber Kimberling\\source\\repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj": {}
+    "C:\\Users\\Amber Kimberling\\Source\\Repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Amber Kimberling\\source\\repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj": {
+    "C:\\Users\\Amber Kimberling\\Source\\Repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Amber Kimberling\\source\\repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj",
+        "projectUniqueName": "C:\\Users\\Amber Kimberling\\Source\\Repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj",
         "projectName": "VirtualClassroomDashboard",
-        "projectPath": "C:\\Users\\Amber Kimberling\\source\\repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj",
+        "projectPath": "C:\\Users\\Amber Kimberling\\Source\\Repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj",
         "packagesPath": "C:\\Users\\Amber Kimberling\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Amber Kimberling\\source\\repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\obj\\",
+        "outputPath": "C:\\Users\\Amber Kimberling\\Source\\Repos\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }
