@@ -6587,10 +6587,6 @@ button.bg-dark:focus {
   background-color: #1d2124 !important;
 }
 
-.bg-white {
-  background-color: #fff !important;
-}
-
 .bg-transparent {
   background-color: transparent !important;
 }
@@ -9903,13 +9899,13 @@ a.text-danger:hover, a.text-danger:focus {
 a.text-light:hover, a.text-light:focus {
   color: #cbd3da !important;
 }
-
+    /*03/11/21 - AK - color updated to green*/
 .text-dark {
-  color: #343a40 !important;
+    color: #8CC63E !important;
 }
-
+    /*03/11/21 - AK - hover updated to light gray*/
 a.text-dark:hover, a.text-dark:focus {
-  color: #121416 !important;
+    color: #D1D2D4 !important;
 }
 
 .text-body {
@@ -9917,7 +9913,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .text-muted {
-  color: #6c757d !important;
+   color: #8CC63E !important;
 }
 
 .text-black-50 {

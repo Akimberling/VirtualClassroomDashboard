@@ -1,4 +1,10 @@
 ﻿
+    /*03/11/21 - AK - added header color to be black*/
+header{
+
+    background-color: #000000;
+
+}
 
 a.navbar-brand {
   white-space: normal;
@@ -9,10 +15,14 @@ a.navbar-brand {
 a {
   color: #0366d6;
 }
+ul li a{
+    font-weight:bold;
+}
 
 a.navbar-brand img{
     width: 200px;
 }
+
 
 .btn-primary {
   color: #fff;
@@ -66,8 +76,10 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
-
+  background-color: #000000;
+  font-weight: bold;
 }
+
 
 /*@ media queries for different media device sizes*/
 
