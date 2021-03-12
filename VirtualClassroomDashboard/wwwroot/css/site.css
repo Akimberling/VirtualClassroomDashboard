@@ -18,6 +18,10 @@ a {
 ul li a{
     font-weight:bold;
 }
+ul{
+    float:left;
+    display:block;
+}
 
 a.navbar-brand img{
     width: 200px;
@@ -35,6 +39,42 @@ a.navbar-brand img{
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+/* Index content
+-------------------------------------------------- */
+
+div.box {
+    width: 96%;
+    border: 3px solid #8CC63E;
+    padding: 2px 2%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:30px;
+    
+}
+h1.mainHeading {
+    margin-top: 8px;
+    color: #007790;
+    font-weight: bold;
+}
+a.linkButtons {
+    width: 44%;
+    border: 1px solid #007790;
+    padding: 5px;
+    margin-top: 20px;
+    float: left;
+    background-color: #007790;
+    color: #D1D2D4;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 30px
+}
+a.linkButtons:hover {
+    background-color: #8CC63E;
+}
+
+img.indexImages{
+    width: 100%;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -42,13 +82,6 @@ html {
   font-size: 14px;
 }
 
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
@@ -78,6 +111,7 @@ body {
   line-height: 60px; /* Vertically center the text there */
   background-color: #000000;
   font-weight: bold;
+  font-size: 12px;
 }
 
 
