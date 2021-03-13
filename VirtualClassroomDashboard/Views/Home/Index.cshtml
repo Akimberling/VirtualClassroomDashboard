@@ -2,7 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="one-hundred">
+    <img class="indexImages" src="~/images/IndexImage.jpg" alt="Virtual Classroom Dashboard Online Learning"/>
+    <div class="box">
+        <h1 class="mainHeading">WELCOME!</h1>
+        <p>
+            Virtual Classroom Dashboard is a online learning platform. It is a all in one applications where educators can provide a diverse learning environment. It possess the ability for zoom call in application, discussion boards, announcements, assignments, assessments, and grades. Administrations can register their school and upload all the educator and student profiles using a mass upload with csv files. Educators have control over their classroom and students. Students have full access to all their coursework.
+        </p>
+    </div>
+    <a class="linkButtons" asp-controller="Home" asp-action="Index">REGISTRATION</a>
+    <a class="linkButtons shiftRight" asp-controller="Home" asp-action="Index">LOGIN</a>
+
 </div>
