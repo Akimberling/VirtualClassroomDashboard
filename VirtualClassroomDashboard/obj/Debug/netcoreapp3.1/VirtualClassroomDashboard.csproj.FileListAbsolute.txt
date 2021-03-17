@@ -22,7 +22,6 @@ C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroo
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.TagHelpers.output.cache
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.RazorCoreGenerate.cache
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -35,3 +34,7 @@ C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroo
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.pdb
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.genruntimeconfig.cache
 C:\Users\Amber Kimberling\Source\Repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.csproj.CopyComplete
+C:\Users\Amber Kimberling\source\repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Login.cshtml.g.cs
+C:\Users\Amber Kimberling\source\repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Manual.cshtml.g.cs
+C:\Users\Amber Kimberling\source\repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Registration.cshtml.g.cs
+C:\Users\Amber Kimberling\source\repos\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Contact.cshtml.g.cs
