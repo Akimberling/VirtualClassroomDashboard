@@ -74,3 +74,10 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.pdb
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.genruntimeconfig.cache
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\VirtualClassroomDashboard.csproj.CopyComplete
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\Autofac.Integration.Mvc.dll
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\Elmah.dll
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\Elmah.Mvc.dll
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\IdentityServer3.dll
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\MediatR.dll
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\Owin.dll
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Contact.cshtml.g.cs
