@@ -39,6 +39,20 @@ a.navbar-brand img{
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+/* Shared Styling
+-------------------------------------------------- */
+img.centerDivide {
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+div.clear{
+    clear:both;
+    display:block;
+}
 /* Index content
 -------------------------------------------------- */
 
@@ -70,12 +84,81 @@ a.linkButtons {
 }
 a.linkButtons:hover {
     background-color: #8CC63E;
+    color: #fff;
 }
 
 img.indexImages{
     width: 100%;
 }
 
+/*Login & Registration & Contact Contents
+-------------------------------------------------- */
+fieldset {
+    padding: 15px;
+    border: 3px solid #8CC63E;
+    width: 85%;
+    margin-left: auto;
+    margin-right:auto;
+}
+.basicLinks{
+    text-decoration: none;
+    color: #007790;
+    font-weight: bold;
+}
+.basicLinks:hover {
+    color: #D1D2D4;
+}
+.Login label, .Login input {
+    display: block;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.Login label{
+    text-align: right;
+    margin-right: 20px;
+    margin-bottom: 26px;
+}
+.Login input {
+    width: 75%
+}
+.Login p{
+    clear: both;
+    text-align:right;
+    margin-top: 15px;
+}
+.Login .submitButton {
+    width: 200px;
+    background-color: #007790;
+    color: #D1D2D4;
+    float:right;
+    margin-bottom: 0px;
+}
+.Login .submitButton:hover {
+    background-color: #8CC63E;
+    color: #fff;
+}
+textarea#comments{
+    width: 75%;
+}
+div.thirtythree {
+    width: 30%;
+    padding: 10px 0.5%;
+    margin: 10px 1%;
+    float: left;
+    border-right: 3px solid #8CC63E;
+}
+
+div.sixtysix {
+    width: 63%;
+    padding: 10px 0.5%;
+    margin: 10px 1%;
+    float: left;
+}
+
+div.seventyfive {
+    margin-top: 10px;
+    width: 75%;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -105,15 +188,24 @@ body {
 }
 .footer {
   position: absolute;
-  bottom: 0;
   width: 100%;
+  bottom: 0px;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
   background-color: #000000;
   font-weight: bold;
   font-size: 12px;
+  margin-top: 50px;
 }
-
+.footerp {
+    text-align: center;
+    margin-bottom: 0px;
+    color: #8CC63E;
+}
+.footerp a {
+    display: inline-block;
+    margin-top: 0px;
+}
 
 /*@ media queries for different media device sizes*/
 

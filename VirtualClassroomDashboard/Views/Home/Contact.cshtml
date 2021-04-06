@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="one-hundred">
+    <img class="indexImages" src="~/images/ContactImage.jpg" alt="Virtual Classroom Dashboard Online Learning" />
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
+    <form class="Login" action="/" method="post">
+        <fieldset>
+            <div class="thirtythree">
+                <label for="fName">First Name: </label>
+                <label for="lName">Last Name: </label>
+                <label for="email">Email: </label>
+                <label for="schoolName">School Name: </label>
+                <label for="comments">Comments/Concerns: </label>
+            </div>
+            <div class="sixtysix">
+                <input id="fName" type="text" name="fName" placeholder="Jane" required />
+                <input id="lName" type="text" name="lName" placeholder="Doe" required />
+                <input type="text" id="email" name="email" placeholder="janedoe@gmail.com" required />
+                <input id="schoolName" type="text" name="schoolName" placeholder="Institute of Tech" required />
+                <textarea id="comments" name="comments" rows="2"></textarea>
+                <div class="seventyfive">
+                    <input class="submitButton" type="submit" value="Submit">
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

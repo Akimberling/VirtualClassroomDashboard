@@ -24,6 +24,10 @@
     ".NETCoreApp,Version=v3.1": {
       "VirtualClassroomDashboard/1.0.0": {
         "dependencies": {
+          "Autofac.Mvc5": "6.0.0",
+          "Elmah.Mvc": "2.1.2",
+          "IdentityServer3": "2.6.3",
+          "MediatR": "9.0.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -312,6 +316,78 @@
         },
         "compile": {
           "VirtualClassroomDashboard.dll": {}
+        }
+      },
+      "Autofac.Mvc5/6.0.0": {
+        "runtime": {
+          "lib/net472/Autofac.Integration.Mvc.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/net472/Autofac.Integration.Mvc.dll": {}
+        }
+      },
+      "elmah.corelibrary/1.2.0": {
+        "runtime": {
+          "lib/Elmah.dll": {
+            "assemblyVersion": "1.2.13605.0",
+            "fileVersion": "1.2.13605.2128"
+          }
+        },
+        "compile": {
+          "lib/Elmah.dll": {}
+        }
+      },
+      "Elmah.Mvc/2.1.2": {
+        "dependencies": {
+          "elmah.corelibrary": "1.2.0"
+        },
+        "runtime": {
+          "lib/net40/Elmah.Mvc.dll": {
+            "assemblyVersion": "2.1.2.1389",
+            "fileVersion": "2.1.2.0"
+          }
+        },
+        "compile": {
+          "lib/net40/Elmah.Mvc.dll": {}
+        }
+      },
+      "IdentityServer3/2.6.3": {
+        "dependencies": {
+          "Owin": "1.0.0"
+        },
+        "runtime": {
+          "lib/net45/IdentityServer3.dll": {
+            "assemblyVersion": "2.6.0.0",
+            "fileVersion": "2.6.3.0"
+          }
+        },
+        "compile": {
+          "lib/net45/IdentityServer3.dll": {}
+        }
+      },
+      "MediatR/9.0.0": {
+        "runtime": {
+          "lib/netstandard2.1/MediatR.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.1/MediatR.dll": {}
+        }
+      },
+      "Owin/1.0.0": {
+        "runtime": {
+          "lib/net40/Owin.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/net40/Owin.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -2013,6 +2089,48 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Autofac.Mvc5/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0bW9vsRf4QZKTYBxyoKbQFuk6hn1yv9VFlVppVrqUyyLmB+jZLTiSriL5YjUXt8+hHlk/IHwjyd+IzkeB0xPQw==",
+      "path": "autofac.mvc5/6.0.0",
+      "hashPath": "autofac.mvc5.6.0.0.nupkg.sha512"
+    },
+    "elmah.corelibrary/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-67j0s7bQTGlvW8Ab97O8JFh2JgtdiiJEZ8O3PG7DPoUK9wx0ycshJ9Hf+BiZSF41hsvtdfGwKuQfvY/E/Kdtig==",
+      "path": "elmah.corelibrary/1.2.0",
+      "hashPath": "elmah.corelibrary.1.2.0.nupkg.sha512"
+    },
+    "Elmah.Mvc/2.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GUgdgrnoPOplQGaE4OAKex0Qb4cXHwjSiDXSNK+RyIUZdHhC6PHs4V/t1YJFFQ5cVi6AB+FK4IaVCvc6NpiDuw==",
+      "path": "elmah.mvc/2.1.2",
+      "hashPath": "elmah.mvc.2.1.2.nupkg.sha512"
+    },
+    "IdentityServer3/2.6.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TrxCgPjJoSwg32313OOOmR6Nx+m6MQb9WH0hj8dhICW9+LtFzcP6akCwYpQbW0ZN/REnQ7WJ71GLmOGuxckzKw==",
+      "path": "identityserver3/2.6.3",
+      "hashPath": "identityserver3.2.6.3.nupkg.sha512"
+    },
+    "MediatR/9.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8b3UYNxegHVYcJMG2zH8wn+YqxLvXG+eMfj0cMCq/jTW72p6O3PCKMkrIv0mqyxdW7bA4gblsocw7n+/9Akg5g==",
+      "path": "mediatr/9.0.0",
+      "hashPath": "mediatr.9.0.0.nupkg.sha512"
+    },
+    "Owin/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OseTFniKmyp76mEzOBwIKGBRS5eMoYNkMKaMXOpxx9jv88+b6mh1rSaw43vjBOItNhaLFG3d0a20PfHyibH5sw==",
+      "path": "owin/1.0.0",
+      "hashPath": "owin.1.0.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
       "type": "referenceassembly",

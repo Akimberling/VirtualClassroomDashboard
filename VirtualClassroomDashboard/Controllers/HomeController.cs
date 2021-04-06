@@ -24,7 +24,22 @@ namespace VirtualClassroomDashboard.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        public IActionResult Manual()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }
