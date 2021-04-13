@@ -81,3 +81,9 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\MediatR.dll
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Debug\netcoreapp3.1\Owin.dll
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Contact.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Admin\AdminDash.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Educator\EducatorDash .cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutEducator.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutStudent.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Student\StudentDash .cshtml.g.cs

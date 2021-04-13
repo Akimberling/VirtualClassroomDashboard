@@ -1,5 +1,5 @@
 ﻿
-    /*03/11/21 - AK - added header color to be black*/
+
 header{
 
     background-color: #000000;
@@ -52,6 +52,28 @@ img.centerDivide {
 div.clear{
     clear:both;
     display:block;
+}
+/* Side Secondary Navigation for user specific layout
+---------------------------------------------------*/
+main.secLayout{
+    width: 80%;
+    float: left;
+}
+div.sideNav{
+    float:left;
+    width: 20%;
+}
+div.sideNav ul.secNav{
+    padding-left: 0px;
+}
+div.sideNav ul.secNav li{
+    list-style-type: none;
+}
+div.sideNav ul.secNav li.subNav{
+    text-indent: 30px;
+}
+div.sideNav ul.secNav li.subSubNav{
+    text-indent: 60px;
 }
 /* Index content
 -------------------------------------------------- */
