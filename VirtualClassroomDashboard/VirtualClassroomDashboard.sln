@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualClassroomDashboard", "VirtualClassroomDashboard.csproj", "{712C12E0-CC6A-4136-833D-C168C0EF0EF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualClassroomDashboard", "VirtualClassroomDashboard.csproj", "{712C12E0-CC6A-4136-833D-C168C0EF0EF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "..\DataLibrary\DataLibrary.csproj", "{839A69ED-58BC-40D6-9005-4C03D8042227}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{712C12E0-CC6A-4136-833D-C168C0EF0EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{712C12E0-CC6A-4136-833D-C168C0EF0EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{712C12E0-CC6A-4136-833D-C168C0EF0EF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839A69ED-58BC-40D6-9005-4C03D8042227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839A69ED-58BC-40D6-9005-4C03D8042227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839A69ED-58BC-40D6-9005-4C03D8042227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839A69ED-58BC-40D6-9005-4C03D8042227}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
