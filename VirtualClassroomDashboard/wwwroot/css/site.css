@@ -1,5 +1,5 @@
 ﻿
-    /*03/11/21 - AK - added header color to be black*/
+
 header{
 
     background-color: #000000;
@@ -52,6 +52,28 @@ img.centerDivide {
 div.clear{
     clear:both;
     display:block;
+}
+/* Side Secondary Navigation for user specific layout
+---------------------------------------------------*/
+main.secLayout{
+    width: 80%;
+    float: left;
+}
+div.sideNav{
+    float:left;
+    width: 20%;
+}
+div.sideNav ul.secNav{
+    padding-left: 0px;
+}
+div.sideNav ul.secNav li{
+    list-style-type: none;
+}
+div.sideNav ul.secNav li.subNav{
+    text-indent: 30px;
+}
+div.sideNav ul.secNav li.subSubNav{
+    text-indent: 60px;
 }
 /* Index content
 -------------------------------------------------- */
@@ -126,20 +148,31 @@ fieldset {
     text-align:right;
     margin-top: 15px;
 }
-.Login .submitButton {
+.Login .submitButton, input.submitButton {
     width: 200px;
     background-color: #007790;
     color: #D1D2D4;
     float:right;
     margin-bottom: 0px;
 }
-.Login .submitButton:hover {
+.Login .submitButton:hover, input.submitButton:hover {
     background-color: #8CC63E;
     color: #fff;
 }
 textarea#comments{
     width: 75%;
 }
+/*Error in the user/school information meaning it already exists*/
+p.errorResponse {
+    color:#ff0000;
+}
+/*center the login*/
+.centerLog, .col-md-4{
+
+    margin-right:auto;
+    margin-left:auto;
+}
+/*May get rid of this ....if it doesnt get used*/
 div.thirtythree {
     width: 30%;
     padding: 10px 0.5%;
@@ -147,14 +180,23 @@ div.thirtythree {
     float: left;
     border-right: 3px solid #8CC63E;
 }
-
+/*May get rid of this ....if it doesnt get used*/
 div.sixtysix {
     width: 63%;
     padding: 10px 0.5%;
     margin: 10px 1%;
     float: left;
 }
+div.fiftyPercent {
+    width: 47%;
+    padding: 10px 0.5%;
+    margin: 10px 1%;
+    float: left;
+}
 
+form{
+    margin-bottom: 20px;
+}
 div.seventyfive {
     margin-top: 10px;
     width: 75%;
