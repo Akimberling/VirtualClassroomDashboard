@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ShwkTWJfL4QAcifS+MLpFwtuUSz5H7iBkbB7HUQ2r9SyfKqU8eBHFPtP1h1kQJg9IaWwwuUY6+86MI3OyY9e1A==",
+  "dgSpecHash": "6zn45cSblBl7oSb/3/J++ga7mPYJWcneDcsUhYModrPGhGD1HJhba6kSIlXdAaFZH3LI9C0FlfOjXk3ClDzjUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Amber Kimberling\\Source\\Repos\\Akimberling\\VirtualClassroomDashboard\\VirtualClassroomDashboard\\VirtualClassroomDashboard.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,8 @@
     "C:\\Users\\Amber Kimberling\\.nuget\\packages\\elmah.mvc\\2.1.2\\elmah.mvc.2.1.2.nupkg.sha512",
     "C:\\Users\\Amber Kimberling\\.nuget\\packages\\identityserver3\\2.6.3\\identityserver3.2.6.3.nupkg.sha512",
     "C:\\Users\\Amber Kimberling\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
-    "C:\\Users\\Amber Kimberling\\.nuget\\packages\\owin\\1.0.0\\owin.1.0.0.nupkg.sha512"
+    "C:\\Users\\Amber Kimberling\\.nuget\\packages\\owin\\1.0.0\\owin.1.0.0.nupkg.sha512",
+    "C:\\Users\\Amber Kimberling\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
   ],
   "logs": [
     {
