@@ -14,30 +14,27 @@
             <!--Registration form for an admin user-->
             <form asp-action="Registration">
                 <fieldset>
-                    <!--Look for ways to add this if a user account exists-->
-                    <!--<label class="errorResponse schoolErr">This account already exists with this school information. Either <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Login">Login</a> or change your school information.</label>
-                    <label class="errorResponse userErr">This account already exists with this User information. Either <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Login">Login</a> or change your school information.</label>*-->
-
+                    <p class="errorResponse">@ViewBag.Error</p>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="fiftyPercent">
+                    <div class="fiftyPercent ">
                         <div class="form-group">
                             <label asp-for="FirstName" class="control-label"></label>
-                            <input asp-for="FirstName" class="form-control" />
+                            <input asp-for="FirstName" class="form-control" placeholder="EX: John" />
                             <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="LastName" class="control-label"></label>
-                            <input asp-for="LastName" class="form-control" />
+                            <input asp-for="LastName" class="form-control" placeholder="EX: Doe" />
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="PhoneNumber" class="control-label"></label>
-                            <input asp-for="PhoneNumber" class="form-control" />
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Ex: 6267689903 or 6267689903"/>
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="EmailAddress" class="control-label"></label>
-                            <input asp-for="EmailAddress" class="form-control" />
+                            <input asp-for="EmailAddress" class="form-control" placeholder="EX: johnD@johnd.com"/>
                             <span asp-validation-for="EmailAddress" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -48,8 +45,18 @@
                     </div>
                     <div class="fiftyPercent">
                         <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
                             <label asp-for="SchoolName" class="control-label"></label>
-                            <input asp-for="SchoolName" class="form-control" />
+                            <input asp-for="SchoolName" class="form-control" placeholder="EX: Institute of Tech"/>
                             <span asp-validation-for="SchoolName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -64,7 +71,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="SchoolCity" class="control-label"></label>
-                            <input asp-for="SchoolCity" class="form-control" />
+                            <input asp-for="SchoolCity" class="form-control" placeholder="EX: Boston"/>
                             <span asp-validation-for="SchoolCity" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -74,7 +81,7 @@
                         </div>
                         <p>Have an account already? Please <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Login">Login</a></p>
                         <div class="form-group">
-                            <input type="submit" value="Register" class="submitButton" />
+                            <input class="submitButton" type="submit" value="Register"  />
                         </div>
                     </div>
                     <div class="clear"></div>

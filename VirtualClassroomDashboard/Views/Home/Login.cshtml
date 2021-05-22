@@ -1,30 +1,39 @@
-﻿@{
+﻿@model VirtualClassroomDashboard.Models.UserSignInModel
+
+@{
     ViewData["Title"] = "Login";
 }
+
 
 <div class="one-hundred">
     <img class="indexImages" src="~/images/LoginImage.jpg" alt="Virtual Classroom Dashboard Online Learning" />
     <h1 class="mainHeading">@ViewData["Title"]</h1>
-    <p>Please enter your username and password to enter your personal portal associated with the school. Your credentials should be from your school. If you do not have an account please <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Registration">Register</a>, <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a> us, or contact the tech help department associated with your school.</p> 
+    <p>Please enter your username and password to enter your personal portal associated with the school. Your credentials should be from your school. If you do not have an account please <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Registration">Register</a>, <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a> us, or contact the tech help department associated with your school.</p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
-    <form class="Login" action="/" method="post">
-        <fieldset>
-            <div class="thirtythree">
-                <label for="username">Username: </label>
-                <label for="password">Password: </label>
-            </div>
-            <div class="sixtysix">
-                <input type="text" id="username" name="username" placeholder="johndoe@gmail.com" required />
-                <input type="password" id="password" name="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" minlength="6" required />
-                <div class="seventyfive">
-                    <p>Don't have an account? Please <a class="basicLinks" asp-area="" asp-controller="Home" asp-action="Registration">Register</a></p>
-                    <input class="submitButton" type="submit" value="Sign in">
-                </div>
-            </div>
-            
-        </fieldset>
-    </form>
-    
-
+    <div class="centerLog">
+        <div class="col-md-4">
+            <form asp-action="Login">
+                <fieldset>
+                    <p class="errorResponse">@ViewBag.Error</p>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="UserEmail" class="control-label"></label>
+                        <input asp-for="UserEmail" class="form-control" />
+                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserPassword" class="control-label"></label>
+                        <input asp-for="UserPassword" class="form-control" />
+                        <span asp-validation-for="UserPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input class="submitButton" type="submit" value="Login" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>
-<div class="clear"></div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
