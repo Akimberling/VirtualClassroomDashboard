@@ -163,9 +163,14 @@ textarea#comments{
     width: 75%;
 }
 /*Error in the user/school information meaning it already exists*/
-label.errorResponse {
-    display:none;
+p.errorResponse {
     color:#ff0000;
+}
+/*center the login*/
+.centerLog, .col-md-4{
+
+    margin-right:auto;
+    margin-left:auto;
 }
 /*May get rid of this ....if it doesnt get used*/
 div.thirtythree {
@@ -188,6 +193,7 @@ div.fiftyPercent {
     margin: 10px 1%;
     float: left;
 }
+
 form{
     margin-bottom: 20px;
 }

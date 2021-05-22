@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace VirtualClassroomDashboard.Models
 {
         //model to store data collected from the registration form for an admin user type
     public class UserModel
     {
+            //only for when a user signs in
+        public int UserID { get; set; }
+        public int SchoolID { get; set; }
+        public string Salt { get; set; }
+        public string UserType { get; set; }
+
             //Display names/required error messages + get and set data
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "Your first name is required")]
@@ -21,7 +24,8 @@ namespace VirtualClassroomDashboard.Models
 
             //Display names/not required/if entered data type is a phone number + get and set data
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Phone Number")] 
+        [StringLength(11, MinimumLength = 10, ErrorMessage = "Your phone number must be a minimum length of 10.")]
         public string PhoneNumber { get; set; }
 
             //Display names/required error messages/data type = email(name@name.com) + get and set data
@@ -35,7 +39,21 @@ namespace VirtualClassroomDashboard.Models
         [Compare("EmailAddress", ErrorMessage ="Confirm email address must match your email address")]
         public string ConfirmEmail { get; set; }
 
-            //Display names/required error messages + get and set data
+        //Display names/required error messages/password
+        [Display(Name = "Password")]
+        [DataType(DataType.Password)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$", ErrorMessage = "Password must contain one uppercase letter, one lowercase letter, one digit and one special character.")]
+        [StringLength(100, MinimumLength =10, ErrorMessage = "Your password must be a minimum length of 10.")]
+        [Required(ErrorMessage = "Your password is required")]
+        public string Password { get; set; }
+
+        //Display names/compares to the password entry and notifies user if not matching get and set data
+        [Display(Name = "Confirm Password")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Confirm password must match your password")]
+        public string ConfirmPassword { get; set; }
+
+        //Display names/required error messages + get and set data
         [Display(Name = "School Name")]
         [Required(ErrorMessage = "Your school name is required")]
         public string SchoolName { get; set; }
@@ -56,6 +74,7 @@ namespace VirtualClassroomDashboard.Models
         [MinLength(2, ErrorMessage = "Must be 2 letters.")]
         [Required(ErrorMessage = "Your school state is required")]
         public string SchoolState { get; set; }
+
 
     }
 }

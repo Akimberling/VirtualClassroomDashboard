@@ -11,7 +11,9 @@ namespace DataLibrary.Models
         public string UserLname { get; set; }
         public string UserPhonNum { get; set; }
         public string UserEmail { get; set; }
-        public string UserLevel { get; set; }
+        public string UserPassword { get; set; }
+        public string UserSalt { get; set; }
+        public string UserType { get; set; }
         public int SchoolID { get; set; }
 
 

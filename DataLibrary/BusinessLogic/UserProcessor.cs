@@ -8,11 +8,11 @@ namespace DataLibrary.BusinessLogic
 {
     public static class UserProcessor
     {
-        public static int CreateUser(string firstName, string lastName, string phoneNumber, string email, string userLevel, int schoolId)
+        public static int CreateUser(string firstName, string lastName, string phoneNumber, string email, string password, string salt, string userType, int schoolId)
         {
                 //The default when registering should mean that the user is an Admin for the school
-            if (userLevel == "")
-                userLevel = "Admin";
+            if (userType == "")
+                userType = "Admin";
 
             UserModel data = new UserModel
             {
@@ -21,23 +21,37 @@ namespace DataLibrary.BusinessLogic
                 UserLname = lastName,
                 UserPhonNum = phoneNumber,
                 UserEmail = email,
-                UserLevel = userLevel,
+                UserPassword = password,
+                UserSalt = salt,
+                UserType = userType,
                 SchoolID = schoolId
             };
 
-            string sql = @"INSERT INTO dbo.USER_INFO (UserID, UserFname, UserLname, UserPhonNum, UserEmail, UserLevel, SchoolID) VALUES (@UserID, @UserFname, @UserLname, @UserPhonNum, @UserEmail, @UserLevel, @SchoolID)";
+            string sql = @"INSERT INTO dbo.USER_INFO (UserID, UserFname, UserLname, UserPhonNum, UserEmail, UserPassword, UserSalt, UserType, SchoolID) VALUES (@UserID, @UserFname, @UserLname, @UserPhonNum, @UserEmail, @UserPassword, @UserSalt, @UserType, @SchoolID)";
 
             return sqlDataAccess.SaveData(sql, data);
 
         }
-        public static List<int> CheckForDuplicates(string firstName, string lastName, string phoneNumber, string email, string userLevel)
+        public static List<int> CheckForDuplicates(string firstName, string lastName, string phoneNumber, string email, string userType)
         {
-            if (userLevel == "")
-                userLevel = "Admin";
+            if (userType == "")
+                userType = "Admin";
 
-            string sql = "SELECT COUNT(*) FROM dbo.SCHOOL WHERE UserFname = \'" + firstName + "\' AND UserLname = \'" + lastName + "\' AND UserPhonNum = \'" + phoneNumber + "\' AND UserEmail = \'" + email + "\' AND UserLevel = \'" + userLevel + "\';";
+            string sql = "SELECT COUNT(*) FROM dbo.USER_INFO WHERE UserFname = \'" + firstName + "\' AND UserLname = \'" + lastName + "\' AND UserPhonNum = \'" + phoneNumber + "\' AND UserEmail = \'" + email + "\' AND UserType = \'" + userType + "\';";
 
             return sqlDataAccess.LoadData<int>(sql);
+        }
+
+        public static List<int> CheckForExistingAccount(string email)
+        {
+            string sql = "SELECT COUNT(*) FROM dbo.USER_INFO WHERE UserEmail = \'" + email + "\';";
+            return sqlDataAccess.LoadData<int>(sql);
+        }
+        public static List<UserModel> RetrieveUserInfo(string email)
+        {
+            string sql = "SELECT * FROM dbo.USER_INFO WHERE UserEmail = \'" + email + "\';";
+
+            return sqlDataAccess.LoadData<UserModel>(sql);
         }
     }
 }
