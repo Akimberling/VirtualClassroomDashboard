@@ -5,7 +5,6 @@ using System.Diagnostics;
 using VirtualClassroomDashboard.Models;
 using DataLibrary.BusinessLogic;
 using VirtualClassroomDashboard.Classes;
-using VirtualClassroomDashboard.Controllers;
 
 //HomeController
 namespace VirtualClassroomDashboard.Controllers
@@ -28,6 +27,8 @@ namespace VirtualClassroomDashboard.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(UserSignInModel model)
         {
             if (ModelState.IsValid)
@@ -147,6 +148,28 @@ namespace VirtualClassroomDashboard.Controllers
         }
         [HttpGet]
         public IActionResult Contact()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Contact(ContactModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string name = model.fName + " " + model.lName;
+                ViewData["UserName"] = name;
+
+                ContactEmailClass.sendEmail(name, model.email, model.comments);
+                ContactEmailClass.reponseEmail(name, model.email);
+
+                return View("ContactConfirmation");
+            }
+            return View();
+
+        }
+        [HttpGet]
+        public IActionResult ContactConfirmation()
         {
             return View();
         }

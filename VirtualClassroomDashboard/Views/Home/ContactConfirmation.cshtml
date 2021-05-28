@@ -1,0 +1,17 @@
+﻿@model VirtualClassroomDashboard.Models.ContactModel
+
+
+@{
+
+    ViewData["Title"] = "Thank You For Your Feedback!";
+    var contactName = ViewData["UserName"];
+
+}
+
+<div class="one-hundred">
+    <img class="indexImages" src="~/images/ContactImage.jpg" alt="Virtual Classroom Dashboard Online Learning" />
+    <div class="box">
+        <h1 class="mainHeading">@ViewData["Title"]</h1>
+        <p>Thank you for your feedback, @contactName. We appreciate any and all feedback from our users or visitors to create the best experience we can for our users. We hope that you are enjoying Virtual Classroom Dashboard. If you haven't already, please <a class="basicLinks" asp-controller="Home" asp-action="Registration">Register</a> or if you have an existing account, <a class="basicLinks" asp-controller="Home" asp-action="Login">Login</a>. Have a great day!</p>
+    </div>
+</div>
