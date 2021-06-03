@@ -152,7 +152,6 @@ namespace VirtualClassroomDashboard.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Contact(ContactModel model)
         {
             if (ModelState.IsValid)

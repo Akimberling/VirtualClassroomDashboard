@@ -10,17 +10,30 @@ namespace VirtualClassroomDashboard.Classes
     {
         public static void sendEmail(string name, string email, string message)
         {
-            string reciever = "info@virtualclassroomdashboard.azurewebsites.net";
+            
+            string reciever = "virtualclassroomdashboard.info@gmail.com";
             SmtpClient smtpClient = new SmtpClient(reciever);
             smtpClient.UseDefaultCredentials = true;
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+            var credentials = new System.Net.NetworkCredential
+            {
+                UserName = reciever,
+                Password = "JtdXcu3@1996$$"
+            };
+
+            smtpClient.Credentials = credentials;
+            smtpClient.Host = "smtp.google.com";
+            smtpClient.Port = 587;
             smtpClient.EnableSsl = true;
-            string emailSubject = "Questions, Comments, or Concerns";
+
+            
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            string emailSubject = "Questions, Comments, or Concerns From VCD Application. User: " + email;
             string body = "From: " + name + "\nEmail: " + email + "\n Message: " + message;
 
             try
             {
-                smtpClient.Send(email, reciever, emailSubject, body);
+                smtpClient.Send(reciever, reciever, emailSubject, body);
             }
             catch (Exception ex)
             {
@@ -30,17 +43,26 @@ namespace VirtualClassroomDashboard.Classes
 
         public static void reponseEmail(string name, string email)
         {
-            string sender = "info@virtualclassroomdashboard.azurewebsites.net";
-            SmtpClient smtpClient = new SmtpClient(sender);
+            string reciever = "virtualclassroomdashboard.info@gmail.com";
+            SmtpClient smtpClient = new SmtpClient(reciever);
             smtpClient.UseDefaultCredentials = true;
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+            var credentials = new System.Net.NetworkCredential
+            {
+                UserName = reciever,
+                Password = "JtdXcu3@1996$$"
+            };
+
+            smtpClient.Credentials = credentials;
+            smtpClient.Host = "smtp.google.com";
+            smtpClient.Port = 587;
             smtpClient.EnableSsl = true;
             string emailSubject = "Thank Your For Your Feedback - Virtual Classroom Dashboard";
-            string body = "Hello " + name + ",\n\tWe appreciate your feedback and can assure you that one of our top priorities is customer service. If there is anything we can do to make your experience more gratifying please do not hesitate to contact us st " + sender + ".\nThank you so much,\nVirtual Classroom Dashboard";
+            string body = "Hello " + name + ",\n\tWe appreciate your feedback and can assure you that one of our top priorities is customer service. If there is anything we can do to make your experience more gratifying please do not hesitate to contact us st " + reciever + ".\nThank you so much,\nVirtual Classroom Dashboard";
 
             try
             {
-                smtpClient.Send(sender, email, emailSubject, body);
+                smtpClient.Send(reciever, email, emailSubject, body);
             }
             catch(Exception ex)
             {
