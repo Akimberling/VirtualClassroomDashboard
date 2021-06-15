@@ -3,18 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>VirtualClassroomDashboard.Program</StartupObject>
+    <UserSecretsId>a6883cde-b48e-43e3-a997-ce10f9691fc7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac.Mvc5" Version="6.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Elmah.MVC" Version="2.1.2" />
     <PackageReference Include="IdentityServer3" Version="2.6.3" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
 </Project>
