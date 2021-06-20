@@ -46,7 +46,7 @@ namespace VirtualClassroomDashboard.Controllers
                 {
                         //collect data from db
                     var userData = UserProcessor.RetrieveUserInfo(model.UserEmail);
-                        //create a new model
+                    //create a new model
                     UserModel UserInfo = new UserModel();
 
                         //store the values from userData into the model
@@ -62,26 +62,41 @@ namespace VirtualClassroomDashboard.Controllers
                         UserInfo.UserType = row.UserType;
                         UserInfo.SchoolID = row.SchoolID;
                     }
-                    
-                        //verify that the passwords match, if not let the user know that the password was incorrect.
-                    if(!PasswordClass.VerifyPassword(model.UserPassword, UserInfo.Password, UserInfo.Salt))
+
+
+                        //set the data into a class so it can be accessed anywhere
+                    UserInfoClass.setUserData(UserInfo);
+
+                        //safety case for accessing the data initially
+                    TempData["UID"] = UserInfo.UserID;
+                    TempData["FN"] = UserInfo.FirstName;
+                    TempData["LN"] = UserInfo.LastName;
+                    TempData["PN"] = UserInfo.PhoneNumber;
+                    TempData["EM"] = UserInfo.EmailAddress;
+                    TempData["UT"] = UserInfo.UserType;
+                    TempData["SID"] = UserInfo.SchoolID;
+
+                    //verify that the passwords match, if not let the user know that the password was incorrect.
+                    if (!PasswordClass.VerifyPassword(model.UserPassword, UserInfo.Password, UserInfo.Salt))
                     {
                         ViewBag.Error = "Incorrect Password.";
                     }
                     else
                     {
-                            //based on the users type send them to the proper dashboard
-                        if (UserInfo.UserType == "Student" || UserInfo.UserType == "student")
+                        string tempUserType = UserInfo.UserType.ToLower();
+
+                        //based on the users type send them to the proper dashboard
+                        if (tempUserType == "student")
                         {
-                            return RedirectToAction("StudentDash", "Student", UserInfo);
+                            return View("EducatorDash", UserInfo);
                         }
-                        else if (UserInfo.UserType == "Educator" || UserInfo.UserType == "educator")
+                        else if (tempUserType == "educator")
                         {
-                            return RedirectToAction("EducatorDash", "Educator", UserInfo);
+                            return View("EducatorDash", UserInfo);
                         }
                         else
                         {
-                            return RedirectToAction("AdminDash", "Admin", UserInfo);
+                            return View("AdminDash", UserInfo);
                         }
                     }
                     
@@ -167,9 +182,76 @@ namespace VirtualClassroomDashboard.Controllers
             return View();
 
         }
+
         [HttpGet]
         public IActionResult ContactConfirmation()
         {
+            return View();
+        }
+
+/***********************************************************************************************************
+ * Admin directory
+ **********************************************************************************************************/
+
+        public IActionResult AdminDash()
+        {
+                //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            return View();
+        }
+
+/***********************************************************************************************************
+ * Student directory
+ **********************************************************************************************************/
+
+        public IActionResult StudentDash()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            return View();
+        }
+
+/***********************************************************************************************************
+* Educator directory
+**********************************************************************************************************/
+
+        public IActionResult EducatorDash()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
             return View();
         }
         [HttpGet]
