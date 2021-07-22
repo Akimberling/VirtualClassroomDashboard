@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
+
 namespace VirtualClassroomDashboard
 {
     public class Startup
@@ -13,7 +14,7 @@ namespace VirtualClassroomDashboard
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
+            
 
         }
 
@@ -23,7 +24,6 @@ namespace VirtualClassroomDashboard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
 
 
         }
@@ -48,7 +48,7 @@ namespace VirtualClassroomDashboard
 
             app.UseAuthorization();
             app.UseAuthentication();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

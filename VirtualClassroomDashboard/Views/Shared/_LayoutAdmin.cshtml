@@ -43,14 +43,21 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminDash">Schools</a>
                 </li>
                 <!--Sub sub nav - for Schools including Zoom, Students, and Educators-->
-                <li class="subSubNav"><!--Zoom-->
+                <li class="subSubNav">
+                    <!--Zoom-->
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminDash">Zoom</a>
                 </li>
-                <li class="subSubNav"><!--Students-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminDash">Students</a>
+                <li class="subSubNav">
+                    <!--Students-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewStudents">Manage Students</a>
                 </li>
-                <li class="subSubNav"><!--Educators-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminDash">Educators</a>
+                <li class="subSubNav">
+                    <!--Educators-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewEducators"> Manage Educators</a>
+                </li>
+                <li class="subSubNav">
+                    <!--Educators-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddUsers">Add Users</a>
                 </li>
                 <!--SubNav-->
                 <li class="subNav">
@@ -64,7 +71,7 @@
                 <!--main nav-->
                 <li>
                     <!--Account-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminDash">Account</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Account">Account</a>
                 </li>
             </ul>
         </div>

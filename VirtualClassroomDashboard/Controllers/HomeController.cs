@@ -5,6 +5,8 @@ using System.Diagnostics;
 using VirtualClassroomDashboard.Models;
 using VirtualClassroomDashboard.BusinessLogic;
 using VirtualClassroomDashboard.Classes;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 //HomeController
 namespace VirtualClassroomDashboard.Controllers
@@ -46,6 +48,9 @@ namespace VirtualClassroomDashboard.Controllers
                 {
                         //collect data from db
                     var userData = UserProcessor.RetrieveUserInfo(model.UserEmail);
+
+                    //var userSchoolData;
+
                     //create a new model
                     UserModel UserInfo = new UserModel();
 
@@ -84,7 +89,7 @@ namespace VirtualClassroomDashboard.Controllers
                     else
                     {
                         string tempUserType = UserInfo.UserType.ToLower();
-
+                       
                         //based on the users type send them to the proper dashboard
                         if (tempUserType == "student")
                         {
@@ -127,7 +132,7 @@ namespace VirtualClassroomDashboard.Controllers
                 else
                 {
                         //check for duplicate users
-                    List<int> reocur2 = UserProcessor.CheckForDuplicates(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, "");
+                    List<int> reocur2 = UserProcessor.CheckForDuplicates(model.FirstName, model.LastName, model.EmailAddress, "");
                         //if the user who is attempting to  make an account is entering in info that already exists
                     if (reocur2[0] > 0)
                     {
@@ -147,8 +152,8 @@ namespace VirtualClassroomDashboard.Controllers
                         List<int> schoolID = SchoolProcessor.GetSchoolID(model.SchoolName);
                             //create a new user with the information from above
                         int userRec = UserProcessor.CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, hashedPass, salt, "", schoolID[0]);
-                            //redirect to the admin dash becuase a member who registers should be an admin
-                        return RedirectToAction("AdminDash", "Admin"); 
+
+                        return View("Login");
                     }
                     
                 }
@@ -182,7 +187,23 @@ namespace VirtualClassroomDashboard.Controllers
             return View();
 
         }
+        public IActionResult Account()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
 
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            return View();
+        }
         [HttpGet]
         public IActionResult ContactConfirmation()
         {
@@ -200,6 +221,56 @@ namespace VirtualClassroomDashboard.Controllers
             BasicUI = UserInfoClass.getUserData();
 
             //save the data
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ViewStudents()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+            
+            var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+            List<UserModel> Students = new List<UserModel>();
+            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "student");
+
+            foreach(var row in userData)
+            {
+                Students.Add(new UserModel
+                {
+                    UserID = row.UserID,
+                    FirstName = row.UserFname,
+                    LastName = row.UserLname,
+                    EmailAddress = row.UserEmail,
+                    PhoneNumber = row.UserPhonNum,
+
+                });
+                
+            }
+
+            return View(Students);
+        }
+        public IActionResult ViewEducators()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //save the data
             TempData["UID"] = BasicUI["UserID"];
             TempData["FN"] = BasicUI["FirstName"];
             TempData["LN"] = BasicUI["LastName"];
@@ -208,12 +279,74 @@ namespace VirtualClassroomDashboard.Controllers
             TempData["UT"] = BasicUI["UserType"];
             TempData["SID"] = BasicUI["SchoolID"];
 
+            var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+            List<UserModel> Educators = new List<UserModel>();
+            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "educators");
+
+            foreach (var row in userData)
+            {
+                Educators.Add(new UserModel
+                {
+                    UserID = row.UserID,
+                    FirstName = row.UserFname,
+                    LastName = row.UserLname,
+                    EmailAddress = row.UserEmail,
+                    PhoneNumber = row.UserPhonNum,
+
+                });
+
+            }
+
+            return View(Educators);
+        }
+        [HttpGet]
+        public IActionResult AddUsers()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            var schoolID = int.Parse(BasicUI["SchoolID"]);
+
             return View();
         }
+        [HttpPost]
+        public ActionResult AddUsers(IFormFile upload)
+        {
+            if (upload.FileName.EndsWith(".csv"))
+            {
+                using (var sreader = new StreamReader(upload.OpenReadStream()))
+                {
+                    string[] headers = sreader.ReadLine().Split(',');
+                    while (!sreader.EndOfStream)                     
+                    {
+                        string[] rows = sreader.ReadLine().Split(',');
+                        int Id = int.Parse(rows[0].ToString());
 
-/***********************************************************************************************************
- * Student directory
- **********************************************************************************************************/
+                    }
+                }
+            }
+            else
+            {
+                //notify user that .csv is the only file extension allowed
+            }
+
+            // redirect back to the index action to show the form once again
+            return RedirectToAction("Index");
+        }
+        /***********************************************************************************************************
+         * Student directory
+         **********************************************************************************************************/
 
         public IActionResult StudentDash()
         {

@@ -15,7 +15,7 @@ namespace VirtualClassroomDashboard.DataAccess
             //Get the connection string and return it 
         public static string GetConnectionString()
         {
-            return "Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = VirtualClassroomDashboard_dbms; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False;";
+            return "Data Source=virtual-classroom-dashboard-server.database.windows.net;Initial Catalog=VirtualClassroomDashboard_dbms;User ID=Akimberling3;Password=LgtKq3@1996$$;Connect Timeout=60;Encrypt=True;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         }
             //return information collected from database from the exected sql statement that was pased to this static method
             //info gets loaded into list

@@ -37,5 +37,12 @@ namespace VirtualClassroomDashboard.BusinessLogic
 
             return sqlDataAccess.LoadData<int>(sql);
         }
+        public static List<int> GetSchoolInfo(int schoolID)
+        {
+
+            string sql = "SELECT * FROM dbo.SCHOOL WHERE SchoolID = \'" + schoolID + "\';";
+
+            return sqlDataAccess.LoadData<int>(sql);
+        }
     }
 }

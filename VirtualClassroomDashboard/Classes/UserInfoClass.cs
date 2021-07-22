@@ -24,6 +24,12 @@ namespace VirtualClassroomDashboard.Classes
             //school id
         private static int SID;
 
+        private static string SN;
+
+        private static string SC;
+
+        private static string SS;
+
         public static void setUserData(UserModel userInfo)
         {
 
@@ -34,6 +40,9 @@ namespace VirtualClassroomDashboard.Classes
             EM  = userInfo.EmailAddress;
             UT  = userInfo.UserType;
             SID = userInfo.SchoolID;
+            SN = userInfo.SchoolName;
+            SC = userInfo.SchoolCity;
+            SS = userInfo.SchoolState;
         }
         public static Dictionary<string, string> getUserData()
         {
