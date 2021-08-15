@@ -10,16 +10,54 @@
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
 
-    <h3>Add Users</h3>
-    <p>Mass Add Users through an csv file. Formatting for a csv file can be found within the user manual or Download the file: <a class="basicLinks" href="~/Downloadables/Student_or_Teacher_Add_User_s.csv">CSV file</a></p>
-    <div class="box">
-        <h5>Upload File</h5>
-        <form method="post" enctype="multipart/form-data">
-            <input id="postedFile" type="file" accept=".csv" name="postedFile" asp-for="Upload" runat="server" /> <!--<input type="submit" value="Add File" /> -->     
-            <div asp-validation-summary="ModelOnly" style="color:red"></div>
-            <span asp-validation-for="Upload" style="color:red"></span>
-            <div><input class="submitButton" type="submit" value="Upload Users" runat="server" /></div>
-        </form>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="AddUsers">
+                <fieldset>
+                    <p class="errorResponse">@ViewBag.Error</p>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="EX: John" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="EX: Doe" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" placeholder="Ex: 6267689903" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="control-label"></label>
+                        <input asp-for="EmailAddress" class="form-control" placeholder="EX: johnD@johnd.com" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UserType" class="control-label"></label>
+                        <input asp-for="UserType" class="form-control" placeholder="EX: johnD@johnd.com" />
+                        <span asp-validation-for="UserType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input class="submitButton" type="submit" value="Add" />
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </fieldset>
+                <div class="clear"></div>
+            </form>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
     </div>
+    <div class="clear"></div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+</div>
 </div>
 

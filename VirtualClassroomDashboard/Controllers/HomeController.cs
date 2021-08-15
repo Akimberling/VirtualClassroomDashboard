@@ -6,7 +6,10 @@ using VirtualClassroomDashboard.Models;
 using VirtualClassroomDashboard.BusinessLogic;
 using VirtualClassroomDashboard.Classes;
 using Microsoft.AspNetCore.Http;
-using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
+using System;
+using Grpc.Core;
 
 //HomeController
 namespace VirtualClassroomDashboard.Controllers
@@ -246,7 +249,7 @@ namespace VirtualClassroomDashboard.Controllers
             var schoolID = int.Parse(BasicUI["SchoolID"]);
 
             List<UserModel> Students = new List<UserModel>();
-            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "student");
+            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Student");
 
             foreach(var row in userData)
             {
@@ -264,6 +267,7 @@ namespace VirtualClassroomDashboard.Controllers
 
             return View(Students);
         }
+     
         public IActionResult ViewEducators()
         {
             //establish a dictionary that will contain user information that was set during login
@@ -282,7 +286,7 @@ namespace VirtualClassroomDashboard.Controllers
             var schoolID = int.Parse(BasicUI["SchoolID"]);
 
             List<UserModel> Educators = new List<UserModel>();
-            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "educators");
+            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Teacher");
 
             foreach (var row in userData)
             {
@@ -299,6 +303,34 @@ namespace VirtualClassroomDashboard.Controllers
             }
 
             return View(Educators);
+        }
+        public ActionResult Delete(int userID, string userType)
+        {
+            UserProcessor.deleteUserData(userID, userType);
+            //inform user that
+           
+
+            //check if the user exists
+            List<int> uExists = UserProcessor.CheckForExistingAccountByID(userID);
+            int userE = uExists[0];
+
+            if (userE == 1)
+            {
+                ViewBag.Error = "Something went wrong. userType = " + userType + " and userId = " + userID;            
+            }
+            else
+            {
+                ViewBag.Error = "User removed successfully.";
+            }
+            if (userType == "Student")
+            {
+                return View("ViewStudents");
+            }
+            else
+            {
+                return View("ViewEducators");
+            }
+
         }
         [HttpGet]
         public IActionResult AddUsers()
@@ -321,28 +353,49 @@ namespace VirtualClassroomDashboard.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddUsers(IFormFile upload)
+        [ValidateAntiForgeryToken]
+        public ActionResult AddUsers(excelParseModel model)
         {
-            if (upload.FileName.EndsWith(".csv"))
-            {
-                using (var sreader = new StreamReader(upload.OpenReadStream()))
-                {
-                    string[] headers = sreader.ReadLine().Split(',');
-                    while (!sreader.EndOfStream)                     
-                    {
-                        string[] rows = sreader.ReadLine().Split(',');
-                        int Id = int.Parse(rows[0].ToString());
+            ViewBag.Error = "";
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
 
-                    }
+            //    //check for duplicate users
+            List<int> reocur2 = UserProcessor.CheckForDuplicates(model.FirstName, model.LastName, model.EmailAddress,model.UserType);
+
+            if(model.UserType == "student" || model.UserType == "Student")
+            {
+                model.UserType = "Student";
+            }
+            else if(model.UserType == "teacher" || model.UserType == "Teacher")
+            {
+                model.UserType = "Teacher";
+            }
+            else {
+                    ViewBag.Error = "Incorrect user type please use Student or Teacher";
+            }
+            if (model.UserType == "Teacher" || model.UserType == "Student")
+            {
+                //    //if the user who is attempting to  make an account is entering in info that already exists
+                if (reocur2[0] > 0)
+                {
+                    //inform user that
+                    ViewBag.Error = "This account already exists. Either Login or enter new credentials.";
+                }
+                else
+                {
+                    model.Password = "johnDoe3#";
+                    //generate the salt value
+                    string salt = PasswordClass.SaltGeneration();
+                    //ecncrypt password
+                    string hashedPass = PasswordClass.HashPassword(salt, model.Password);
+                    //create a new user with the information from above
+                    int userRec = UserProcessor.CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, hashedPass, salt, model.UserType, int.Parse(BasicUI["SchoolID"]));
+                    ViewBag.Error = "Congratualations You have added a student";
                 }
             }
-            else
-            {
-                //notify user that .csv is the only file extension allowed
-            }
-
-            // redirect back to the index action to show the form once again
-            return RedirectToAction("Index");
+            ModelState.Clear();
+            return View();
         }
         /***********************************************************************************************************
          * Student directory
