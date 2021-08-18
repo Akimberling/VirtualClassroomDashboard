@@ -304,32 +304,49 @@ namespace VirtualClassroomDashboard.Controllers
 
             return View(Educators);
         }
-        public ActionResult Delete(int userID, string userType)
+        public ActionResult DeleteStudent(int id)
         {
-            UserProcessor.deleteUserData(userID, userType);
+            UserProcessor.deleteUserData(id);
             //inform user that
            
 
             //check if the user exists
-            List<int> uExists = UserProcessor.CheckForExistingAccountByID(userID);
-            int userE = uExists[0];
+            List<int> uExists = UserProcessor.CheckForExistingAccountByID(id);
 
-            if (userE == 1)
+            if (uExists[0] == 1)
             {
-                ViewBag.Error = "Something went wrong. userType = " + userType + " and userId = " + userID;            
+                ViewBag.Error = "Something went wrong.";           
             }
             else
             {
                 ViewBag.Error = "User removed successfully.";
             }
-            if (userType == "Student")
+
+            return View("ViewStudents");
+
+
+        }
+
+        public ActionResult DeleteEducators(int id)
+        {
+            UserProcessor.deleteUserData(id);
+            //inform user that
+
+
+            //check if the user exists
+            List<int> uExists = UserProcessor.CheckForExistingAccountByID(id);
+
+            if (uExists[0] == 1)
             {
-                return View("ViewStudents");
+                ViewBag.Error = "Something went wrong.";
             }
             else
             {
-                return View("ViewEducators");
+                ViewBag.Error = "User removed successfully.";
             }
+
+            return View("ViewEducators");
+
 
         }
         [HttpGet]

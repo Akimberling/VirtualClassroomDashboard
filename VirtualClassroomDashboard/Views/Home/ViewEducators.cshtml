@@ -33,7 +33,7 @@
                     <td>@item.LastName</td>
                     <td>@item.EmailAddress</td>
                     <td>@item.PhoneNumber</td>
-                    <td>@Html.ActionLink("Delete", "Delete", new { id = item.UserID }, new { usertype = item.UserType })</td>
+                    <td>@Html.ActionLink("Delete", "DeleteEducators", new { id = item.UserID })</td>
                 </tr>
             }
         }

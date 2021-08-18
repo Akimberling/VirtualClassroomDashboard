@@ -68,12 +68,11 @@ namespace VirtualClassroomDashboard.BusinessLogic
 
             return sqlDataAccess.LoadData<UserModelData>(sql);
         }
-        public static int deleteUserData(int userId, string userType)
+        public static int deleteUserData(int userId)
         {
             UserModelData data = new UserModelData
             {
-                UserID = userId,
-                UserType = userType
+                UserID = userId
             };
             string sql = "DELETE FROM dbo.USER_INFO WHERE UserID = \'" + userId + "\';";
 
