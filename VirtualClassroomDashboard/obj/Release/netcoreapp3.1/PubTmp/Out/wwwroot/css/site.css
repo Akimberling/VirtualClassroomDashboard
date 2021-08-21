@@ -1,5 +1,5 @@
 ﻿
-    /*03/11/21 - AK - added header color to be black*/
+
 header{
 
     background-color: #000000;
@@ -52,6 +52,32 @@ img.centerDivide {
 div.clear{
     clear:both;
     display:block;
+}
+/* Side Secondary Navigation for user specific layout
+---------------------------------------------------*/
+main.secLayout{
+    width: 80%;
+    float: left;
+}
+div.sideNav {
+    float: left;
+    width: 15%;
+    margin-right: 20px;
+    border-right-width: 3px;
+    border-right-style: solid;
+    border-image: linear-gradient( to bottom, #000000, rgba(0, 0, 0, 0) ) 1 100%;
+}
+div.sideNav ul.secNav{
+    padding-left: 0px;
+}
+div.sideNav ul.secNav li{
+    list-style-type: none;
+}
+div.sideNav ul.secNav li.subNav{
+    text-indent: 30px;
+}
+div.sideNav ul.secNav li.subSubNav{
+    text-indent: 60px;
 }
 /* Index content
 -------------------------------------------------- */
@@ -126,20 +152,34 @@ fieldset {
     text-align:right;
     margin-top: 15px;
 }
-.Login .submitButton {
+.Login .submitButton, input.submitButton {
     width: 200px;
     background-color: #007790;
     color: #D1D2D4;
     float:right;
     margin-bottom: 0px;
 }
-.Login .submitButton:hover {
+.Login .submitButton:hover, input.submitButton:hover {
     background-color: #8CC63E;
     color: #fff;
 }
-textarea#comments{
-    width: 75%;
+.navbarIcon {
+    background-image: url(~/images/NavIcon.png);
+    height: 30px;
+    width: 30px;
 }
+
+/*Error in the user/school information meaning it already exists*/
+p.errorResponse {
+    color: #ff0000;
+}
+/*center the login*/
+.centerLog, .col-md-4{
+
+    margin-right:auto;
+    margin-left:auto;
+}
+/*May get rid of this ....if it doesnt get used*/
 div.thirtythree {
     width: 30%;
     padding: 10px 0.5%;
@@ -147,18 +187,76 @@ div.thirtythree {
     float: left;
     border-right: 3px solid #8CC63E;
 }
-
+/*May get rid of this ....if it doesnt get used*/
 div.sixtysix {
     width: 63%;
     padding: 10px 0.5%;
     margin: 10px 1%;
     float: left;
 }
+div.fiftyPercent {
+    width: 47%;
+    padding: 10px 0.5%;
+    margin: 10px 1%;
+    float: left;
+}
 
+form{
+    margin-bottom: 20px;
+}
 div.seventyfive {
     margin-top: 10px;
     width: 75%;
 }
+
+/*Tabs for editing users from an admin standpoint*/
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #007790;
+    background-color: #007790;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
+/*Headings */
+h3{
+    font-size: 18px;
+}
+h5{
+    font-size: 15px;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #8CC63E;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #8CC63E;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/**************************************************/
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -190,7 +288,7 @@ body {
   position: absolute;
   width: 100%;
   bottom: 0px;
-  white-space: nowrap;
+  white-space:nowrap;
   line-height: 60px; /* Vertically center the text there */
   background-color: #000000;
   font-weight: bold;
