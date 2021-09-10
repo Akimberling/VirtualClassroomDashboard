@@ -55,6 +55,14 @@
               "target": "Package",
               "version": "[2.1.2, )"
             },
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Grpc.Core": {
+              "target": "Package",
+              "version": "[2.38.1, )"
+            },
             "IdentityServer3": {
               "target": "Package",
               "version": "[2.6.3, )"
@@ -100,6 +108,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.2, )"
+            },
+            "System.IO.Abstractions": {
+              "target": "Package",
+              "version": "[13.2.43, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

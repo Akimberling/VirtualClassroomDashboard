@@ -49,7 +49,12 @@ namespace VirtualClassroomDashboard.BusinessLogic
             string sql = "SELECT COUNT(*) FROM dbo.USER_INFO WHERE UserEmail = \'" + email + "\';";
             return sqlDataAccess.LoadData<int>(sql);
         }
-            //retrieve a single users information
+        public static List<int> CheckForExistingAccountByID(int uID)
+        {
+            string sql = "SELECT COUNT(*) FROM dbo.USER_INFO WHERE UserId = \'" + uID + "\';";
+            return sqlDataAccess.LoadData<int>(sql);
+        }
+        //retrieve a single users information
         public static List<UserModelData> RetrieveUserInfo(string email)
         {
             string sql = "SELECT * FROM dbo.USER_INFO WHERE UserEmail = \'" + email + "\';";
@@ -59,9 +64,19 @@ namespace VirtualClassroomDashboard.BusinessLogic
             //Select all users that are from a given school with the specified user type
         public static List<UserModelData> RetrieveNecessaryUsers(int schoolId, string userType)
         {
-            string sql = "SELECT * FROM dbo.USER_INFO WHERE SchoolID = \'" + schoolId + "\' AND USerType = \'" + userType + "\';";
+            string sql = "SELECT * FROM dbo.USER_INFO WHERE SchoolID = \'" + schoolId + "\' AND UserType = \'" + userType + "\';";
 
             return sqlDataAccess.LoadData<UserModelData>(sql);
+        }
+        public static int deleteUserData(int userId)
+        {
+            UserModelData data = new UserModelData
+            {
+                UserID = userId
+            };
+            string sql = "DELETE FROM dbo.USER_INFO WHERE UserID = \'" + userId + "\';";
+
+            return sqlDataAccess.SaveData(sql, data);
         }
     }
 }
