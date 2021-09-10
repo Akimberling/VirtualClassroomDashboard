@@ -3,18 +3,36 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>VirtualClassroomDashboard.Program</StartupObject>
+    <UserSecretsId>a6883cde-b48e-43e3-a997-ce10f9691fc7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac.Mvc5" Version="6.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Elmah.MVC" Version="2.1.2" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Grpc.Core" Version="2.38.1" />
     <PackageReference Include="IdentityServer3" Version="2.6.3" />
     <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Owin.Security.Cookies" Version="4.2.0" />
+    <PackageReference Include="Microsoft.Owin.Security.OAuth" Version="4.2.0" />
+    <PackageReference Include="Microsoft.Owin.Security.OpenIdConnect" Version="4.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+    <PackageReference Include="System.IO.Abstractions" Version="13.2.43" />
+    <PackageReference Include="Twilio" Version="5.63.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
+    <Folder Include="wwwroot\TempUploads\" />
   </ItemGroup>
 
 </Project>

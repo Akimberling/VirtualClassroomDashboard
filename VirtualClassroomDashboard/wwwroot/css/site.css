@@ -56,12 +56,16 @@ div.clear{
 /* Side Secondary Navigation for user specific layout
 ---------------------------------------------------*/
 main.secLayout{
-    width: 80%;
+    width: 75%;
     float: left;
 }
-div.sideNav{
-    float:left;
+div.sideNav {
+    float: left;
     width: 20%;
+    margin-right: 20px;
+    border-right-width: 3px;
+    border-right-style: solid;
+    border-image: linear-gradient( to bottom, #000000, rgba(0, 0, 0, 0) ) 1 100%;
 }
 div.sideNav ul.secNav{
     padding-left: 0px;
@@ -69,12 +73,12 @@ div.sideNav ul.secNav{
 div.sideNav ul.secNav li{
     list-style-type: none;
 }
-div.sideNav ul.secNav li.subNav{
+/*div.sideNav ul.secNav li.subNav{
     text-indent: 30px;
 }
 div.sideNav ul.secNav li.subSubNav{
     text-indent: 60px;
-}
+}*/
 /* Index content
 -------------------------------------------------- */
 
@@ -159,12 +163,15 @@ fieldset {
     background-color: #8CC63E;
     color: #fff;
 }
-textarea#comments{
-    width: 75%;
+.navbarIcon {
+    background-image: url(~/images/NavIcon.png);
+    height: 30px;
+    width: 30px;
 }
+
 /*Error in the user/school information meaning it already exists*/
 p.errorResponse {
-    color:#ff0000;
+    color: #ff0000;
 }
 /*center the login*/
 .centerLog, .col-md-4{
@@ -201,6 +208,55 @@ div.seventyfive {
     margin-top: 10px;
     width: 75%;
 }
+
+/*Tabs for editing users from an admin standpoint*/
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #007790;
+    background-color: #007790;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
+/*Headings */
+h3{
+    font-size: 18px;
+}
+h5{
+    font-size: 15px;
+}
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #8CC63E;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #8CC63E;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/**************************************************/
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -232,7 +288,7 @@ body {
   position: absolute;
   width: 100%;
   bottom: 0px;
-  white-space: nowrap;
+  white-space:nowrap;
   line-height: 60px; /* Vertically center the text there */
   background-color: #000000;
   font-weight: bold;

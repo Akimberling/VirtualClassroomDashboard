@@ -1,31 +1,56 @@
-﻿@{
+﻿@model VirtualClassroomDashboard.Models.ContactModel
+
+@{
     ViewData["Title"] = "Contact";
 }
 
 <div class="one-hundred">
     <img class="indexImages" src="~/images/ContactImage.jpg" alt="Virtual Classroom Dashboard Online Learning" />
     <h1 class="mainHeading">@ViewData["Title"]</h1>
-    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: virtualclassroomdashboard.info@gmail.com?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
-    <form class="Login" action="/" method="post">
-        <fieldset>
-            <div class="thirtythree">
-                <label for="fName">First Name: </label>
-                <label for="lName">Last Name: </label>
-                <label for="email">Email: </label>
-                <label for="schoolName">School Name: </label>
-                <label for="comments">Comments/Concerns: </label>
-            </div>
-            <div class="sixtysix">
-                <input id="fName" type="text" name="fName" placeholder="Jane" required />
-                <input id="lName" type="text" name="lName" placeholder="Doe" required />
-                <input type="text" id="email" name="email" placeholder="janedoe@gmail.com" required />
-                <input id="schoolName" type="text" name="schoolName" placeholder="Institute of Tech" required />
-                <textarea id="comments" name="comments" rows="2"></textarea>
-                <div class="seventyfive">
-                    <input class="submitButton" type="submit" value="Submit">
-                </div>
-            </div>
-        </fieldset>
-    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Contact">
+                <fieldset>
+                    <div class="fiftyPercent">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="fName" class="control-label"></label>
+                            <input asp-for="fName" class="form-control" placeholder="EX: John"/>
+                            <span asp-validation-for="fName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="lName" class="control-label"></label>
+                            <input asp-for="lName" class="form-control" placeholder="EX: Doe"/>
+                            <span asp-validation-for="lName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="email" class="control-label"></label>
+                            <input asp-for="email" class="form-control" placeholder="EX: JohnD@johnd.com"/>
+                            <span asp-validation-for="email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="fiftyPercent">
+                        <div class="form-group">
+                            <label asp-for="schoolName" class="control-label"></label>
+                            <input asp-for="schoolName" class="form-control" placeholder="EX: MIT"/>
+                            <span asp-validation-for="schoolName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="comments" class="control-label"></label>
+                            <textarea asp-for="comments" class="form-control" rows="3" placeholder="Comments, questions, concerns, or any type of feedback is welcome!"></textarea>
+                            <span asp-validation-for="comments" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Submit" class="submitButton" />
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

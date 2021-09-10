@@ -1,0 +1,38 @@
+﻿@model IEnumerable<VirtualClassroomDashboard.Models.UserModel>
+@{
+    ViewData["Title"]="Manage Students" ;
+    Layout="_LayoutAdmin" ;
+}
+
+<div class="clear"></div>
+<div class="one-hundred">
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
+
+    <h3>Edit/Delete</h3>
+    <p class="errorResponse">@ViewBag.Error</p>
+    <table>
+        <tr>
+            <th>User Id</th>
+            <th>First Name</th>
+            <th>Last Name </th>
+            <th>Email Address</th>
+            <th>PhoneNumber</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserID.ToString()</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.EmailAddress</td>
+                <td>@item.PhoneNumber</td>
+                <td>@Html.ActionLink("Delete", "DeleteStudent", new { id = item.UserID })</td>
+
+            </tr>
+        }
+    </table>
+</div>
+

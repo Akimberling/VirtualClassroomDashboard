@@ -14,24 +14,15 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <!--03/11/21 - AK - logo in nav and navigation links updated-->
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/vcdLogo.png" alt="Virtual Classroom Dashboard Logo" /></a>
+                <a class="navbar-brand"><img src="~/images/vcdLogo.png" alt="Virtual Classroom Dashboard Logo" /></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span><img class="navbarIcon" src="~/images/NavIcon.png" alt="nav bar icon" /></span>
                 </button>
                 <div class="navigation navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">LOGIN</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Registration">REGISTER</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">CONTACT</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Manual">MANUAL</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">LOGOUT</a>
                         </li>
                     </ul>
                 </div>
@@ -44,36 +35,29 @@
                 <!--Main Nav-->
                 <li>
                     <!--Dash-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Dashboard</a>
-                </li>
-                <!--Sub Nav - Should display schools as a subnav of dashboard-->
-                <li class="subNav">
-                    <!--Schools-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Schools</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminDash">Dashboard</a>
                 </li>
                 <!--Sub sub nav - for Schools including Zoom, Students, and Educators-->
-                <li class="subSubNav"><!--Zoom-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Zoom</a>
+                <li class="subSubNav">
+                    <!--Zoom-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdminZoom">Zoom</a>
                 </li>
-                <li class="subSubNav"><!--Students-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Students</a>
+                <li class="subSubNav">
+                    <!--Students-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewStudents">Manage Students</a>
                 </li>
-                <li class="subSubNav"><!--Educators-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Educators</a>
+                <li class="subSubNav">
+                    <!--Educators-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewEducators"> Manage Educators</a>
                 </li>
-                <!--SubNav-->
-                <li class="subNav">
-                    <!--Settings-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Settings</a>
-                </li>
-                <li class="subNav">
-                    <!--Profile-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Profile</a>
+                <li class="subSubNav">
+                    <!--Educators-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddUsers">Add Users</a>
                 </li>
                 <!--main nav-->
                 <li>
                     <!--Account-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="AdminDash">Account</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Account">Account</a>
                 </li>
             </ul>
         </div>
@@ -87,7 +71,7 @@
                 <!--03/11/21 AK logo in footer and copyright information-->
             <p class="footerp">
                 <img src="~/images/vcdLogo.png" alt="Virtual Classroom Dashboard Logo" width="70px" />
-                &copy;2021 - VIRTUAL CLASSROOM DASHBOARD - AMBER KIMBERLING - CALIFORNIA STATE UNIVERSITY-FULLERTON MASTER'S PROJECT  
+                &copy;2021
             </p>
                 
 
