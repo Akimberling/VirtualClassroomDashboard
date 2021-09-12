@@ -190,6 +190,7 @@ namespace VirtualClassroomDashboard.Controllers
             return View();
 
         }
+        [HttpGet]
         public IActionResult Account()
         {
             //establish a dictionary that will contain user information that was set during login
@@ -206,6 +207,42 @@ namespace VirtualClassroomDashboard.Controllers
             TempData["SID"] = BasicUI["SchoolID"];
 
             return View();
+        }
+        [HttpPost]
+        public IActionResult Account(UserUpdateModel model)
+        {
+            ViewBag.Error = "";
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            int userID = int.Parse(BasicUI["UserID"]);
+            if (model.PhoneNumber != null)
+            {
+                UserProcessor.updateUserPhoneNumber(model.PhoneNumber, userID);
+                ViewBag.Error = "Your phone number has been updated.";
+            }
+
+            if (model.Password != null)
+            {
+                //generate the salt value
+                string salt = PasswordClass.SaltGeneration();
+                //ecncrypt password
+                string hashedPass = PasswordClass.HashPassword(salt, model.Password);
+                UserProcessor.updateUserPassword(hashedPass, salt, userID);
+                ViewBag.Error = ViewBag.Error +  " Your password has been changed.";
+            }
+            return View();
+
         }
         [HttpGet]
         public IActionResult ContactConfirmation()
