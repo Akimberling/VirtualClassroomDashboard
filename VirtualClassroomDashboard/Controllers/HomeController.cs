@@ -183,7 +183,7 @@ namespace VirtualClassroomDashboard.Controllers
                 ViewData["UserName"] = name;
 
                 ContactEmailClass.sendEmail(name, model.email, model.comments);
-                //ContactEmailClass.reponseEmail(name, model.email);
+                ContactEmailClass.reponseEmail(name, model.email);
 
                 return View("ContactConfirmation");
             }
