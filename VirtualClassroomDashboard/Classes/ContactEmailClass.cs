@@ -30,38 +30,34 @@ namespace VirtualClassroomDashboard.Classes
             {
                 Console.WriteLine(ex.ToString());
             }
-            //string reciever = "virtualclassroomdashboard.info@gmail.com";
-            //SmtpClient smtpClient = new SmtpClient(reciever);
-            //smtpClient.UseDefaultCredentials = true;
-
-            //var credentials = new System.Net.NetworkCredential
-            // {
-            //    UserName = reciever,
-            //    Password = "JtdXcu3@1996$$"
-            //};
-
-            //smtpClient.Credentials = credentials;
-            //smtpClient.Host = "smtp.google.com";
-            //smtpClient.Port = 465;
-            //smtpClient.EnableSsl = true;
-
-
-            //smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            //string emailSubject = "Questions, Comments, or Concerns From VCD Application. User: " + email;
-            // string body = "From: " + name + "\nEmail: " + email + "\n Message: " + message;
-
-            // try
-            // {
-            //   smtpClient.Send(reciever, reciever, emailSubject, body);
-            // }
-            // catch (Exception ex)
-            // {
-
-            // }
         }
 
         public static void reponseEmail(string name, string email)
         {
+
+            MailAddress To = new MailAddress("virtualclassroomdashboard.info@gmail.com");
+            MailAddress From = new MailAddress(email);
+
+            MailMessage Body = new MailMessage(To, From);
+            Body.Subject = "Questions, Comments, or Concerns From VCD Application. User: " + email;
+            Body.Body = "Hello " + name + ",\n\tWe appreciate your feedback and can assure you that one of our top priorities is customer service. If there is anything we can do to make your experience more gratifying please do not hesitate to contact us at virtualclassroomdashboard.info@gmail.com.\nThank you so much,\nVirtual Classroom Dashboard";
+
+            SmtpClient client = new SmtpClient("smtp.google.com", 587)
+            {
+                Credentials = new NetworkCredential("virtualclassroomdashboard.info@gmail.com", "JtdXcu3@1996$$"),
+                EnableSsl = true
+            };
+
+
+            try
+            {
+                client.Send(Body);
+            }
+            catch (SmtpException ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
             //string reciever = "virtualclassroomdashboard.info@gmail.com";
             //SmtpClient smtpClient = new SmtpClient(reciever);
             //smtpClient.UseDefaultCredentials = true;

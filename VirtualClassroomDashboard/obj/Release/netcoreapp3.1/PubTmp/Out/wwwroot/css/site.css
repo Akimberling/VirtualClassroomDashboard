@@ -56,12 +56,12 @@ div.clear{
 /* Side Secondary Navigation for user specific layout
 ---------------------------------------------------*/
 main.secLayout{
-    width: 80%;
+    width: 75%;
     float: left;
 }
 div.sideNav {
     float: left;
-    width: 15%;
+    width: 20%;
     margin-right: 20px;
     border-right-width: 3px;
     border-right-style: solid;
@@ -73,12 +73,12 @@ div.sideNav ul.secNav{
 div.sideNav ul.secNav li{
     list-style-type: none;
 }
-div.sideNav ul.secNav li.subNav{
+/*div.sideNav ul.secNav li.subNav{
     text-indent: 30px;
 }
 div.sideNav ul.secNav li.subSubNav{
     text-indent: 60px;
-}
+}*/
 /* Index content
 -------------------------------------------------- */
 
