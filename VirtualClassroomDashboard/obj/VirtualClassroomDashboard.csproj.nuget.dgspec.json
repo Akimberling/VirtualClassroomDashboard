@@ -67,10 +67,6 @@
               "target": "Package",
               "version": "[2.6.3, )"
             },
-            "MediatR": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
             "Microsoft.AspNet.Identity.Core": {
               "target": "Package",
               "version": "[2.2.3, )"
@@ -128,10 +124,6 @@
             "System.IO.Abstractions": {
               "target": "Package",
               "version": "[13.2.43, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[6.11.1, )"
             },
             "Twilio": {
               "target": "Package",
