@@ -96,15 +96,19 @@ namespace VirtualClassroomDashboard.Controllers
                         //based on the users type send them to the proper dashboard
                         if (tempUserType == "student")
                         {
-                            return View("EducatorDash", UserInfo);
+                            return View("StudentDash", UserInfo);
                         }
-                        else if (tempUserType == "educator")
+                        else if (tempUserType == "teacher")
                         {
                             return View("EducatorDash", UserInfo);
+                        }
+                        else if (tempUserType == "admin")
+                        {
+                            return View("AdminDash", UserInfo);
                         }
                         else
                         {
-                            return View("AdminDash", UserInfo);
+                            ViewBag.Error = "User type is not set correctly.";
                         }
                     }
                     
@@ -165,7 +169,7 @@ namespace VirtualClassroomDashboard.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Manual()
+        public IActionResult Documentation()
         {
             return View();
         }
@@ -480,7 +484,7 @@ namespace VirtualClassroomDashboard.Controllers
                     string hashedPass = PasswordClass.HashPassword(salt, model.Password);
                     //create a new user with the information from above
                     int userRec = UserProcessor.CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, hashedPass, salt, model.UserType, int.Parse(BasicUI["SchoolID"]));
-                    ViewBag.Error = "Congratualations You have added a student";
+                    ViewBag.Error = "Congratualations You have added a " + model.UserType;
                 }
             }
             ModelState.Clear();
