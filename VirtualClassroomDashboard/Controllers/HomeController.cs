@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using System;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 
 //HomeController
 namespace VirtualClassroomDashboard.Controllers
@@ -197,22 +198,32 @@ namespace VirtualClassroomDashboard.Controllers
         [HttpGet]
         public IActionResult Account()
         {
+
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            if (BasicUI["UserType"] == null)
+            {
 
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
+                return View("AccessDenied");
 
-            return View();
+            }
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                return View();
+            }
         }
         [HttpPost]
+        
         public IActionResult Account(UserUpdateModel model)
         {
             ViewBag.Error = "";
@@ -220,32 +231,41 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
-
-            int userID = int.Parse(BasicUI["UserID"]);
-            if (model.PhoneNumber != null)
+            if (BasicUI["UserType"] == null)
             {
-                UserProcessor.updateUserPhoneNumber(model.PhoneNumber, userID);
-                ViewBag.Error = "Your phone number has been updated.";
-            }
 
-            if (model.Password != null)
-            {
-                //generate the salt value
-                string salt = PasswordClass.SaltGeneration();
-                //ecncrypt password
-                string hashedPass = PasswordClass.HashPassword(salt, model.Password);
-                UserProcessor.updateUserPassword(hashedPass, salt, userID);
-                ViewBag.Error = ViewBag.Error +  " Your password has been changed.";
+                return View("AccessDenied");
+
             }
-            return View();
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                int userID = int.Parse(BasicUI["UserID"]);
+                if (model.PhoneNumber != null)
+                {
+                    UserProcessor.updateUserPhoneNumber(model.PhoneNumber, userID);
+                    ViewBag.Error = "Your phone number has been updated.";
+                }
+
+                if (model.Password != null)
+                {
+                    //generate the salt value
+                    string salt = PasswordClass.SaltGeneration();
+                    //ecncrypt password
+                    string hashedPass = PasswordClass.HashPassword(salt, model.Password);
+                    UserProcessor.updateUserPassword(hashedPass, salt, userID);
+                    ViewBag.Error = ViewBag.Error + " Your password has been changed.";
+                }
+                return View();
+            }
 
         }
         [HttpGet]
@@ -255,131 +275,169 @@ namespace VirtualClassroomDashboard.Controllers
         }
 
 /***********************************************************************************************************
- * Admin directory
- **********************************************************************************************************/
-
+    * Admin directory
+**********************************************************************************************************/
+        
         public IActionResult AdminDash()
         {
+
                 //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            if (BasicUI["UserType"] != "Admin")
+            {
 
-            //save the data
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["SID"] = BasicUI["SchoolID"];
+                return View("AccessDenied");
 
-            return View();
+            }
+            else
+            {
+                //save the data
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                return View();
+            }
         }
+        
         public IActionResult AdminZoom()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
 
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
-
-            var schoolID = int.Parse(BasicUI["SchoolID"]);
-
-            List<UserModel> Students = new List<UserModel>();
-            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Student");
-
-            foreach (var row in userData)
+            if (BasicUI["UserType"] != "Admin")
             {
-                Students.Add(new UserModel
-                {
-                    UserID = row.UserID,
-                    FirstName = row.UserFname,
-                    LastName = row.UserLname,
-                    EmailAddress = row.UserEmail,
-                    PhoneNumber = row.UserPhonNum,
 
-                });
+                return View("AccessDenied");
 
             }
-            return View();
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+                List<UserModel> Students = new List<UserModel>();
+                var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Student");
+
+                foreach (var row in userData)
+                {
+                    Students.Add(new UserModel
+                    {
+                        UserID = row.UserID,
+                        FirstName = row.UserFname,
+                        LastName = row.UserLname,
+                        EmailAddress = row.UserEmail,
+                        PhoneNumber = row.UserPhonNum,
+
+                    });
+
+                }
+                return View();
+            }
         }
+        
         [HttpGet]
         public IActionResult ViewStudents()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
-            
-            var schoolID = int.Parse(BasicUI["SchoolID"]);
-
-            List<UserModel> Students = new List<UserModel>();
-            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Student");
-
-            foreach(var row in userData)
+            if (BasicUI["UserType"] != "Admin")
             {
-                Students.Add(new UserModel
-                {
-                    UserID = row.UserID,
-                    FirstName = row.UserFname,
-                    LastName = row.UserLname,
-                    EmailAddress = row.UserEmail,
-                    PhoneNumber = row.UserPhonNum,
 
-                });
-                
+                return View("AccessDenied");
+
             }
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
 
-            return View(Students);
+                var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+                List<UserModel> Students = new List<UserModel>();
+                var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Student");
+
+                foreach (var row in userData)
+                {
+                    Students.Add(new UserModel
+                    {
+                        UserID = row.UserID,
+                        FirstName = row.UserFname,
+                        LastName = row.UserLname,
+                        EmailAddress = row.UserEmail,
+                        PhoneNumber = row.UserPhonNum,
+
+                    });
+
+                }
+
+                return View(Students);
+            }
         }
-     
+        
         public IActionResult ViewEducators()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
 
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
-
-            var schoolID = int.Parse(BasicUI["SchoolID"]);
-
-            List<UserModel> Educators = new List<UserModel>();
-            var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Teacher");
-
-            foreach (var row in userData)
+            if (BasicUI["UserType"] != "Admin")
             {
-                Educators.Add(new UserModel
-                {
-                    UserID = row.UserID,
-                    FirstName = row.UserFname,
-                    LastName = row.UserLname,
-                    EmailAddress = row.UserEmail,
-                    PhoneNumber = row.UserPhonNum,
 
-                });
+                return View("AccessDenied");
 
             }
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
 
-            return View(Educators);
+                var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+                List<UserModel> Educators = new List<UserModel>();
+                var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Teacher");
+
+                foreach (var row in userData)
+                {
+                    Educators.Add(new UserModel
+                    {
+                        UserID = row.UserID,
+                        FirstName = row.UserFname,
+                        LastName = row.UserLname,
+                        EmailAddress = row.UserEmail,
+                        PhoneNumber = row.UserPhonNum,
+
+                    });
+
+                }
+
+                return View(Educators);
+            }
         }
+        
         public ActionResult DeleteStudent(int id)
         {
             UserProcessor.deleteUserData(id);
@@ -402,7 +460,7 @@ namespace VirtualClassroomDashboard.Controllers
 
 
         }
-
+        
         public ActionResult DeleteEducators(int id)
         {
             UserProcessor.deleteUserData(id);
@@ -426,115 +484,161 @@ namespace VirtualClassroomDashboard.Controllers
 
         }
         [HttpGet]
+        
         public IActionResult AddUsers()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
 
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
+            if (BasicUI["UserType"] != "Admin")
+            {
 
-            var schoolID = int.Parse(BasicUI["SchoolID"]);
+                return View("AccessDenied");
 
-            return View();
+            }
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+                return View();
+            }
         }
         [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public ActionResult AddUsers(excelParseModel model)
         {
             ViewBag.Error = "";
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            if (BasicUI["UserType"] != "Admin")
+            {
 
-            //    //check for duplicate users
-            List<int> reocur2 = UserProcessor.CheckForDuplicates(model.FirstName, model.LastName, model.EmailAddress,model.UserType);
+                return View("AccessDenied");
 
-            if(model.UserType == "student" || model.UserType == "Student")
-            {
-                model.UserType = "Student";
             }
-            else if(model.UserType == "teacher" || model.UserType == "Teacher")
+            else
             {
-                model.UserType = "Teacher";
-            }
-            else {
-                    ViewBag.Error = "Incorrect user type please use Student or Teacher";
-            }
-            if (model.UserType == "Teacher" || model.UserType == "Student")
-            {
-                //    //if the user who is attempting to  make an account is entering in info that already exists
-                if (reocur2[0] > 0)
+                //    //check for duplicate users
+                List<int> reocur2 = UserProcessor.CheckForDuplicates(model.FirstName, model.LastName, model.EmailAddress, model.UserType);
+
+                if (model.UserType == "student" || model.UserType == "Student")
                 {
-                    //inform user that
-                    ViewBag.Error = "This account already exists. Either Login or enter new credentials.";
+                    model.UserType = "Student";
+                }
+                else if (model.UserType == "teacher" || model.UserType == "Teacher")
+                {
+                    model.UserType = "Teacher";
                 }
                 else
                 {
-                    model.Password = "johnDoe3#";
-                    //generate the salt value
-                    string salt = PasswordClass.SaltGeneration();
-                    //ecncrypt password
-                    string hashedPass = PasswordClass.HashPassword(salt, model.Password);
-                    //create a new user with the information from above
-                    int userRec = UserProcessor.CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, hashedPass, salt, model.UserType, int.Parse(BasicUI["SchoolID"]));
-                    ViewBag.Error = "Congratualations You have added a " + model.UserType;
+                    ViewBag.Error = "Incorrect user type please use Student or Teacher";
                 }
+                if (model.UserType == "Teacher" || model.UserType == "Student")
+                {
+                    //if the user who is attempting to  make an account is entering in info that already exists
+                    if (reocur2[0] > 0)
+                    {
+                        //inform user that
+                        ViewBag.Error = "This account already exists. Either Login or enter new credentials.";
+                    }
+                    else
+                    {
+                        model.Password = "johnDoe3#";
+                        //generate the salt value
+                        string salt = PasswordClass.SaltGeneration();
+                        //ecncrypt password
+                        string hashedPass = PasswordClass.HashPassword(salt, model.Password);
+                        //create a new user with the information from above
+                        int userRec = UserProcessor.CreateUser(model.FirstName, model.LastName, model.PhoneNumber, model.EmailAddress, hashedPass, salt, model.UserType, int.Parse(BasicUI["SchoolID"]));
+                        ViewBag.Error = "Congratualations You have added a " + model.UserType;
+                    }
+                }
+                ModelState.Clear();
+                return View();
             }
-            ModelState.Clear();
-            return View();
         }
         /***********************************************************************************************************
          * Student directory
          **********************************************************************************************************/
-
+        
         public IActionResult StudentDash()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
 
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
+            if (BasicUI["UserType"] != "Student")
+            {
 
-            return View();
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                return View();
+            }
         }
 
 /***********************************************************************************************************
 * Educator directory
 **********************************************************************************************************/
-
+        
         public IActionResult EducatorDash()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
 
-            //save the data
-            TempData["UID"] = BasicUI["UserID"];
-            TempData["FN"] = BasicUI["FirstName"];
-            TempData["LN"] = BasicUI["LastName"];
-            TempData["PN"] = BasicUI["PhoneNumber"];
-            TempData["EM"] = BasicUI["EmailAddress"];
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["SID"] = BasicUI["SchoolID"];
+            if (BasicUI["UserType"] != "Teacher")
+            {
 
-            return View();
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                return View();
+            }
         }
         [HttpGet]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult AccessDenied()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
+            return View();
+        }
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
