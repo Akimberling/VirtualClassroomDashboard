@@ -1,15 +1,19 @@
 ﻿@model VirtualClassroomDashboard.Models.UserUpdateModel
 @{
     ViewData["Title"] = "Account";
-    if (@TempData["UT"].ToString() == "Admin")
+    if (@TempData["UT"] == null)
+    {
+        Layout = "_Layout";
+    }
+    else if (@TempData["UT"].ToString() == "Admin")
     {
         Layout = "_LayoutAdmin";
     }
-    else if (@TempData["UT"].ToString() == "Educator")
+    else if (@TempData["UT"].ToString() == "Teacher")
     {
         Layout = "_LayoutEducator";
     }
-    else
+    else if (@TempData["UT"].ToString() == "Student")
     {
         Layout = "_LayoutStudent";
     }
