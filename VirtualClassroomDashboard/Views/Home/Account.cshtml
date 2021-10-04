@@ -1,7 +1,23 @@
 ﻿@model VirtualClassroomDashboard.Models.UserUpdateModel
 @{
     ViewData["Title"] = "Account";
-    Layout = "_LayoutAdmin";
+    if (@TempData["UT"] == null)
+    {
+        Layout = "_Layout";
+    }
+    else if (@TempData["UT"].ToString() == "Admin")
+    {
+        Layout = "_LayoutAdmin";
+    }
+    else if (@TempData["UT"].ToString() == "Teacher")
+    {
+        Layout = "_LayoutEducator";
+    }
+    else if (@TempData["UT"].ToString() == "Student")
+    {
+        Layout = "_LayoutStudent";
+    }
+
 }
 
 <div class="one-hundred">
@@ -24,7 +40,14 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="PhoneNumber" class="control-label"></label>
-                        <input asp-for="PhoneNumber" class="form-control" placeholder="Ex: 6267689903" />
+                        @if (@TempData["PN"] != null)
+                        {
+                            <input asp-for="PhoneNumber" class="form-control" value=@TempData["PN"] />
+                        }
+                        else
+                        {
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Ex: 6267689903" />
+                        }
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -32,7 +55,6 @@
                         <p>@TempData["EM"]</p>
                     </div>
                     <div class="form-group">
-                        <p>Used to change your password</p>
                         <label asp-for="Password" class="control-label"></label>
                         <input asp-for="Password" class="form-control" />
                     </div>

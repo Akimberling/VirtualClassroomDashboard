@@ -19,7 +19,7 @@ namespace VirtualClassroomDashboard.Models
        
 
         //Display names/required error messages/password
-        [Display(Name = "Password")]
+        [Display(Name = "Change Password")]
         [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$", ErrorMessage = "Password must contain one uppercase letter, one lowercase letter, one digit and one special character.")]
         [StringLength(100, MinimumLength = 10, ErrorMessage = "Your password must be a minimum length of 10.")]

@@ -78,5 +78,28 @@ namespace VirtualClassroomDashboard.BusinessLogic
 
             return sqlDataAccess.SaveData(sql, data);
         }
+        public static int updateUserPhoneNumber(string userPN, int userID)
+        {
+            UserModelData data = new UserModelData
+            {
+                UserID = userID,
+                UserPhonNum = userPN
+            };
+            string sql = "UPDATE dbo.USER_INFO SET UserPhonNum = \'" + userPN + "\' WHERE UserID = \'" + userID + "\';";
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
+        public static int updateUserPassword(string userPass, string salt, int userID)
+        {
+            UserModelData data = new UserModelData
+            {
+                UserID = userID,
+                UserPassword = userPass,
+                UserSalt = salt
+            };
+            string sql = "UPDATE dbo.USER_INFO SET UserPassword = \'" + userPass + "\', UserSalt = \'" + salt + "\' WHERE UserID = \'" + userID + "\';";
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
     }
 }

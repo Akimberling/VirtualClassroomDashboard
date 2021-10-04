@@ -38,7 +38,10 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="UserType" class="control-label"></label>
-                        <input asp-for="UserType" class="form-control" placeholder="EX: johnD@johnd.com" />
+                        <select asp-for="UserType" id="UserType" class="form-control">
+                            <option value="Teacher">Teacher</option>
+                            <option value="Student">Student</option>
+                        </select>
                         <span asp-validation-for="UserType" class="text-danger"></span>
                     </div>
                     <div class="form-group">

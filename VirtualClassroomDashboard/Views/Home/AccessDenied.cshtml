@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Access Denied";
+    if (@TempData["UT"] == null)
+    {
+        Layout = "_Layout";
+    }
+    else if (@TempData["UT"].ToString() == "Admin")
+    {
+        Layout = "_LayoutAdmin";
+    }
+    else if (@TempData["UT"].ToString() == "Teacher")
+    {
+        Layout = "_LayoutEducator";
+    }
+    else if (@TempData["UT"].ToString() == "Student")
+    {
+        Layout = "_LayoutStudent";
+    }
+}
+
+<div class="one-hundred">
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>You do not have permission to access this page</p>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
