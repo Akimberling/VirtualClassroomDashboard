@@ -257,11 +257,33 @@ h5{
     border-top: none;
 }
 
+/*Table decoration*/
+.tableDec {
+    border-collapse: collapse;
+}
+.tableDec td, .tableDec th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.tableDec tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.tableDec tr:hover {
+    background-color: #ddd;
+}
+.tableDec th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #007790;
+    color: white;
+}
+
 /**************************************************/
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 

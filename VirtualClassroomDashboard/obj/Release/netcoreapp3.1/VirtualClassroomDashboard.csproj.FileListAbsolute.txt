@@ -29,7 +29,6 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\Contact.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\Login.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\Manual.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\Registration.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -123,13 +122,11 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Release\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Account.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Announcements.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Assessments.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Assignments.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Discussions.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Grades.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Home.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Roster.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Syllabus.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Educator\Zoom.cshtml.g.cs
@@ -137,13 +134,11 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Shared\_LayoutAdmin.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Shared\_LayoutEducator.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Shared\_LayoutStudent.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Account.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Announcements.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Assessments.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Assignments.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Discussions.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Grades.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Home.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Roster.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Syllabus.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Student\Zoom.cshtml.g.cs
@@ -164,8 +159,6 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Release\netcoreapp3.1\Twilio.dll
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\Account.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\AdminDash.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\EducatorDash .cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\StudentDash .cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Release\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -220,3 +213,7 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\AdminZoom.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\ViewEducators.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\ViewStudents.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\AccessDenied.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\Documentation.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\EducatorDash.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Release\netcoreapp3.1\Razor\Views\Home\StudentDash.cshtml.g.cs
