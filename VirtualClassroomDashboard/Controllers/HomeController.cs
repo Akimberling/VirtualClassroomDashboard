@@ -98,15 +98,15 @@ namespace VirtualClassroomDashboard.Controllers
                         //based on the users type send them to the proper dashboard
                         if (tempUserType == "student")
                         {
-                            return View("StudentDash", UserInfo);
+                            return View("StudentDash");
                         }
                         else if (tempUserType == "teacher")
                         {
-                            return View("EducatorDash", UserInfo);
+                            return View("EducatorDash");
                         }
                         else if (tempUserType == "admin")
                         {
-                            return View("AdminDash", UserInfo);
+                            return View("AdminDash");
                         }
                         else
                         {
@@ -592,7 +592,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
+            int userId = int.Parse(BasicUI["UserID"]);
             if (BasicUI["UserType"] != "Teacher")
             {
 
@@ -610,8 +610,56 @@ namespace VirtualClassroomDashboard.Controllers
                 TempData["UT"] = BasicUI["UserType"];
                 TempData["SID"] = BasicUI["SchoolID"];
 
-                return View();
+                List<CourseModel> Courses = new List<CourseModel>();
+                var courseData = CourseProcessor.RetrieveNecessaryCourses(userId);
+
+                foreach (var row in courseData)
+                {
+                    Courses.Add(new CourseModel
+                    {
+                        CourseID = row.CourseID,
+                        CourseName = row.CourseName,
+                        CourseSection = row.CourseSection,
+                        CourseNumber = row.CourseNumber,
+                        ClassNum = row.ClassNum
+
+                    });
+
+                }
+                return View(Courses);
             }
+        }
+
+        public ActionResult SetCourse(int id)
+        {
+            List<CourseModel> Courses = new List<CourseModel>();
+            var courseData = CourseProcessor.RetrieveCourse(id);
+            foreach (var row in courseData)
+            {
+                Courses.Add(new CourseModel
+                {
+                    CourseID = row.CourseID,
+                    CourseName = row.CourseName,
+                    CourseSection = row.CourseSection,
+                    CourseNumber = row.CourseNumber,
+                    ClassNum = row.ClassNum
+
+                });
+            }
+
+            //create a new model
+            CourseModel CurrentInfo = new CourseModel();
+
+            //store the values from userData into the model
+            CurrentInfo.CourseID = Courses[0].CourseID;
+            CurrentInfo.CourseName = Courses[0].CourseName;
+            CurrentInfo.CourseSection = Courses[0].CourseSection;
+            CurrentInfo.CourseNumber = Courses[0].CourseNumber;
+            CurrentInfo.ClassNum = Courses[0].CourseNumber;
+
+            SelectedCourseClass.setCourseData(CurrentInfo);
+
+            return View("EducatorDash");
         }
         public IActionResult TeacherZoom()
         {
@@ -785,7 +833,7 @@ namespace VirtualClassroomDashboard.Controllers
                 CurrentInfo.CourseNumber = Courses[0].CourseNumber;
                 CurrentInfo.ClassNum = Courses[0].CourseNumber;
 
-                CourseInfoClass.setCourseData(CurrentInfo);
+                CourseInfoClass.setTempCourseData(CurrentInfo);
                 TempData["CName"] =Courses[0].CourseName;
                 TempData["CN"] = Courses[0].CourseNumber;
                 TempData["ClN"] = Courses[0].ClassNum;
@@ -815,6 +863,82 @@ namespace VirtualClassroomDashboard.Controllers
 
                 return View("ViewCourses");
             }
+        }
+        [HttpGet]
+        public IActionResult AddStudents(int id)
+        {
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            //form of authentication
+            if (BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+                List<UserModel> Students = new List<UserModel>();
+                var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Student");
+                //user course id 
+
+                foreach (var row in userData)
+                {
+                    Students.Add(new UserModel
+                    {
+                        UserID = row.UserID,
+                        FirstName = row.UserFname,
+                        LastName = row.UserLname,
+                        EmailAddress = row.UserEmail,
+                        PhoneNumber = row.UserPhonNum,
+
+                    });
+
+                }
+
+                List<CourseModel> Courses = new List<CourseModel>();
+                var courseData = CourseProcessor.RetrieveCourse(id);
+
+                foreach (var row in courseData)
+                {
+                    Courses.Add(new CourseModel
+                    {
+                        CourseID = row.CourseID,
+                        CourseName = row.CourseName,
+                        CourseSection = row.CourseSection,
+                        CourseNumber = row.CourseNumber,
+                        ClassNum = row.ClassNum
+
+                    });
+                }
+                //create a new model
+                CourseModel CurrentInfo = new CourseModel();
+
+                //store the values from userData into the model
+                CurrentInfo.CourseID = Courses[0].CourseID;
+                CurrentInfo.CourseName = Courses[0].CourseName;
+                CurrentInfo.CourseSection = Courses[0].CourseSection;
+                CurrentInfo.CourseNumber = Courses[0].CourseNumber;
+                CurrentInfo.ClassNum = Courses[0].CourseNumber;
+
+                CourseInfoClass.setTempCourseData(CurrentInfo);
+                TempData["CName"] = Courses[0].CourseName;
+
+                return View(Students);
+            }
+        }
+        public ActionResult AddStudent(int id)
+        {
+            //check to ensure there are no dulicate courses
+
+            ViewBag.Error = "There is no action ";
+            
+            return View("AddStudents");
         }
         public IActionResult AccessDenied()
         {

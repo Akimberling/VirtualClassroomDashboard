@@ -6,7 +6,7 @@ using VirtualClassroomDashboard.Models;
 
 namespace VirtualClassroomDashboard.Classes
 {
-    public class CourseInfoClass
+    public class SelectedCourseClass
     {
         //courseID
         private static int cID;
@@ -23,7 +23,7 @@ namespace VirtualClassroomDashboard.Classes
         //classNum
         private static string clNum;
 
-        public static void setTempCourseData(CourseModel model)
+        public static void setCourseData(CourseModel model)
         {
             cID = model.CourseID;
             sID = model.SchoolID;

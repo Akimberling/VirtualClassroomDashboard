@@ -87,7 +87,21 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
         }
         public static List<int> getCourseData(int userID, string cName)
         {
-            string sql = "SELECT CourseID FROM dbo.COURSES WHERE UserID = \'" + userID + "\' CourseName = \'" + cName + "\';";
+            string sql = "SELECT CourseID FROM dbo.COURSES WHERE UserID = \'" + userID + "\' AND CourseName = \'" + cName + "\';";
+
+            return sqlDataAccess.LoadData<int>(sql);
+        }
+        public static int addStudents(int courseID, int userID)
+        {
+            CourseModelData data = new CourseModelData { };
+
+            string sql = @"INSERT INTO dbo.USER_COURSES (UserID, CourseID) VALUES (\'" + courseID + "\', \'" + userID + "\'); ";
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
+        public static List<int> CheckForExistingStudent(int courseID, int userID)
+        {
+            string sql = "SELECT COUNT(*) FROM dbo.USER_COURSES WHERE CourseID = \'" + courseID + "AND UserID = \'" + userID + "\';";
 
             return sqlDataAccess.LoadData<int>(sql);
         }

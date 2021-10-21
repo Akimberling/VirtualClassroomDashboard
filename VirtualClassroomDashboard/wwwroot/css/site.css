@@ -169,7 +169,22 @@ fieldset {
     height: 30px;
     width: 30px;
 }
-
+/*course selection buttons*/
+a.courseButton{
+    width: 50%;
+    border: 1px solid #007790;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 245px;
+    background-color: #007790;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    display:block;
+}
+a.courseButton:hover{
+    background-color: #8CC63E;
+}
 /*Error in the user/school information meaning it already exists*/
 p.errorResponse {
     color: #ff0000;
