@@ -9,13 +9,19 @@
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
     <h2>Welcome @TempData["FN"] @TempData["LN"]!</h2>
-    
+
     @if (Model != null)
     {
         @foreach (var item in Model)
         {
-            @Html.ActionLink(item.CourseName + " " + item.CourseNumber, "SetCourse", new { id = item.CourseID }, new{ @class = "courseButton" })
+            @Html.ActionLink(item.CourseName + " " + item.CourseNumber, "SetCourse", new { id = item.CourseID }, new { @class = "courseButton" })
             <br />
         }
     }
+    else
+    {
+        <p>Something went wrong or you have not added any courses.</p>
+    }
+    <div class="clear"></div>
 </div>
+<div class="clear"></div>

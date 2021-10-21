@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<VirtualClassroomDashboard.Models.UserModel>
 @{
-    ViewData["Title"] = "Dashboard";
-    if (@TempData["UT"].ToString() == "Admin")
+    ViewData["Title"] = "Roster";
+    if (@TempData["UT"].ToString() == "Student")
     {
-        Layout = "_LayoutAdmin";
+        Layout = "_LayoutStudent";
     }
     else
     {
@@ -16,6 +16,37 @@
     <h1 class="mainHeading">@ViewData["Title"]</h1>
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
-    <h2>SECOND LAYOUT</h2>
+    <h2>@TempData["CourseName"]</h2>
 
+    <p class="errorResponse">@ViewBag.Error</p>
+    @if (Model != null)
+    {
+
+        <table class="tableDec">
+            <tr>
+                <th>User Id</th>
+                <th>First Name</th>
+                <th>Last Name </th>
+                <th>Email Address</th>
+                <th>PhoneNumber</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserID.ToString()</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.EmailAddress</td>
+                    <td>@item.PhoneNumber</td>
+
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>There are no Students enrolled in this course. Or you have not selected a course on the dashboard</p>
+    }
+    <div class = "clear"></div>
 </div>
+<div class="clear"></div>

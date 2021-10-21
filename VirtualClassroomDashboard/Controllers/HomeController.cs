@@ -12,12 +12,17 @@ using System;
 using Grpc.Core;
 using Microsoft.AspNetCore.Authorization;
 using VirtualClassroomDashboard.DataLibrary.BusinessLogic;
+using System.IO;
+using System.Linq;
+using System.Web;
 
 //HomeController
 namespace VirtualClassroomDashboard.Controllers
 {
     public class HomeController : Controller
     {
+        private IHostingEnvironment Environment;
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -586,7 +591,7 @@ namespace VirtualClassroomDashboard.Controllers
 /***********************************************************************************************************
 * Educator directory
 **********************************************************************************************************/
-        
+        [HttpGet]
         public IActionResult EducatorDash()
         {
             //establish a dictionary that will contain user information that was set during login
@@ -632,6 +637,17 @@ namespace VirtualClassroomDashboard.Controllers
 
         public ActionResult SetCourse(int id)
         {
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
             List<CourseModel> Courses = new List<CourseModel>();
             var courseData = CourseProcessor.RetrieveCourse(id);
             foreach (var row in courseData)
@@ -658,6 +674,7 @@ namespace VirtualClassroomDashboard.Controllers
             CurrentInfo.ClassNum = Courses[0].CourseNumber;
 
             SelectedCourseClass.setCourseData(CurrentInfo);
+            ViewBag.Error = "Ypu can now access your course information.";
 
             return View("EducatorDash");
         }
@@ -948,6 +965,88 @@ namespace VirtualClassroomDashboard.Controllers
             TempData["UT"] = BasicUI["UserType"];
             return View();
         }
+        [HttpGet]
+        public IActionResult EducatorSyllabus()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EducatorSyllabus(List<IFormFile> postedFiles)
+        {
+
+            string path = Path.Combine("TempUploads");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            List<string> uploadedFiles = new List<string>();
+            foreach (IFormFile postedFile in postedFiles)
+            {
+                string fileName = Path.GetFileName(postedFile.FileName);
+                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                {
+                    postedFile.CopyTo(stream);
+                    uploadedFiles.Add(fileName);
+                    ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
+                }
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Roster()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            if (BasicUI["UserType"] != "Student" && BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                //save the data
+                TempData["UID"] = BasicUI["UserID"];
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                var schoolID = int.Parse(BasicUI["SchoolID"]);
+
+                Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+                BasicCI = SelectedCourseClass.getCourseData();
+                TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+                int courseID = int.Parse(BasicCI["CourseID"]);
+
+                List<UserModel> Students = new List<UserModel>();
+                var userData = CourseProcessor.RetrieveStudentsInCourse(courseID);
+
+                foreach (var row in userData)
+                {
+                    Students.Add(new UserModel
+                    {
+                        UserID = row.UserID,
+                        FirstName = row.UserFname,
+                        LastName = row.UserLname,
+                        EmailAddress = row.UserEmail,
+                        PhoneNumber = row.UserPhonNum,
+
+                    });
+
+                }
+                
+                return View(Students);
+            }
+        }
+
+
         [HttpGet]
         public IActionResult Error()
         {

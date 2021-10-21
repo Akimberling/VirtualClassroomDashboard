@@ -105,5 +105,11 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
 
             return sqlDataAccess.LoadData<int>(sql);
         }
+        public static List<UserModelData> RetrieveStudentsInCourse(int courseId)
+        {
+            string sql = "SELECT * FROM dbo.USER_INFO INNER JOIN USER_COURSE ON dbo.USER_INFO.UserID = dbo.USER_COURSE.UserID WHERE CourseID = \'" + courseId + "\';";
+
+            return sqlDataAccess.LoadData<UserModelData>(sql);
+        }
     }
 }
