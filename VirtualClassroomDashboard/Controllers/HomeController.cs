@@ -58,9 +58,6 @@ namespace VirtualClassroomDashboard.Controllers
                 {
                         //collect data from db
                     var userData = UserProcessor.RetrieveUserInfo(model.UserEmail);
-
-                    //var userSchoolData;
-
                     //create a new model
                     UserModel UserInfo = new UserModel();
 
@@ -77,8 +74,6 @@ namespace VirtualClassroomDashboard.Controllers
                         UserInfo.UserType = row.UserType;
                         UserInfo.SchoolID = row.SchoolID;
                     }
-
-
                         //set the data into a class so it can be accessed anywhere
                     UserInfoClass.setUserData(UserInfo);
 
@@ -103,15 +98,15 @@ namespace VirtualClassroomDashboard.Controllers
                         //based on the users type send them to the proper dashboard
                         if (tempUserType == "student")
                         {
-                            return View("StudentDash");
+                            return RedirectToAction("StudentDash");
                         }
                         else if (tempUserType == "teacher")
                         {
-                            return View("EducatorDash");
+                            return RedirectToAction("EducatorDash");
                         }
                         else if (tempUserType == "admin")
                         {
-                            return View("AdminDash");
+                            return RedirectToAction("AdminDash");
                         }
                         else
                         {
@@ -503,7 +498,6 @@ namespace VirtualClassroomDashboard.Controllers
             }
         }
         [HttpPost]
-        
         [ValidateAntiForgeryToken]
         public ActionResult AddUsers(excelParseModel model)
         {
@@ -594,9 +588,23 @@ namespace VirtualClassroomDashboard.Controllers
         [HttpGet]
         public IActionResult EducatorDash()
         {
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            TempData["SCI"] = "";
+
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
             int userId = int.Parse(BasicUI["UserID"]);
             if (BasicUI["UserType"] != "Teacher")
             {
@@ -604,17 +612,13 @@ namespace VirtualClassroomDashboard.Controllers
                 return View("AccessDenied");
 
             }
+            else if (BasicCI["CourseName"] != null)
+            {
+                TempData["SCI"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+                return View();
+            }
             else
             {
-                //save the data
-                TempData["UID"] = BasicUI["UserID"];
-                TempData["FN"] = BasicUI["FirstName"];
-                TempData["LN"] = BasicUI["LastName"];
-                TempData["PN"] = BasicUI["PhoneNumber"];
-                TempData["EM"] = BasicUI["EmailAddress"];
-                TempData["UT"] = BasicUI["UserType"];
-                TempData["SID"] = BasicUI["SchoolID"];
-
                 List<CourseModel> Courses = new List<CourseModel>();
                 var courseData = CourseProcessor.RetrieveNecessaryCourses(userId);
 
@@ -634,7 +638,11 @@ namespace VirtualClassroomDashboard.Controllers
                 return View(Courses);
             }
         }
-
+        public ActionResult selectNewCourse()
+        {
+            SelectedCourseClass.clearCourseData();
+            return RedirectToAction("EducatorDash");
+        }
         public ActionResult SetCourse(int id)
         {
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
@@ -673,8 +681,11 @@ namespace VirtualClassroomDashboard.Controllers
             CurrentInfo.CourseNumber = Courses[0].CourseNumber;
             CurrentInfo.ClassNum = Courses[0].CourseNumber;
 
+            //selected course information
+            TempData["SCI"] = Courses[0].CourseName + " " + Courses[0].CourseNumber;
+
             SelectedCourseClass.setCourseData(CurrentInfo);
-            ViewBag.Error = "Ypu can now access your course information.";
+            ViewBag.Error = "You can now access your course information.";
 
             return View("EducatorDash");
         }
@@ -951,48 +962,155 @@ namespace VirtualClassroomDashboard.Controllers
         }
         public ActionResult AddStudent(int id)
         {
-            //check to ensure there are no dulicate courses
+            //check to ensure there are no dulicate Students
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
 
-            ViewBag.Error = "There is no action ";
-            
+            int cid = int.Parse(BasicCI["CourseID"]);
+
+            CourseProcessor.AddUserToCourse(cid, id);
+
             return View("AddStudents");
         }
-        public IActionResult AccessDenied()
+        
+        [HttpGet]
+        public IActionResult EducatorSyllabus()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-            TempData["UT"] = BasicUI["UserType"];
-            return View();
-        }
-        [HttpGet]
-        public IActionResult EducatorSyllabus()
-        {
-            return View();
+            int userId = int.Parse(BasicUI["UserID"]);
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            //form of authentication
+            if (BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+                string directoryName = BasicUI["FirstName"] + BasicUI["LastName"] + "_" + BasicCI["CourseNumber"];
+                
+                //set the path
+                List<CourseFileModel> CourseFile = new List<CourseFileModel>();
+                string filepath = directoryName + "/Syllabus/";
+                int cid = int.Parse(BasicCI["CourseID"]);
+                var courseFileData = FileProcessor.RetrieveCourseFile("Syllabus", filepath, userId, cid);
+
+                if (courseFileData.Count > 0)
+                {
+
+                    foreach (var row in courseFileData)
+                    {
+                        CourseFile.Add(new CourseFileModel
+                        {
+                            FileName = row.FileName
+
+                        });
+                    }
+                    //create a new model
+                    CourseFileModel fileInfo = new CourseFileModel();
+
+                    //store the values from userData into the model
+                    fileInfo.FileName = CourseFile[0].FileName;
+
+                    System.IO.FileInfo fileP = new FileInfo(Path.Combine(filepath, fileInfo.FileName));
+
+                    if (fileP.Exists)
+                      ViewBag.Message += string.Format("<p>Current Syllabus: </p><a href= \"" + fileP + "\" target=\"_blank\" download>" + fileInfo.FileName + "</a>");
+                }
+
+                return View();
+            }
         }
 
         [HttpPost]
         public IActionResult EducatorSyllabus(List<IFormFile> postedFiles)
         {
-
-            string path = Path.Combine("TempUploads");
-            if (!Directory.Exists(path))
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //class Information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            string directoryName = BasicUI["FirstName"] + BasicUI["LastName"] + "_" + BasicCI["CourseNumber"];
+            TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+            //form of authentication
+            if (BasicUI["UserType"] != "Teacher")
             {
-                Directory.CreateDirectory(path);
+
+                return View("AccessDenied");
+
             }
-
-            List<string> uploadedFiles = new List<string>();
-            foreach (IFormFile postedFile in postedFiles)
+            else if(BasicCI["CourseNumber"] == null)
             {
-                string fileName = Path.GetFileName(postedFile.FileName);
-                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            } 
+            else
+            {
+                //designate the path that the file will be saved
+                string path = Path.Combine(directoryName + "/Syllabus/");
+                //check if that directory already exists. if it does create the path
+                if (!Directory.Exists(path))
                 {
-                    postedFile.CopyTo(stream);
-                    uploadedFiles.Add(fileName);
-                    ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", fileName);
+                    Directory.CreateDirectory(path);
                 }
+                //create a list of strings called uploded files
+                List<string> uploadedFiles = new List<string>();
+
+                //foreach of the file being uploaded
+                foreach (IFormFile postedFile in postedFiles)
+                {
+                    //grab the filename
+                    string fileName = Path.GetFileName(postedFile.FileName);
+                    //combine the filename with the path
+                    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                    {
+                        postedFile.CopyTo(stream);
+                        uploadedFiles.Add(fileName);
+
+                    }
+                    //find the file path
+                    System.IO.FileInfo fi = new System.IO.FileInfo(Path.Combine(path, fileName));
+                    //find the file extension
+                    string fileEnd = fileName.Split(".")[1];
+                    //if the file exists
+                    if (fi.Exists)
+                    {
+                        string filepath = directoryName + "/Syllabus/";
+                        int cid = int.Parse(BasicCI["CourseID"]);
+                        //check the database
+                        List<int> dupFiles = FileProcessor.CheckForDuplicates(directoryName + "." + fileEnd, userId, cid, "Syllabus");
+                        //if the database contains the file
+                        if(dupFiles[0] != 0)
+                        {
+                            //remove the file
+                            int fileDel = FileProcessor.deleteCourseFileData(directoryName + "." + fileEnd, path, userId, cid);
+                            //remove the file from server
+                            System.IO.FileInfo fileP = new FileInfo(Path.Combine(path, directoryName + "." + fileEnd));
+                            if (fileP.Exists)
+                                fileP.Delete();
+                        }
+                        //change the file name
+                        fi.MoveTo(Path.Combine(path, directoryName + "." + fileEnd));
+                        //inform the user that the file was uploaded and the name change
+                        ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", directoryName + "." + fileEnd);
+                        ViewBag.Message += string.Format("<p>New Syllabus: </p><a href= " + path + "/" + directoryName + "." + fileEnd + " taget=\"_blank\" download>" + directoryName + "." + fileEnd + "</a>");
+                        //set the syllabus 
+                        SelectedCourseClass.setSyllabus(directoryName + "." + fileEnd);
+                        string NewFile = directoryName + "." + fileEnd;
+                        //save the file to the database
+                        int fileRec = FileProcessor.CreateFile(NewFile, path, "Syllabus", directoryName + "Syllabus", userId, cid);
+                    }
+                    
+                }
+                return View();
             }
-            return View();
         }
 
         [HttpGet]
@@ -1019,15 +1137,15 @@ namespace VirtualClassroomDashboard.Controllers
                 TempData["SID"] = BasicUI["SchoolID"];
 
                 var schoolID = int.Parse(BasicUI["SchoolID"]);
-
+                //grab daved information
                 Dictionary<string, string> BasicCI = new Dictionary<string, string>();
                 BasicCI = SelectedCourseClass.getCourseData();
                 TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
                 int courseID = int.Parse(BasicCI["CourseID"]);
-
+                //grab user data
                 List<UserModel> Students = new List<UserModel>();
                 var userData = CourseProcessor.RetrieveStudentsInCourse(courseID);
-
+                //save user data to a model
                 foreach (var row in userData)
                 {
                     Students.Add(new UserModel
@@ -1045,8 +1163,27 @@ namespace VirtualClassroomDashboard.Controllers
                 return View(Students);
             }
         }
+        public ActionResult RemoveStudent(int id)
+        {
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
 
+            int cid = int.Parse(BasicCI["CourseID"]);
+            TempData["UT"] = "Teacher";
+            CourseProcessor.deleteUserFromCourse(cid, id);
 
+            return RedirectToAction("Roster");
+        }
+        public IActionResult AccessDenied()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
+
+            return View();
+        }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet]
         public IActionResult Error()
         {

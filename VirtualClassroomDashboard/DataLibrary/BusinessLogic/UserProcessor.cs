@@ -61,7 +61,13 @@ namespace VirtualClassroomDashboard.BusinessLogic
 
             return sqlDataAccess.LoadData<UserModelData>(sql);
         }
-            //Select all users that are from a given school with the specified user type
+        public static List<UserModelData> RetrieveUserInfoByID(int ID)
+        {
+            string sql = "SELECT * FROM dbo.USER_INFO WHERE UserID = \'" + ID + "\';";
+
+            return sqlDataAccess.LoadData<UserModelData>(sql);
+        }
+        //Select all users that are from a given school with the specified user type
         public static List<UserModelData> RetrieveNecessaryUsers(int schoolId, string userType)
         {
             string sql = "SELECT * FROM dbo.USER_INFO WHERE SchoolID = \'" + schoolId + "\' AND UserType = \'" + userType + "\';";

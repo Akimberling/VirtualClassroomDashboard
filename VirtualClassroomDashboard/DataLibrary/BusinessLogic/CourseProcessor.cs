@@ -27,6 +27,31 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
             return sqlDataAccess.SaveData(sql, data);
 
         }
+        public static int AddUserToCourse(int cid, int uID)
+        {
+            CourseModelData data = new CourseModelData
+            {
+                CourseID = cid,
+                UserID = uID,
+
+            };
+
+            string sql = @"INSERT INTO dbo.USER_COURSE (UserID, CourseID) VALUES (@UserID, @CourseID);";
+
+            return sqlDataAccess.SaveData(sql, data);
+
+        }
+        public static int deleteUserFromCourse(int cid, int uID)
+        {
+            CourseModelData data = new CourseModelData
+            {
+                CourseID = cid,
+                UserID = uID,
+            };
+            string sql = "DELETE FROM dbo.USER_COURSE WHERE CourseID = @CourseID AND UserID = @UserID;";
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
         public static List<int> CheckForDuplicates(string CourseName, int UID, int SID)
         {
             string sql = "SELECT COUNT(*) FROM dbo.COURSES WHERE CourseName = \'" + CourseName + "\' AND UserID = \'" + UID + "\' AND SchoolID = \'" + SID + "\';";
@@ -107,9 +132,10 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
         }
         public static List<UserModelData> RetrieveStudentsInCourse(int courseId)
         {
-            string sql = "SELECT * FROM dbo.USER_INFO INNER JOIN USER_COURSE ON dbo.USER_INFO.UserID = dbo.USER_COURSE.UserID WHERE CourseID = \'" + courseId + "\';";
+            string sql = "SELECT * FROM dbo.USER_INFO INNER JOIN USER_COURSE ON dbo.USER_INFO.UserID = dbo.USER_COURSE.UserID WHERE dbo.USER_COURSE.CourseID = \'" + courseId + "\';";
 
             return sqlDataAccess.LoadData<UserModelData>(sql);
         }
+
     }
 }

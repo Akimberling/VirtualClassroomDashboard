@@ -10,13 +10,21 @@
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
     <h2>Welcome @TempData["FN"] @TempData["LN"]!</h2>
 
-    @if (Model != null)
+    @if (Model != null && TempData["SCI"] == "")
     {
+        <p>Please Select a course to begin managing your classroom.</p>
+
         @foreach (var item in Model)
         {
             @Html.ActionLink(item.CourseName + " " + item.CourseNumber, "SetCourse", new { id = item.CourseID }, new { @class = "courseButton" })
             <br />
         }
+    }
+    else if (TempData["SCI"] != null)
+    {
+        <p>Selected course: <b>@TempData["SCI"]</b></p>
+        @Html.ActionLink("Select New Course", "selectNewCourse",  new { @class = "submitButton" })
+        <br />
     }
     else
     {

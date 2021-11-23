@@ -22,6 +22,8 @@ namespace VirtualClassroomDashboard.Classes
         private static string cNum;
         //classNum
         private static string clNum;
+        //syllabus
+        private static string SyllabusName;
 
         public static void setCourseData(CourseModel model)
         {
@@ -32,6 +34,16 @@ namespace VirtualClassroomDashboard.Classes
             cS = model.CourseSection;
             cNum = model.CourseNumber;
             clNum = model.ClassNum;
+        }
+        public static void clearCourseData()
+        {
+            cID = 0;
+            sID = 0;
+            uID = 0;
+            cNam = null;
+            cS = null;
+            cNum = null;
+            clNum = null;
         }
         public static Dictionary<string, string> getCourseData()
         {
@@ -46,6 +58,15 @@ namespace VirtualClassroomDashboard.Classes
             BCI.Add("ClassNum", clNum);
 
             return BCI;
+        }
+        public static void setSyllabus(string fileName)
+        {
+            SyllabusName = fileName;
+        }
+
+        public static string getSyllabus()
+        {
+            return SyllabusName;
         }
     }
 }
