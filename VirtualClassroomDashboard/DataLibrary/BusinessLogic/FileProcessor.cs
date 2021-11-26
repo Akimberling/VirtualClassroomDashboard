@@ -23,7 +23,7 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
                 
             };
 
-            string sql = @"INSERT INTO dbo.COURSE_FILES (FileID, FileName, FilePath, FileSubject, FileSubject, FileDesc, UserID CourseID) VALUES (@FileID, @FileName, @FIlePath, @FileSubject, @FileDesc, @UserID, @CourseID);";
+            string sql = @"INSERT INTO dbo.COURSE_FILES (FileID, FileName, FilePath, FileSubject, FileDesc, UserID, CourseID) VALUES (@FileID, @FileName, @FIlePath, @FileSubject, @FileDesc, @UserID, @CourseID);";
 
             return sqlDataAccess.SaveData(sql, data);
 
@@ -81,17 +81,14 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
             return sqlDataAccess.LoadData<FileModelData>(sql);
         }
         //retrieve all course information
-        public static List<FileModelData> RetrieveAllCourseFile(string fname, string fpath, int uid, int cid)
+        public static List<FileModelData> RetrieveAllCourseFile(int cid)
         {
             FileModelData data = new FileModelData
             {
-                FileName = fname,
-                FIlePath = fpath,
-                UserID = uid,
                 CourseID = cid
             };
 
-            string sql = "SELECT * FROM dbo.COURSE_FILES WHERE FileName = \'" + data.FileName + "\' AND FilePath = \'" + data.FIlePath + "\' AND UserID = \'" + data.UserID + "\' AND CourseID = \'" + data.CourseID + "\';";
+            string sql = "SELECT * FROM dbo.COURSE_FILES WHERE CourseID = \'" + data.CourseID + "\';";
 
             return sqlDataAccess.LoadData<FileModelData>(sql);
         }

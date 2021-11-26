@@ -996,7 +996,7 @@ namespace VirtualClassroomDashboard.Controllers
                 
                 //set the path
                 List<CourseFileModel> CourseFile = new List<CourseFileModel>();
-                string filepath = directoryName + "/Syllabus/";
+                string filepath = directoryName + "/";
                 int cid = int.Parse(BasicCI["CourseID"]);
                 var courseFileData = FileProcessor.RetrieveCourseFile("Syllabus", filepath, userId, cid);
 
@@ -1050,11 +1050,11 @@ namespace VirtualClassroomDashboard.Controllers
             {
                 ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
-            } 
-            else
-            {
+            }
+            else { 
+
                 //designate the path that the file will be saved
-                string path = Path.Combine(directoryName + "/Syllabus/");
+                string path = Path.Combine(directoryName + "/");
                 //check if that directory already exists. if it does create the path
                 if (!Directory.Exists(path))
                 {
@@ -1082,7 +1082,7 @@ namespace VirtualClassroomDashboard.Controllers
                     //if the file exists
                     if (fi.Exists)
                     {
-                        string filepath = directoryName + "/Syllabus/";
+                        string filepath = directoryName + "/";
                         int cid = int.Parse(BasicCI["CourseID"]);
                         //check the database
                         List<int> dupFiles = FileProcessor.CheckForDuplicates(directoryName + "." + fileEnd, userId, cid, "Syllabus");
@@ -1119,11 +1119,20 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+
             if (BasicUI["UserType"] != "Student" && BasicUI["UserType"] != "Teacher")
             {
 
                 return View("AccessDenied");
 
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
             }
             else
             {
@@ -1137,9 +1146,6 @@ namespace VirtualClassroomDashboard.Controllers
                 TempData["SID"] = BasicUI["SchoolID"];
 
                 var schoolID = int.Parse(BasicUI["SchoolID"]);
-                //grab daved information
-                Dictionary<string, string> BasicCI = new Dictionary<string, string>();
-                BasicCI = SelectedCourseClass.getCourseData();
                 TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
                 int courseID = int.Parse(BasicCI["CourseID"]);
                 //grab user data
@@ -1173,6 +1179,178 @@ namespace VirtualClassroomDashboard.Controllers
             CourseProcessor.deleteUserFromCourse(cid, id);
 
             return RedirectToAction("Roster");
+        }
+        [HttpGet]
+        public IActionResult ViewFiles()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            if (BasicUI["UserType"] != "Student" && BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                var schoolID = int.Parse(BasicUI["SchoolID"]);
+                TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+                int courseID = int.Parse(BasicCI["CourseID"]);
+                //grab file data
+                List<CourseFileModel> filesForCourse = new List<CourseFileModel>();
+                var fileData = FileProcessor.RetrieveAllCourseFile(courseID);
+                //save user data to a model
+                foreach (var row in fileData)
+                {
+                    filesForCourse.Add(new CourseFileModel
+                    {
+                        UserID = row.UserID,
+                        FileID = row.FileID,
+                        CourseID = row.CourseID,
+                        FileName = row.FileName,
+                        FIlePath = row.FIlePath,
+                        FileSubject = row.FileSubject,
+                        FileDesc = row.FileDesc
+
+                    });
+
+                }
+                return View(filesForCourse);
+            }
+               
+        }
+        public ActionResult RemoveUserFile(int id, string fname, string fpath, int cid)
+        {
+            //remove the file from the database
+            FileProcessor.deleteCourseFileData(fname, fpath, id, cid);
+
+            //remove the file from server
+            System.IO.FileInfo fileP = new FileInfo(Path.Combine(fpath, fname));
+            if (fileP.Exists)
+                fileP.Delete();
+
+            return RedirectToAction("ViewFiles");
+        }
+        [HttpGet]
+        public IActionResult CourseFiles()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            if (BasicUI["UserType"] != "Student" && BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CourseFiles(CourseFileModel model, List<IFormFile> postedFiles)
+        {
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+
+            //CheckForDuplicates(string fname, int uid, int cid, string fsub)
+
+            //check to ensure there are no dulicate courses
+            List<int> fExists = FileProcessor.CheckForDuplicates(model.FileName, int.Parse(BasicUI["UserID"]), int.Parse(BasicCI["CourseID"]), model.FileSubject);
+
+            if (fExists[0] != 0)
+            {
+                ViewBag.Error = "This File already exists, please try adding a different File.";
+            }
+            else
+            {
+                string directoryName = BasicUI["FirstName"] + BasicUI["LastName"] + "_" + BasicCI["CourseNumber"];
+                //designate the path that the file will be saved
+                string path = Path.Combine(directoryName);
+                //check if that directory already exists. if it does create the path
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                //create a list of strings called uploded files
+                List<string> uploadedFiles = new List<string>();
+
+                //foreach of the file being uploaded
+                foreach (IFormFile postedFile in postedFiles)
+                {
+                    //grab the filename
+                    string fileName = Path.GetFileName(postedFile.FileName);
+                    //combine the filename with the path
+                    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                    {
+                        postedFile.CopyTo(stream);
+                        uploadedFiles.Add(fileName);
+                    }
+                    int cid = int.Parse(BasicCI["CourseID"]);
+                    if (model.FileSubject == "Syllabus")
+                    {
+                        //find the file path
+                        System.IO.FileInfo fi = new System.IO.FileInfo(Path.Combine(path, fileName));
+                        string fileEnd = fileName.Split(".")[1];
+                        //if the file exists
+                        if (fi.Exists)
+                        {
+                            string newFile = directoryName + "." + fileEnd;
+                            //change the file name
+                            fi.MoveTo(Path.Combine(path, newFile));
+                            //set the syllabus 
+                            SelectedCourseClass.setSyllabus(newFile);
+                            //save the file to the database
+                            int fileRec = FileProcessor.CreateFile(newFile, path + "/", "Syllabus", directoryName + "Syllabus", int.Parse(BasicUI["UserID"]), cid);
+                        }
+                    }
+                    else
+                    {
+                        int fileRec = FileProcessor.CreateFile(fileName, path + "/", model.FileSubject, model.FileDesc, int.Parse(BasicUI["UserID"]), cid);
+                    }
+
+                }
+
+                ViewBag.Error = "The file has been added. Please refer to the File page to view all your files.";
+            }
+
+            return RedirectToAction("CourseFiles");
         }
         public IActionResult AccessDenied()
         {
