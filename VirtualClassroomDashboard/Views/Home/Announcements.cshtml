@@ -44,8 +44,8 @@
                         }
                         @if ((int.Parse(CurrentUID) == item.UserID) || @TempData["UT"].ToString() == "Teacher")
                         {
-                            <button class="submitButton">@Html.ActionLink("Remove", "RemoveAnnouncement", new { id = item.UserID, AnnouncID = item.AnnounceID, fileID = item.FileID, cid = item.CourseID })</button>
-                            <button class="submitButton">@Html.ActionLink("Edit", "EditAnnouncement", new { id = item.UserID, AnnouncID = item.AnnounceID, fileID = item.FileID, cid = item.CourseID })</button>
+                            <button class="submitButton">@Html.ActionLink("Remove", "RemoveAnnouncement", new { AnnouncID = item.AnnounceID, fileID = item.FileID, fpath = item.FIlePath, fname = item.FileName})</button>
+                            <button class="submitButton">@Html.ActionLink("Edit", "EditAnnouncement", new { AnnouncID = item.AnnounceID, fileID = item.FileID})</button>
                         }
                     </div>
                 }

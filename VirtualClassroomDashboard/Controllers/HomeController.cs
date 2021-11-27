@@ -1352,16 +1352,244 @@ namespace VirtualClassroomDashboard.Controllers
 
             return RedirectToAction("CourseFiles");
         }
+        [HttpGet]
         public IActionResult Announcements()
         {
-            return View();
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                TempData["FN"] = BasicUI["FirstName"];
+                TempData["LN"] = BasicUI["LastName"];
+                TempData["PN"] = BasicUI["PhoneNumber"];
+                TempData["EM"] = BasicUI["EmailAddress"];
+                TempData["UT"] = BasicUI["UserType"];
+                TempData["SID"] = BasicUI["SchoolID"];
+
+                TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+                int courseID = int.Parse(BasicCI["CourseID"]);
+                int userID = int.Parse(BasicUI["UserID"]);
+                //grab Announcement data
+                List<AnnouncementModel> announcements = new List<AnnouncementModel>();
+                var AnnounceData = AnnouncementProcessor.RetrieveAllCourseAnnouncements(courseID, userID);
+                //save data to a model
+                foreach (var row in AnnounceData)
+                {
+                    string fname = "", fpath = "";
+                    if (row.FileID != 0)
+                    {
+                        var FileData = FileProcessor.RetrieveCourseFileByID(row.FileID);
+                        foreach (var item in FileData)
+                        {
+                            fname = item.FileName;
+                            fpath = item.FIlePath;
+                        }
+                    }
+                    announcements.Add(new AnnouncementModel
+                    {
+                        
+                        FileName = fname,
+                        FIlePath = fpath,
+                        AnnounceID = row.AnnounceID,
+                        AnnounceTitle = row.AnnounceTitle,
+                        AnnounceDesc = row.AnnounceDesc,
+                        UserID = row.UserID,
+                        FileID = row.FileID,
+                        CourseID = row.CourseID,
+                    });
+
+                }
+                return View(announcements);
+            }
         }
+        public ActionResult RemoveAnnouncement(int AnnouncID, int fileID, string fpath, string fname)
+        {
+            //remove announcement
+            AnnouncementProcessor.deleteAnnouncement(AnnouncID);
+            //remove the file associated with the announcement
+            FileProcessor.deleteCourseFileDataByID(fileID);
+
+            //remove the file from server
+            System.IO.FileInfo fileP = new FileInfo(Path.Combine(fpath, fname));
+            if (fileP.Exists)
+                fileP.Delete();
+
+            //redirect back to the announcements page
+            return RedirectToAction("Announcements"); 
+        }
+        [HttpGet]
         public IActionResult CreateAnnouncements()
         {
-            return View();
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            if (BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                return View();
+            }
         }
-        public IActionResult EditAnnouncements()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateAnnouncements(AnnouncementModel model, List<IFormFile> postedFiles)
         {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            int cid = int.Parse(BasicCI["CourseID"]);
+            int uid = int.Parse(BasicUI["UserID"]);
+            int fid = 0;
+            if (model.FileName != "")
+            {
+
+                string directoryName = BasicUI["FirstName"] + BasicUI["LastName"] + "_" + BasicCI["CourseNumber"];
+                //designate the path that the file will be saved
+                string path = Path.Combine(directoryName);
+
+                //check if that directory already exists. if it does create the path
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                //create a list of strings called uploded files
+                List<string> uploadedFiles = new List<string>();
+
+                //foreach of the file being uploaded
+                foreach (IFormFile postedFile in postedFiles)
+                {
+                    //grab the filename
+                    string fileName = Path.GetFileName(postedFile.FileName);
+                    //combine the filename with the path
+                    using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                    {
+                        postedFile.CopyTo(stream);
+                        uploadedFiles.Add(fileName);
+                    }
+                    
+                    if (model.FileSubject == "Syllabus")
+                    {
+                        //find the file path
+                        System.IO.FileInfo fi = new System.IO.FileInfo(Path.Combine(path, fileName));
+                        string fileEnd = fileName.Split(".")[1];
+                        //if the file exists
+                        if (fi.Exists)
+                        {
+                            string newFile = directoryName + "." + fileEnd;
+                            //change the file name
+                            fi.MoveTo(Path.Combine(path, newFile));
+                            //set the syllabus 
+                            SelectedCourseClass.setSyllabus(newFile);
+                            //save the file to the database
+                            int fileRec = FileProcessor.CreateFile(newFile, path + "/", "Syllabus", directoryName + "Syllabus", uid, cid);
+                        }
+                    }
+                    else
+                    {
+                        int fileRec = FileProcessor.CreateFile(fileName, path + "/", model.FileSubject, model.FileDesc, int.Parse(BasicUI["UserID"]), cid);
+
+                    }
+                    //grab file data
+                    var finfo = FileProcessor.RetrieveCourseFile(model.FileSubject, path + "/", uid, cid);
+
+                    foreach (var row in finfo)
+                    {
+                        fid = row.FileID;
+                    }
+                }
+            }
+
+            int announceRec = AnnouncementProcessor.CreateAnnouncement(model.AnnounceTitle, model.AnnounceDesc, cid, uid,fid);
+
+            return RedirectToAction("CreateAnnouncements");
+        }
+        [HttpGet]
+        public IActionResult EditAnnouncements(int AnnouncID , int fileID)
+        {
+            
+            // establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            if (BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+
+                //retrieve announcement
+                var AnnounceData = AnnouncementProcessor.RetrieveAnnouncement(AnnouncID);
+                //save data to a model
+                foreach (var row in AnnounceData)
+                {
+                    if (row.FileID != 0)
+                    {
+                        var FileData = FileProcessor.RetrieveCourseFileByID(row.FileID);
+                        foreach (var item in FileData)
+                        {
+                            TempData["fileName"] = item.FileName;
+                            TempData["fsub"] = item.FileSubject;
+                            TempData["fdesc"] = item.FileDesc;
+                        }
+                    }
+                    TempData["ATitle"] = row.AnnounceTitle;
+                    TempData["ADesc"] = row.AnnounceDesc;
+                }
+                return View();
+            }
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditAnnouncements(AnnouncementModel model, List<IFormFile> postedFiles)
+        {
+           
+            //updateAnnouncement(int AID, string Atitle, string Adesc, int fileID)
+
             return View();
         }
         public IActionResult AccessDenied()

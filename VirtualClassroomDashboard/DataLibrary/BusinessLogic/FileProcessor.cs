@@ -48,6 +48,20 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
 
             return sqlDataAccess.SaveData(sql, data);
         }
+        public static int updateFileInfo(string fname, string fsub, string fDesc, int fid)
+        {
+            FileModelData data = new FileModelData
+            {
+                FileID = fid,
+                FileName = fname,
+                FileSubject = fsub,
+                FileDesc = fDesc
+            };
+
+            string sql = @"UPDATE dbo.COURSE_FILES SET FileName = @FileName, FileSubject = @FileSubject, FileDesc = @FileDesc WHERE FileID = @FileID;";
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
         //remove a file
         public static int deleteCourseFileData(string fname, string fpath, int uid, int cid)
         {
@@ -63,6 +77,17 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
 
             return sqlDataAccess.SaveData(sql, data);
         }
+        public static int deleteCourseFileDataByID(int fid)
+        {
+            FileModelData data = new FileModelData
+            {
+                FileID = fid
+            };
+
+            string sql = "DELETE FROM dbo.COURSE_FILES WHERE FileID = @FileID ;"; ;
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
         //retrieve a particular file
         public static List<FileModelData> RetrieveCourseFile(string fsub,string fpath, int uid, int cid)
         {
@@ -75,6 +100,17 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
             };
 
             string sql = "SELECT * FROM dbo.COURSE_FILES WHERE FileSubject = \'" + data.FileSubject + "\' AND FilePath = \'" + data.FIlePath + "\' AND UserID = \'" + data.UserID + "\' AND CourseID = \'" + data.CourseID + "\';";
+
+            return sqlDataAccess.LoadData<FileModelData>(sql);
+        }
+        public static List<FileModelData> RetrieveCourseFileByID(int fid)
+        {
+            FileModelData data = new FileModelData
+            {
+                FileID = fid
+            };
+
+            string sql = @"SELECT * FROM dbo.COURSE_FILES WHERE FileID = @FileID;";
 
             return sqlDataAccess.LoadData<FileModelData>(sql);
         }
