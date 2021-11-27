@@ -1352,7 +1352,18 @@ namespace VirtualClassroomDashboard.Controllers
 
             return RedirectToAction("CourseFiles");
         }
-
+        public IActionResult Announcements()
+        {
+            return View();
+        }
+        public IActionResult CreateAnnouncements()
+        {
+            return View();
+        }
+        public IActionResult EditAnnouncements()
+        {
+            return View();
+        }
         public IActionResult AccessDenied()
         {
             //establish a dictionary that will contain user information that was set during login
