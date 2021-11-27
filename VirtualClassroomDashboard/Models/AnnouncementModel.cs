@@ -26,14 +26,11 @@ namespace VirtualClassroomDashboard.Models
 
         //File Info
         [Display(Name = "Select File")]
-        [Required(ErrorMessage = "Selecting a file is required")]
         public string FileName { get; set; }
         public string FIlePath { get; set; }
         [Display(Name = "File Subject")]
-        [Required(ErrorMessage = "The File Subject is required")]
         public string FileSubject { get; set; }
         [Display(Name = "File Description")]
-        [Required(ErrorMessage = "File Description is required")]
         public string FileDesc { get; set; }
 
         public int FileID { get; set; }

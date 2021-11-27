@@ -343,6 +343,28 @@ body {
     margin-top: 0px;
 }
 
+/*This code came from w3Schools https://www.w3schools.com/howto/howto_js_accordion.asp */
+.accordion {
+    background-color: #007790;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+
 /*@ media queries for different media device sizes*/
 
 @media (min-width: 768px) {
