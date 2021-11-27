@@ -1,7 +1,4 @@
-﻿using VirtualClassroomDashboard.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using VirtualClassroomDashboard.DataAccess;
 using VirtualClassroomDashboard.DataLibrary.Models;
 
@@ -35,7 +32,7 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
 
             return sqlDataAccess.LoadData<int>(sql);
         }
-        //update the syllabus 
+        //update the file 
         public static int updateSyllabusFileInfo(string fname, string fpath, int uid, int cid)
         {
             FileModelData data = new FileModelData
@@ -47,7 +44,8 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
             };
 
            
-            string sql = "UPDATE dbo.COURSE_FILES SET FileName = \'" + data.FileName + "\', FilePath = \'" + data.FIlePath + "\', UserID = \'" + data.UserID + "\', CourseID = \'" + data.CourseID + "\';"; ;
+            string sql = @"UPDATE dbo.COURSE_FILES SET FileName = @FileName, FilePath = @FIlePath, UserID = @UserID, CourseID = @CourseID WHERE UserID = @UserID AND CourseID = CourseID;";
+
             return sqlDataAccess.SaveData(sql, data);
         }
         //remove a file
