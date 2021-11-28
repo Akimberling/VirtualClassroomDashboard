@@ -17,7 +17,7 @@
         else
         {
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <form asp-action="CreateAnnouncement">
                         <fieldset>
                             <p class="errorResponse">@ViewBag.Error</p>
@@ -32,7 +32,7 @@
                                 <input asp-for="AnnounceDesc" class="form-control" />
                                 <span asp-validation-for="AnnounceDesc" class="text-danger"></span>
                             </div>
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <label asp-for="FileName" class="control-label"></label>
                                 <input asp-for="FileName" class="form-control" type="file" name="postedFiles" multiple />
                                 <span asp-validation-for="FileName" class="text-danger"></span>
@@ -53,7 +53,7 @@
                                 <label asp-for="FileDesc" class="control-label"></label>
                                 <input asp-for="FileDesc" class="form-control" />
                                 <span asp-validation-for="FileDesc" class="text-danger"></span>
-                            </div>
+                            </div>*@
                             <div class="form-group">
                                 <input type="submit" value="Upload" class="submitButton" />
                             </div>

@@ -8,6 +8,7 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
     {
         public static int CreateAnnouncement(string Atitle, string Adesc, int cid, int uid, int fileID)
         {
+            string sql;
             AnnouncementModelData data = new AnnouncementModelData
             { 
                 AnnounceID = 0,
@@ -17,23 +18,14 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
                 UserID = uid,
                 FileID = fileID
             };
-
-            string sql = @"INSERT INTO dbo.ANNOUNCEMENTS (AnnounceID, AnnounceTitle, AnnounceDesc, CourseID, UserID, FileID) VALUES (@AnnounceID, @AnnounceTitle, @AnnounceDesc, @CourseID, @UserID, @FileID);";
-
-            return sqlDataAccess.SaveData(sql, data);
-        }
-        //update the Announcement 
-        public static int updateAnnouncement(int AID, string Atitle, string Adesc, int fileID)
-        {
-            AnnouncementModelData data = new AnnouncementModelData
+            if (fileID == 0)
             {
-                AnnounceID = AID,
-                AnnounceTitle = Atitle,
-                AnnounceDesc = Adesc,
-                FileID = fileID
-            };
-
-            string sql = @"UPDATE dbo.ANNOUNCEMENTS SET AnnounceTitle = @AnnounceTitle, AnnounceDesc = @AnnounceDesc, FileID = @FileID WHERE AnnounceID = @AnnounceID;";
+                sql = @"INSERT INTO dbo.ANNOUNCEMENTS (AnnounceID, AnnounceTitle, AnnounceDesc, CourseID, UserID, FileID) VALUES (@AnnounceID, @AnnounceTitle, @AnnounceDesc, @CourseID, @UserID, NULL);";
+            }
+            else
+            {
+                sql = @"INSERT INTO dbo.ANNOUNCEMENTS (AnnounceID, AnnounceTitle, AnnounceDesc, CourseID, UserID, FileID) VALUES (@AnnounceID, @AnnounceTitle, @AnnounceDesc, @CourseID, @UserID, @FileID);";
+            }
 
             return sqlDataAccess.SaveData(sql, data);
         }
@@ -45,32 +37,22 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
                 AnnounceID = AID
             };
 
-            string sql = @"DELETE FROM dbo.ANNOUNCEMENTS WHERE AnnounceID = @AnnounceID;";
+            string sql = "DELETE FROM dbo.ANNOUNCEMENTS WHERE AnnounceID = \'" + AID + "\';";
 
             return sqlDataAccess.SaveData(sql, data);
         }
         //retrieve Announcement
         public static List<AnnouncementModelData> RetrieveAnnouncement(int AID)
         {
-            AnnouncementModelData data = new AnnouncementModelData
-            {
-                AnnounceID = AID
-            };
 
-            string sql = @"SELECT * FROM dbo.ANNOUNCEMENTS WHERE AnnounceID = @AnnounceID;";
+            string sql = "SELECT * FROM dbo.ANNOUNCEMENTS WHERE AnnounceID = \'" + AID + "\';";
 
             return sqlDataAccess.LoadData<AnnouncementModelData>(sql);
         }
         //retrieve all the announcements for a course
         public static List<AnnouncementModelData> RetrieveAllCourseAnnouncements(int cid, int uid)
         {
-            AnnouncementModelData data = new AnnouncementModelData
-            {
-                CourseID = cid,
-                UserID = uid
-            };
-
-            string sql = @"SELECT * FROM dbo.COURSE_FILES WHERE CourseID = @CourseID AND UserID = @UserID;";
+            string sql = "SELECT * FROM dbo.ANNOUNCEMENTS WHERE CourseID = \'" + cid + "\' AND UserID =  \'" + uid + "\' ;";
 
             return sqlDataAccess.LoadData<AnnouncementModelData>(sql);
         }

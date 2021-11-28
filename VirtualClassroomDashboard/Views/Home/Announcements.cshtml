@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<VirtualClassroomDashboard.Models.AnnouncementModel>
 @{
-    ViewData["Title"] = "Annnouncements";
+    ViewData["Title"] = "Announcements";
     string CurrentUID = @TempData["UID"].ToString();
     if (@TempData["UT"].ToString() == "Student")
     {
@@ -35,19 +35,21 @@
 
                 @foreach (var item in Model)
                 {
-                    <button class="accordion">@item.AnnounceTitle</button>
-                    <div class="panel">
-                        <p>@item.AnnounceDesc</p>
-                        @if (item.FileName != "")
-                        {
-                            <a href="@item.FIlePath@item.FileName" target="_blank" download>@item.FileName</a>
-                        }
-                        @if ((int.Parse(CurrentUID) == item.UserID) || @TempData["UT"].ToString() == "Teacher")
-                        {
-                            <button class="submitButton">@Html.ActionLink("Remove", "RemoveAnnouncement", new { AnnouncID = item.AnnounceID, fileID = item.FileID, fpath = item.FIlePath, fname = item.FileName})</button>
-                            <button class="submitButton">@Html.ActionLink("Edit", "EditAnnouncement", new { AnnouncID = item.AnnounceID, fileID = item.FileID})</button>
-                        }
+                    <div class="accordDiv">
+                        <button class="accordion">@item.AnnounceTitle</button>
+                        <div class="panel">
+                            <p>@item.AnnounceDesc</p>
+                            @*@if (item.FileName != null)
+                            {
+                                <a href="@item.FIlePath@item.FileName" target="_blank" download>@item.FileName</a>
+                            }*@
+                            @if ((int.Parse(CurrentUID) == item.UserID) || @TempData["UT"].ToString() == "Teacher")
+                            {
+                                @Html.ActionLink("Remove", "RemoveAnnouncement", new { AnnouncID = item.AnnounceID, fileID = item.FileID, fpath = item.FIlePath, fname = item.FileName })
+                            }
+                        </div>
                     </div>
+                    
                 }
             }
             else

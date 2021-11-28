@@ -84,7 +84,7 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
                 FileID = fid
             };
 
-            string sql = "DELETE FROM dbo.COURSE_FILES WHERE FileID = @FileID ;"; ;
+            string sql = "DELETE FROM dbo.COURSE_FILES WHERE FileID = \'" + fid + "\';";
 
             return sqlDataAccess.SaveData(sql, data);
         }
@@ -105,12 +105,8 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
         }
         public static List<FileModelData> RetrieveCourseFileByID(int fid)
         {
-            FileModelData data = new FileModelData
-            {
-                FileID = fid
-            };
 
-            string sql = @"SELECT * FROM dbo.COURSE_FILES WHERE FileID = @FileID;";
+            string sql = "SELECT * FROM dbo.COURSE_FILES WHERE FileID = \'" + fid + "\';";
 
             return sqlDataAccess.LoadData<FileModelData>(sql);
         }

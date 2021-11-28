@@ -363,10 +363,30 @@ body {
     background-color: white;
     display: none;
     overflow: hidden;
+    width: 100%;
+}
+.accordDiv{
+    width:75%;
+    float:left;
+    margin-bottom:10px;
 }
 
+.panel a {
+    width: 30%;
+    border: 1px solid #007790;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 15px;
+    background-color: #007790;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    float: right;
+}
+.panel a:hover {
+    background-color: #8CC63E;
+}
 /*@ media queries for different media device sizes*/
-
 @media (min-width: 768px) {
     html {
         font-size: 16px;

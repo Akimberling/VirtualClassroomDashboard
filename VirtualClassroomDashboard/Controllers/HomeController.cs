@@ -1350,7 +1350,7 @@ namespace VirtualClassroomDashboard.Controllers
                 ViewBag.Error = "The file has been added. Please refer to the File page to view all your files.";
             }
 
-            return RedirectToAction("CourseFiles");
+            return RedirectToAction("ViewFiles");
         }
         [HttpGet]
         public IActionResult Announcements()
@@ -1358,7 +1358,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
+            TempData["UID"] = BasicUI["UserID"];
             //grab daved information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
@@ -1422,19 +1422,22 @@ namespace VirtualClassroomDashboard.Controllers
         {
             //remove announcement
             AnnouncementProcessor.deleteAnnouncement(AnnouncID);
-            //remove the file associated with the announcement
-            FileProcessor.deleteCourseFileDataByID(fileID);
+            if(fileID != 0)
+            {
+                //remove the file associated with the announcement
+                FileProcessor.deleteCourseFileDataByID(fileID);
 
-            //remove the file from server
-            System.IO.FileInfo fileP = new FileInfo(Path.Combine(fpath, fname));
-            if (fileP.Exists)
-                fileP.Delete();
-
+                //remove the file from server
+                System.IO.FileInfo fileP = new FileInfo(Path.Combine(fpath, fname));
+                if (fileP.Exists)
+                    fileP.Delete();
+            }
+            
             //redirect back to the announcements page
             return RedirectToAction("Announcements"); 
         }
         [HttpGet]
-        public IActionResult CreateAnnouncements()
+        public IActionResult CreateAnnouncement()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
@@ -1461,7 +1464,7 @@ namespace VirtualClassroomDashboard.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateAnnouncements(AnnouncementModel model, List<IFormFile> postedFiles)
+        public IActionResult CreateAnnouncement(AnnouncementModel model, List<IFormFile> postedFiles)
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
@@ -1473,7 +1476,7 @@ namespace VirtualClassroomDashboard.Controllers
             int cid = int.Parse(BasicCI["CourseID"]);
             int uid = int.Parse(BasicUI["UserID"]);
             int fid = 0;
-            if (model.FileName != "")
+            if (model.FileName != null)
             {
 
                 string directoryName = BasicUI["FirstName"] + BasicUI["LastName"] + "_" + BasicCI["CourseNumber"];
@@ -1534,63 +1537,7 @@ namespace VirtualClassroomDashboard.Controllers
 
             int announceRec = AnnouncementProcessor.CreateAnnouncement(model.AnnounceTitle, model.AnnounceDesc, cid, uid,fid);
 
-            return RedirectToAction("CreateAnnouncements");
-        }
-        [HttpGet]
-        public IActionResult EditAnnouncements(int AnnouncID , int fileID)
-        {
-            
-            // establish a dictionary that will contain user information that was set during login
-            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
-            BasicUI = UserInfoClass.getUserData();
-
-            //grab daved information
-            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
-            BasicCI = SelectedCourseClass.getCourseData();
-            if (BasicUI["UserType"] != "Teacher")
-            {
-
-                return View("AccessDenied");
-
-            }
-            else if (BasicCI["CourseNumber"] == null)
-            {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
-                return View();
-            }
-            else
-            {
-
-                //retrieve announcement
-                var AnnounceData = AnnouncementProcessor.RetrieveAnnouncement(AnnouncID);
-                //save data to a model
-                foreach (var row in AnnounceData)
-                {
-                    if (row.FileID != 0)
-                    {
-                        var FileData = FileProcessor.RetrieveCourseFileByID(row.FileID);
-                        foreach (var item in FileData)
-                        {
-                            TempData["fileName"] = item.FileName;
-                            TempData["fsub"] = item.FileSubject;
-                            TempData["fdesc"] = item.FileDesc;
-                        }
-                    }
-                    TempData["ATitle"] = row.AnnounceTitle;
-                    TempData["ADesc"] = row.AnnounceDesc;
-                }
-                return View();
-            }
-
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult EditAnnouncements(AnnouncementModel model, List<IFormFile> postedFiles)
-        {
-           
-            //updateAnnouncement(int AID, string Atitle, string Adesc, int fileID)
-
-            return View();
+            return RedirectToAction("Announcements");
         }
         public IActionResult AccessDenied()
         {
