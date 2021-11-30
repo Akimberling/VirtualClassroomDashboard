@@ -32,7 +32,6 @@
     <div class="container">
         <div class="sideNav">
             <ul class="secNav">
-                <!--MainNav-->
                 <li>
                     <!--Dash-->
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Dashboard</a>
@@ -40,39 +39,47 @@
                 <!--SubNav Should display schools as a subnav of dashboard-->
                 <li>
                     <!--Courses-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Courses</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddCourse">Add Courses</a>
+                </li>
+                <li>
+                    <!--Courses-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewCourses">Manage Courses</a>
                 </li>
                 <li>
                     <!--Zoom-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Zoom</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TeacherZoom">Zoom</a>
                 </li>
                 <li>
                     <!--Announcements-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Announcements</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Announcements">Announcements</a>
                 </li>
                 <li>
                     <!--Discussion-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Discussion</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Discussions">Discussion</a>
                 </li>
                 <li>
                     <!--Assignments-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Assignments</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorAssignments">Assignments</a>
                 </li>
                 <li>
                     <!--Assessments-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Assessments</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorAssessments">Assessments</a>
                 </li>
                 <li>
                     <!--Grades-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Grades</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorGrades">Grades</a>
                 </li>
                 <li>
                     <!--Syllabus-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Syllabus</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorSyllabus">Syllabus</a>
                 </li>
                 <li>
                     <!--Roster-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="EducatorDash">Roster</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Roster">Roster</a>
+                </li>
+                <li>
+                    <!--Roster-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewFiles">Files</a>
                 </li>
                 <li>
                     <!--Account-->

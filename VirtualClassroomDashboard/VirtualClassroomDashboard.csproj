@@ -33,8 +33,4 @@
     <PackageReference Include="Twilio" Version="5.63.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\TempUploads\" />
-  </ItemGroup>
-
 </Project>

@@ -23,11 +23,11 @@ namespace VirtualClassroomDashboard.Classes
         private static string UT;
             //school id
         private static int SID;
-
+            //school name
         private static string SN;
-
+            //school city
         private static string SC;
-
+            //school state
         private static string SS;
 
         public static void setUserData(UserModel userInfo)

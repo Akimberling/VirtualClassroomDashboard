@@ -1,0 +1,57 @@
+﻿@model VirtualClassroomDashboard.Models.CourseFileModel
+@{
+    ViewData["Title"] = "Add Files";
+    Layout = "_LayoutEducator";
+}
+
+<div class="one-hundred">
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
+    @{
+        if (ViewBag.Message == "Please got to the Dashboard and Select a Course. There is no active course selected.")
+        {
+            <span style="color:red">@Html.Raw(ViewBag.Message)</span>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="post" enctype="multipart/form-data" asp-action="CourseFiles">
+                        <fieldset>
+                            <p class="errorResponse">@ViewBag.Error</p>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="FileName" class="control-label"></label>
+                                <input asp-for="FileName" class="form-control" type="file" name="postedFiles" multiple />
+                                <span asp-validation-for="FileName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FileSubject" class="control-label"></label>
+                                <select asp-for="FileSubject" class="form-control">
+                                    <option value="Syllabus">Syllabus</option>
+                                    <option value="Course Material">Course Material</option>
+                                </select>
+                                <span asp-validation-for="FileSubject" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FileDesc" class="control-label"></label>
+                                <input asp-for="FileDesc" class="form-control" />
+                                <span asp-validation-for="FileDesc" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Upload" class="submitButton" />
+                            </div>
+                            <div class="clear"></div>
+                        </fieldset>
+                        <div class="clear"></div>
+                    </form>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        }
+    }
+ </div>
+<div class="clear"></div>

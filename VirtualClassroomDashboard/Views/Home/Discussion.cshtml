@@ -1,0 +1,29 @@
+﻿@model VirtualClassroomDashboard.Models.DiscussionsModel
+@{
+    ViewData["Title"] = "Discussions";
+    string CurrentUID = @TempData["UID"].ToString();
+    if (@TempData["UT"].ToString() == "Student")
+    {
+        Layout = "_LayoutStudent";
+    }
+    else
+    {
+        Layout = "_LayoutEducator";
+    }
+}
+
+<div class="one-hundred">
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
+
+    <h3> @TempData["CourseName"]: <!--Discussion title--></h3>
+    <p class="errorResponse">@ViewBag.Error</p>
+    <div class="discuss">
+        <!--Discussion desc-->
+        <!--Discussion Datae-->
+        <!--Reply Link with discussion ID + title + Desc-->
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>

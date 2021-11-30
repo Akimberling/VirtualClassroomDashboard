@@ -1,22 +1,21 @@
 ﻿@model IEnumerable<VirtualClassroomDashboard.Models.UserModel>
 
 @{
-    ViewData["Title"] = "Manage Educators";
+    ViewData["Title"] = "Manage Teachers";
     Layout = "_LayoutAdmin";
 }
 
-<div class="clear"></div>
 <div class="one-hundred">
     <h1 class="mainHeading">@ViewData["Title"]</h1>
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
 
-    <h3>Edit/Delete</h3>
+    <h3>Delete</h3>
     <p class="errorResponse">@ViewBag.Error</p>
     @if (Model != null)
     {
 
-        <table>
+        <table class="tableDec">
             <tr>
                 <th>User Id</th>
                 <th>First Name</th>
@@ -43,4 +42,7 @@
     {
         <p>There are no Teachers at this school</p>
     }
-
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
