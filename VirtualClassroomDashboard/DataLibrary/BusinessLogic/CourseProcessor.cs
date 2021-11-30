@@ -41,6 +41,20 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
             return sqlDataAccess.SaveData(sql, data);
 
         }
+        //retrieve the user course ID's -- Needed for studcent dash
+        public static List<CourseModelData> RetrieveUserCourses(int UID)
+        {
+            string sql = "SELECT * FROM dbo.USER_COURSE WHERE UserID = \'" + UID + "\';";
+
+            return sqlDataAccess.LoadData<CourseModelData>(sql);
+        }
+        //retrieve the courses the user is in by the course ids from Retrieve User courses --  Needed for studcent dash
+        public static List<CourseModelData> RetrieveCoursesForUser(int CID)
+        {
+            string sql = "SELECT * FROM dbo.COURSES WHERE CourseID = \'" + CID + "\';";
+
+            return sqlDataAccess.LoadData<CourseModelData>(sql);
+        }
         public static int deleteUserFromCourse(int cid, int uID)
         {
             CourseModelData data = new CourseModelData

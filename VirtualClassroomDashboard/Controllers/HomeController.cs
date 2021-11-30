@@ -551,9 +551,9 @@ namespace VirtualClassroomDashboard.Controllers
                 return View();
             }
         }
-        /***********************************************************************************************************
-         * Student directory
-         **********************************************************************************************************/
+/***********************************************************************************************************
+ * Student directory
+**********************************************************************************************************/
         
         public IActionResult StudentDash()
         {
@@ -582,10 +582,15 @@ namespace VirtualClassroomDashboard.Controllers
             }
         }
 
+        public IActionResult StudentZoom()
+        {
+            return View();
+        }
+
 /***********************************************************************************************************
 * Educator directory
 **********************************************************************************************************/
-        [HttpGet]
+       [HttpGet]
         public IActionResult EducatorDash()
         {
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
@@ -713,6 +718,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             //form of authentication
             if (BasicUI["UserType"] != "Teacher")
             {
@@ -735,6 +741,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             //form of authentication
             if (BasicUI["UserType"] != "Teacher")
             {
@@ -772,6 +779,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             int userId = int.Parse(BasicUI["UserID"]);
             //form of authentication
             if (BasicUI["UserType"] != "Teacher")
@@ -828,6 +836,7 @@ namespace VirtualClassroomDashboard.Controllers
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
             int userId = int.Parse(BasicUI["UserID"]);
+            TempData["UT"] = BasicUI["UserType"];
             //form of authentication
             if (BasicUI["UserType"] != "Teacher")
             {
@@ -875,6 +884,7 @@ namespace VirtualClassroomDashboard.Controllers
         {
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             //form of authentication
             if (BasicUI["UserType"] != "Teacher")
             {
@@ -899,6 +909,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             int userId = int.Parse(BasicUI["UserID"]);
             //form of authentication
             if (BasicUI["UserType"] != "Teacher")
@@ -972,7 +983,63 @@ namespace VirtualClassroomDashboard.Controllers
 
             return View("AddStudents");
         }
-        
+        public IActionResult EducatorAssessments()
+        {
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            //form of authentication
+            if (BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public IActionResult EducatorAssignments()
+        {
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            //form of authentication
+            if (BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public IActionResult EducatorGrades()
+        {
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            //form of authentication
+            if (BasicUI["UserType"] != "Teacher")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
         [HttpGet]
         public IActionResult EducatorSyllabus()
         {
@@ -980,6 +1047,7 @@ namespace VirtualClassroomDashboard.Controllers
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
             int userId = int.Parse(BasicUI["UserID"]);
+            TempData["UT"] = BasicUI["UserType"];
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
             //form of authentication
@@ -1033,6 +1101,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             //class Information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
@@ -1119,7 +1188,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
+            TempData["UT"] = BasicUI["UserType"];
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
 
@@ -1186,6 +1255,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             //save the data
             TempData["UID"] = BasicUI["UserID"];
             //grab daved information
@@ -1256,7 +1326,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
+            TempData["UT"] = BasicUI["UserType"];
             //grab daved information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
@@ -1284,7 +1354,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
+            TempData["UT"] = BasicUI["UserType"];
             //grab daved information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
@@ -1358,6 +1428,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
             TempData["UID"] = BasicUI["UserID"];
             //grab daved information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
@@ -1442,7 +1513,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
+            TempData["UT"] = BasicUI["UserType"];
             //grab daved information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
@@ -1469,7 +1540,7 @@ namespace VirtualClassroomDashboard.Controllers
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-
+            TempData["UT"] = BasicUI["UserType"];
             //grab daved information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
@@ -1538,6 +1609,32 @@ namespace VirtualClassroomDashboard.Controllers
             int announceRec = AnnouncementProcessor.CreateAnnouncement(model.AnnounceTitle, model.AnnounceDesc, cid, uid,fid);
 
             return RedirectToAction("Announcements");
+        }
+        public IActionResult Discussions()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["UID"] = BasicUI["UserID"];
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                return View();
+            }
         }
         public IActionResult AccessDenied()
         {
