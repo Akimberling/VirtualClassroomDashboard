@@ -15,23 +15,10 @@
             <div class="container">
                 <!--03/11/21 - AK - logo in nav and navigation links updated-->
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/vcdLogo.png" alt="Virtual Classroom Dashboard Logo" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span><img class="navbarIcon" src="~/images/NavIcon.png" alt="nav bar icon" /></span>
-                </button>
-                <div class="navigation navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navigation d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">LOGIN</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Registration">REGISTER</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">CONTACT</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Manual">MANUAL</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">LOGOUT</a>
                         </li>
                     </ul>
                 </div>
@@ -40,57 +27,46 @@
     </header>
     <div class="container">
         <div class="sideNav">
-            <ul>
-                <!--MainNav-->
+            <ul class="secNav">
                 <li>
                     <!--Dash-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Dashboard</a>
-                </li>
-                <!--SubNav Should display schools as a subnav of dashboard-->
-                <li class="subNav">
-                    <!--Courses-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Courses</a>
-                </li>
-                <!--subSub nac-->
-                <li class="subSubNav">
-                    <!--Home-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Home</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentDash">Dashboard</a>
                 </li>
                 <li class="subSubNav">
                     <!--Zoom-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Zoom</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentZoom">Zoom</a>
                 </li>
                 <li class="subSubNav">
                     <!--Announcements-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Announcements</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Announcements">Announcements</a>
                 </li>
                 <li class="subSubNav">
                     <!--Discussion-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="StudentDash">Discussion</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Discussions">Discussion</a>
                 </li>
                 <li class="subSubNav">
                     <!--Assignments-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Assignments</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentAssignments">Assignments</a>
                 </li>
                 <li class="subSubNav">
                     <!--Assessments-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Assessments</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentAssessments">Assessments</a>
                 </li>
                 <li class="subSubNav">
                     <!--Grades-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Grades</a>
-                </li>
-                <li class="subSubNav">
-                    <!--Syllabus-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Syllabus</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="StudentGrades">Grades</a>
                 </li>
                 <li class="subSubNav">
                     <!--Roster-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Roster</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Roster">Roster</a>
+                </li>
+                <li>
+                    <!--Roster-->
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ViewFiles">Files</a>
                 </li>
                 <li>
                     <!--Account-->
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="StudentDash">Account</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Account">Account</a>
                 </li>
             </ul>
         </div>

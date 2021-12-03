@@ -1,0 +1,37 @@
+﻿@model VirtualClassroomDashboard.Models.DiscussionsModel
+
+@{
+    ViewData["Title"] = "Add Discussion";
+    Layout = "_LayoutEducator";
+}
+
+<div class="one-hundred">
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="AddDiscussion">
+                <fieldset>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="DiscussionTitle" class="control-label"></label>
+                        <input asp-for="DiscussionTitle" class="form-control" />
+                        <span asp-validation-for="DiscussionTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DiscussionDesc" class="control-label"></label>
+                        <input asp-for="DiscussionDesc" class="form-control" />
+                        <span asp-validation-for="DiscussionDesc" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add" class="submitButton"   />
+                    </div>
+                </fieldset>
+            </form>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>

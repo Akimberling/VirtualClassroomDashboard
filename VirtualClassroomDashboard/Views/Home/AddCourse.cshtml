@@ -1,0 +1,59 @@
+﻿@model VirtualClassroomDashboard.Models.CourseModel
+@{
+    ViewData["Title"] = "Add Course";
+    Layout = "_LayoutEducator";
+}
+
+<div class="one-hundred">
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="AddCourse">
+                <fieldset>
+                    <p class="errorResponse">@ViewBag.Error</p>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="fiftyPercent ">
+                        <div class="form-group">
+                            <label asp-for="CourseName" class="control-label"></label>
+                            <input asp-for="CourseName" class="form-control" />
+                            <span asp-validation-for="CourseName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseSection" class="control-label"></label>
+                            <input asp-for="CourseSection" class="form-control" />
+                            <span asp-validation-for="CourseSection" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="fiftyPercent ">
+                        <div class="form-group">
+                            <label asp-for="CourseNumber" class="control-label"></label>
+                            <input asp-for="CourseNumber" class="form-control" />
+                            <span asp-validation-for="CourseNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ClassNum" class="control-label"></label>
+                            <input asp-for="ClassNum" class="form-control" />
+                            <span asp-validation-for="ClassNum" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <p>@TempData["EM"]</p>
+                        </div>
+                        <div class="form-group">
+                            <input class="submitButton" type="submit" value="Add" />
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </fieldset>
+                <div class="clear"></div>
+            </form>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

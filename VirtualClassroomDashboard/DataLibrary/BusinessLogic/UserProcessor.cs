@@ -61,7 +61,13 @@ namespace VirtualClassroomDashboard.BusinessLogic
 
             return sqlDataAccess.LoadData<UserModelData>(sql);
         }
-            //Select all users that are from a given school with the specified user type
+        public static List<UserModelData> RetrieveUserInfoByID(int ID)
+        {
+            string sql = "SELECT * FROM dbo.USER_INFO WHERE UserID = \'" + ID + "\';";
+
+            return sqlDataAccess.LoadData<UserModelData>(sql);
+        }
+        //Select all users that are from a given school with the specified user type
         public static List<UserModelData> RetrieveNecessaryUsers(int schoolId, string userType)
         {
             string sql = "SELECT * FROM dbo.USER_INFO WHERE SchoolID = \'" + schoolId + "\' AND UserType = \'" + userType + "\';";
@@ -75,6 +81,29 @@ namespace VirtualClassroomDashboard.BusinessLogic
                 UserID = userId
             };
             string sql = "DELETE FROM dbo.USER_INFO WHERE UserID = \'" + userId + "\';";
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
+        public static int updateUserPhoneNumber(string userPN, int userID)
+        {
+            UserModelData data = new UserModelData
+            {
+                UserID = userID,
+                UserPhonNum = userPN
+            };
+            string sql = "UPDATE dbo.USER_INFO SET UserPhonNum = \'" + userPN + "\' WHERE UserID = \'" + userID + "\';";
+
+            return sqlDataAccess.SaveData(sql, data);
+        }
+        public static int updateUserPassword(string userPass, string salt, int userID)
+        {
+            UserModelData data = new UserModelData
+            {
+                UserID = userID,
+                UserPassword = userPass,
+                UserSalt = salt
+            };
+            string sql = "UPDATE dbo.USER_INFO SET UserPassword = \'" + userPass + "\', UserSalt = \'" + salt + "\' WHERE UserID = \'" + userID + "\';";
 
             return sqlDataAccess.SaveData(sql, data);
         }

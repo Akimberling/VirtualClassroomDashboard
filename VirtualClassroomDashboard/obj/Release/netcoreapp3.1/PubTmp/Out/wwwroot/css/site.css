@@ -37,8 +37,9 @@ a.navbar-brand img{
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
-  border-color: #1861ac;
+  border-color: #007790;
 }
+
 /* Shared Styling
 -------------------------------------------------- */
 img.centerDivide {
@@ -56,12 +57,12 @@ div.clear{
 /* Side Secondary Navigation for user specific layout
 ---------------------------------------------------*/
 main.secLayout{
-    width: 80%;
+    width: 75%;
     float: left;
 }
 div.sideNav {
     float: left;
-    width: 15%;
+    width: 20%;
     margin-right: 20px;
     border-right-width: 3px;
     border-right-style: solid;
@@ -73,12 +74,12 @@ div.sideNav ul.secNav{
 div.sideNav ul.secNav li{
     list-style-type: none;
 }
-div.sideNav ul.secNav li.subNav{
+/*div.sideNav ul.secNav li.subNav{
     text-indent: 30px;
 }
 div.sideNav ul.secNav li.subSubNav{
     text-indent: 60px;
-}
+}*/
 /* Index content
 -------------------------------------------------- */
 
@@ -168,7 +169,22 @@ fieldset {
     height: 30px;
     width: 30px;
 }
-
+/*course selection buttons*/
+a.courseButton{
+    width: 50%;
+    border: 1px solid #007790;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 245px;
+    background-color: #007790;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    display:block;
+}
+a.courseButton:hover{
+    background-color: #8CC63E;
+}
 /*Error in the user/school information meaning it already exists*/
 p.errorResponse {
     color: #ff0000;
@@ -256,11 +272,33 @@ h5{
     border-top: none;
 }
 
+/*Table decoration*/
+.tableDec {
+    border-collapse: collapse;
+}
+.tableDec td, .tableDec th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.tableDec tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.tableDec tr:hover {
+    background-color: #ddd;
+}
+.tableDec th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #007790;
+    color: white;
+}
+
 /**************************************************/
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 
@@ -305,8 +343,50 @@ body {
     margin-top: 0px;
 }
 
-/*@ media queries for different media device sizes*/
+/*This code came from w3Schools https://www.w3schools.com/howto/howto_js_accordion.asp */
+.accordion {
+    background-color: #007790;
+    color: #fff;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+    width: 100%;
+}
+.accordDiv{
+    width:75%;
+    float:left;
+    margin-bottom:10px;
+}
 
+.panel a {
+    width: 30%;
+    border: 1px solid #007790;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 15px;
+    background-color: #007790;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    float: right;
+}
+.panel a:hover {
+    background-color: #8CC63E;
+}
+/*@ media queries for different media device sizes*/
 @media (min-width: 768px) {
     html {
         font-size: 16px;

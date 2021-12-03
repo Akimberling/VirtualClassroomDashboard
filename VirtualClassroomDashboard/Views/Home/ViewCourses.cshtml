@@ -1,0 +1,50 @@
+﻿@model IEnumerable<VirtualClassroomDashboard.Models.CourseModel>
+
+@{
+    ViewData["Title"] = "Manage Courses";
+    Layout = "_LayoutEducator";
+}
+
+<div class="one-hundred">
+    <h1 class="mainHeading">@ViewData["Title"]</h1>
+    <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
+    <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
+
+    <h3>Edit/Delete Courses &amp; Add Students</h3>
+    <p class="errorResponse">@ViewBag.Error</p>
+    @if (Model != null)
+    {
+
+        <table class="tableDec">
+            <tr>
+                <th>Course Id</th>
+                <th>Course Name</th>
+                <th>Course Section</th>
+                <th>Course Number</th>
+                <th>Class Number</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CourseID.ToString()</td>
+                    <td>@item.CourseName</td>
+                    <td>@item.CourseSection</td>
+                    <td>@item.CourseNumber</td>
+                    <td>@item.ClassNum</td>
+                    <td>@Html.ActionLink("Delete", "DeleteCourse", new { id = item.CourseID })</td>
+                    <td>@Html.ActionLink("Edit", "EditCourse", new { id = item.CourseID })</td>
+                    <td>@Html.ActionLink("Add", "AddStudents", new { id = item.CourseID })</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>You have not added any courses yet.</p>
+    }
+    <div class="Hide"><p>Please View the web application at a greater size to see the table.</p></div>
+</div>
+
