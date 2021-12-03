@@ -18,7 +18,7 @@ namespace VirtualClassroomDashboard.Models
         //message of the discussion
         public string DiscussionDesc { get; set; }
         //date comes from a framework
-        public DateTime DiscussionDate { get; set; }
+        public String DiscussionDate { get; set; }
         //the current selected course
         public int CourseID { get; set; }
         //the id of the user

@@ -16,14 +16,14 @@
 
         @foreach (var item in Model)
         {
-            @Html.ActionLink(item.CourseName + " " + item.CourseNumber, "SetCourse", new { id = item.CourseID }, new { @class = "courseButton" })
+            <p>@Html.ActionLink(item.CourseName + " " + item.CourseNumber, "SetCourse", new { id = item.CourseID }, new { @class = "courseButton" })</p>
             <br />
         }
     }
     else if (TempData["SCI"] != null)
     {
-        <p>Selected course: <b>@TempData["SCI"]</b></p>
-        @Html.ActionLink("Select New Course", "selectNewCourse",  new { @class = "submitButton" })
+        <p class="selected">Selected course: <b>@TempData["SCI"]</b></p>
+        <p class="linkDec">@Html.ActionLink("Select New Course", "selectNewCourse", new { @class = "submitButton" })</p>
         <br />
     }
     else

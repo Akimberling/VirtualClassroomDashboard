@@ -5,14 +5,9 @@ using System.Threading.Tasks;
 
 namespace VirtualClassroomDashboard.DataLibrary.Models
 {
-    public class DiscussionModelData
+    public class UserCourseModelData
     {
-        public int DiscussionID { get; set; }
-        public string DiscussionTitle { get; set; }
-        public string DiscussionDesc { get; set; }
-        public String DiscussionDate { get; set; }
         public int CourseID { get; set; }
         public int UserID { get; set; }
-
     }
 }

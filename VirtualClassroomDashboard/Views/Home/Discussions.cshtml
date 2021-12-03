@@ -20,7 +20,7 @@
     <h3>Discussion Board for @TempData["CourseName"]</h3>
     @if (@TempData["UT"].ToString() == "Teacher")
     {
-        <p>@Html.ActionLink("Add Discussion Board", "AddDiscussion")</p>
+        <p class="linkDec">@Html.ActionLink("Add Discussion Board", "AddDiscussion")</p>
     }
     <p class="errorResponse">@ViewBag.Error</p>
     @{
@@ -37,18 +37,17 @@
                 {
 
                     <div class="discussboard">
-                        @Html.ActionLink(item.DiscussionTitle, "Discussion", new { id = item.DiscussionID})
-
+                        <p class="db">@Html.ActionLink(item.DiscussionTitle, "Discussion", new { id = item.DiscussionID })</p>
                         @if (@TempData["UT"].ToString() == "Teacher")
                         {
-                            @Html.ActionLink("Remove", "RemoveDiscussion", new { id = item.DiscussionID})       
+                            <p class="linkDec">@Html.ActionLink("Remove", "RemoveDiscussion", new { id = item.DiscussionID }) </p>      
                         }
                     </div>
                 }
             }
             else
             {
-                <p>No Files have been uploaded for this course.</p>
+                <p>No Discussion have been created for this course.</p>
             }
         }
     }
