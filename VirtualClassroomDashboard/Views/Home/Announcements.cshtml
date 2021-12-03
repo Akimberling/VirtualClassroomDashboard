@@ -20,7 +20,7 @@
     <h3>View Announcements from @TempData["CourseName"]</h3>
     @if (@TempData["UT"].ToString() == "Teacher")
     {
-        <p>@Html.ActionLink("Add Announcement", "CreateAnnouncement")</p>
+        <p class="linkDec">@Html.ActionLink("Add Announcement", "CreateAnnouncement")</p>
     }
     <p class="errorResponse">@ViewBag.Error</p>
     @{
@@ -45,7 +45,7 @@
                             }*@
                             @if ((int.Parse(CurrentUID) == item.UserID) || @TempData["UT"].ToString() == "Teacher")
                             {
-                                @Html.ActionLink("Remove", "RemoveAnnouncement", new { AnnouncID = item.AnnounceID, fileID = item.FileID, fpath = item.FIlePath, fname = item.FileName })
+                            <p> @Html.ActionLink("Remove", "RemoveAnnouncement", new { AnnouncID = item.AnnounceID, fileID = item.FileID, fpath = item.FIlePath, fname = item.FileName })</p>
                             }
                         </div>
                     </div>

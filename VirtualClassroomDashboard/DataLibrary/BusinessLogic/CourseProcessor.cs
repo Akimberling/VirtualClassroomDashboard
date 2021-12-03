@@ -1,7 +1,5 @@
 ﻿using VirtualClassroomDashboard.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using VirtualClassroomDashboard.DataAccess;
 using VirtualClassroomDashboard.DataLibrary.Models;
 
@@ -42,11 +40,11 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
 
         }
         //retrieve the user course ID's -- Needed for studcent dash
-        public static List<CourseModelData> RetrieveUserCourses(int UID)
+        public static List<UserCourseModelData> RetrieveUserCourses(int UID)
         {
             string sql = "SELECT * FROM dbo.USER_COURSE WHERE UserID = \'" + UID + "\';";
 
-            return sqlDataAccess.LoadData<CourseModelData>(sql);
+            return sqlDataAccess.LoadData<UserCourseModelData>(sql);
         }
         //retrieve the courses the user is in by the course ids from Retrieve User courses --  Needed for studcent dash
         public static List<CourseModelData> RetrieveCoursesForUser(int CID)

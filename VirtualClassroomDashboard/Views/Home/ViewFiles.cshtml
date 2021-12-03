@@ -20,7 +20,7 @@
     <h3>View/Add Files from @TempData["CourseName"]</h3>
     @if (@TempData["UT"].ToString() == "Teacher")
     {
-        <p>@Html.ActionLink("Add Files", "CourseFiles")</p>
+        <p class="linkDec">@Html.ActionLink("Add Files", "CourseFiles")</p>
     }
     <p class="errorResponse">@ViewBag.Error</p>
     @{
@@ -61,6 +61,7 @@
             }
         }
     }
+    <div class="Hide"><p>Please View the web application at a greater size to see the table.</p></div>
     <div class="clear"></div>
 </div>
 <div class="clear"></div>

@@ -33,19 +33,26 @@
                 {
                     <th></th>
                 }
-                
+
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
-                     @if (@TempData["UT"].ToString() == "Teacher")
+                    @if (@TempData["UT"].ToString() == "Teacher")
                     {
                         <td>@item.UserID.ToString()</td>
                     }
                     <td>@item.FirstName</td>
                     <td>@item.LastName</td>
                     <td>@item.EmailAddress</td>
-                    <td>@item.PhoneNumber</td>
+                    @if(item.PhoneNumber == "")
+                    {
+                        <td></td>
+                    }
+                    else
+                    {
+                        <td>@item.PhoneNumber</td>
+                    }
                     @if (@TempData["UT"].ToString() == "Teacher")
                     {
                         <td>@Html.ActionLink("Remove", "RemoveStudent", new { id = item.UserID })</td>
@@ -59,6 +66,7 @@
     {
         <p>There are no Students enrolled in this course. Or you have not selected a course on the dashboard</p>
     }
-    <div class = "clear"></div>
+    <div class="Hide"><p>Please View the web application at a greater size to see the table.</p></div>
+    <div class="clear"></div>
 </div>
 <div class="clear"></div>

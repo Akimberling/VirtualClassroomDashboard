@@ -14,6 +14,10 @@ a.navbar-brand {
 
 a {
   color: #0366d6;
+  font-weight:bold;
+}
+a:hover{
+    color:#8CC63E;
 }
 ul li a{
     font-weight:bold;
@@ -53,6 +57,52 @@ img.centerDivide {
 div.clear{
     clear:both;
     display:block;
+}
+p.selected{
+    font-size: 20px;
+}
+div.discuss, div.discussboard {
+    border: 3px solid #007790;
+    padding: 10px;
+    width: 75%;
+    display: flow-root;
+    margin-bottom: 10px;
+    background-color: #000000;
+    color:#ffffff;
+}
+div.discussReply {
+    border: 3px solid #8CC63E;
+    padding: 10px;
+    width: 75%;
+    display: flow-root;
+    margin-bottom:-2px;
+
+}
+
+p.linkDec {
+    display: block;
+}
+p.linkDec a {
+    width: 200px;
+    background-color: #007790;
+    color: #D1D2D4;
+    padding: 8px;
+    line-height:10px;
+    margin-top: 10px;
+}
+p.linkDec a:hover {
+    background-color: #8CC63E;
+    color: #fff;
+}
+div.discussboard p.db a {
+    color: #8CC63E;
+    font-size: 20px;
+    width: 500px;
+    padding: 5px;
+}
+
+div.discussboard p.db a:hover {
+    color: #007790;
 }
 /* Side Secondary Navigation for user specific layout
 ---------------------------------------------------*/
@@ -386,9 +436,51 @@ body {
 .panel a:hover {
     background-color: #8CC63E;
 }
+div.Hide{
+    display:none;
+}
 /*@ media queries for different media device sizes*/
-@media (min-width: 768px) {
+/*around ipad size*/
+@media (max-width: 768px) {
     html {
-        font-size: 16px;
+        font-size: 18px;
+    }
+    div.fiftyPercent{
+        width: 97%;
+    }
+    img.indexImages{
+        width: 100%;
+    }
+    a.linkButtons{
+        width: 85%;
+    }
+    div.col-md-4{
+        max-width:none;
+    }
+    
+}
+@media (max-width: 765px) {
+    div.sideNav{
+        border: none;
+        width: 90%;
+        float: right;
+    }
+    div.col-md-12{
+        width:100%;
+        display:block;
+    }
+    table{
+        display:none;
+    }
+    div.Hide{
+        display:inherit;
+    }
+}
+@media (max-width: 411px){
+    input.submitButton{
+        width: 90%;
+    }
+    img.indexImages {
+        display:none;
     }
 }

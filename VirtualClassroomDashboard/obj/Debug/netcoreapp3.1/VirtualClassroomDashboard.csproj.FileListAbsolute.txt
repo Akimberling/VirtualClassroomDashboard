@@ -229,10 +229,6 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutEducator.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LayoutStudent.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Student\Assessments.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Student\Assignments.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Student\Discussions.cshtml.g.cs
-C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Student\Grades.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Student\Syllabus.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
@@ -261,3 +257,7 @@ C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\Vir
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\EducatorGrades.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\Discussion.cshtml.g.cs
 C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\DiscussionReply.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\AddDiscussion.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\StudentAssessments.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\StudentAssignments.cshtml.g.cs
+C:\Users\Amber Kimberling\Source\Repos\Akimberling\VirtualClassroomDashboard\VirtualClassroomDashboard\obj\Debug\netcoreapp3.1\Razor\Views\Home\StudentGrades.cshtml.g.cs

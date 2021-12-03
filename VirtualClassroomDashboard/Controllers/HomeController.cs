@@ -7,14 +7,10 @@ using VirtualClassroomDashboard.BusinessLogic;
 using VirtualClassroomDashboard.Classes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting.Internal;
-using System;
-using Grpc.Core;
-using Microsoft.AspNetCore.Authorization;
 using VirtualClassroomDashboard.DataLibrary.BusinessLogic;
 using System.IO;
-using System.Linq;
-using System.Web;
+using System.Globalization;
+using System;
 
 //HomeController
 namespace VirtualClassroomDashboard.Controllers
@@ -557,10 +553,123 @@ namespace VirtualClassroomDashboard.Controllers
         
         public IActionResult StudentDash()
         {
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            TempData["SCI"] = "";
+
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
 
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            int userId = int.Parse(BasicUI["UserID"]);
+            if (BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseName"] != null)
+            {
+                TempData["SCI"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+                return View();
+            }
+            else
+            {
+                List<CourseModel> Courses = new List<CourseModel>();
+                var courseUserData = CourseProcessor.RetrieveUserCourses(userId);
+
+                foreach (var row in courseUserData)
+                {
+                    var courseData = CourseProcessor.RetrieveCoursesForUser(row.CourseID);
+                    foreach(var rows in courseData)
+                    {
+                        Courses.Add(new CourseModel
+                        {
+                            CourseID = rows.CourseID,
+                            CourseName = rows.CourseName,
+                            CourseSection = rows.CourseSection,
+                            CourseNumber = rows.CourseNumber,
+                            ClassNum = rows.ClassNum
+
+                        });
+                    }
+                }
+                return View(Courses);
+            }
+        }
+        public ActionResult selectStudentNewCourse()
+        {
+            SelectedCourseClass.clearCourseData();
+            return RedirectToAction("StudentDash");
+        }
+        public ActionResult SetStudentCourse(int id)
+        {
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //save the data
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["FN"] = BasicUI["FirstName"];
+            TempData["LN"] = BasicUI["LastName"];
+            TempData["PN"] = BasicUI["PhoneNumber"];
+            TempData["EM"] = BasicUI["EmailAddress"];
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["SID"] = BasicUI["SchoolID"];
+
+            List<CourseModel> Courses = new List<CourseModel>();
+            var courseData = CourseProcessor.RetrieveCourse(id);
+            foreach (var row in courseData)
+            {
+                Courses.Add(new CourseModel
+                {
+                    CourseID = row.CourseID,
+                    CourseName = row.CourseName,
+                    CourseSection = row.CourseSection,
+                    CourseNumber = row.CourseNumber,
+                    ClassNum = row.ClassNum
+
+                });
+            }
+
+            //create a new model
+            CourseModel CurrentInfo = new CourseModel();
+
+            //store the values from userData into the model
+            CurrentInfo.CourseID = Courses[0].CourseID;
+            CurrentInfo.CourseName = Courses[0].CourseName;
+            CurrentInfo.CourseSection = Courses[0].CourseSection;
+            CurrentInfo.CourseNumber = Courses[0].CourseNumber;
+            CurrentInfo.ClassNum = Courses[0].CourseNumber;
+
+            //selected course information
+            TempData["SCI"] = Courses[0].CourseName + " " + Courses[0].CourseNumber;
+
+            SelectedCourseClass.setCourseData(CurrentInfo);
+            ViewBag.Error = "You can now access your course information.";
+
+            return View("StudentDash");
+        }
+
+        public IActionResult StudentZoom()
+        {
+            return View();
+        }
+        public IActionResult StudentAssessments()
+        {
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            //form of authentication
             if (BasicUI["UserType"] != "Student")
             {
 
@@ -569,28 +678,51 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else
             {
-                //save the data
-                TempData["UID"] = BasicUI["UserID"];
-                TempData["FN"] = BasicUI["FirstName"];
-                TempData["LN"] = BasicUI["LastName"];
-                TempData["PN"] = BasicUI["PhoneNumber"];
-                TempData["EM"] = BasicUI["EmailAddress"];
-                TempData["UT"] = BasicUI["UserType"];
-                TempData["SID"] = BasicUI["SchoolID"];
-
                 return View();
             }
         }
-
-        public IActionResult StudentZoom()
+        public IActionResult StudentAssignments()
         {
-            return View();
-        }
 
-/***********************************************************************************************************
-* Educator directory
-**********************************************************************************************************/
-       [HttpGet]
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            //form of authentication
+            if (BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public IActionResult StudentGrades()
+        {
+
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            int userId = int.Parse(BasicUI["UserID"]);
+            //form of authentication
+            if (BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
+        /***********************************************************************************************************
+        * Educator directory
+        **********************************************************************************************************/
+        [HttpGet]
         public IActionResult EducatorDash()
         {
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
@@ -1610,16 +1742,20 @@ namespace VirtualClassroomDashboard.Controllers
 
             return RedirectToAction("Announcements");
         }
+        [HttpGet]
         public IActionResult Discussions()
         {
             //establish a dictionary that will contain user information that was set during login
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
             BasicUI = UserInfoClass.getUserData();
-            TempData["UT"] = BasicUI["UserType"];
-            TempData["UID"] = BasicUI["UserID"];
-            //grab daved information
             Dictionary<string, string> BasicCI = new Dictionary<string, string>();
             BasicCI = SelectedCourseClass.getCourseData();
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+            int cid = int.Parse(BasicCI["CourseID"]);
+            //grab daved information
+            
             if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
             {
 
@@ -1633,8 +1769,221 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else
             {
+                List<DiscussionsModel> discuss = new List<DiscussionsModel>();
+                var DiscussData = DiscussionProcessor.RetrieveDiscussionsForCourse(cid);
+                //save data to a model
+                foreach (var row in DiscussData)
+                {
+                    discuss.Add(new DiscussionsModel
+                    {
+                        DiscussionID = row.DiscussionID,
+                        DiscussionTitle = row.DiscussionTitle
+                    });
+                }
+                return View(discuss);
+            }
+        }
+        [HttpGet]
+        public IActionResult AddDiscussion()
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //grab saved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+            TempData["UT"] = BasicUI["UserType"];
+
+            if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
+            {
+                return View("AccessDenied");
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
+            else
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddDiscussion(DiscussionsModel model)
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //grab saved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["UID"] = BasicUI["UserID"];
+            int cid = int.Parse(BasicCI["CourseID"]);
+            int uid = int.Parse(BasicUI["UserID"]);
+
+            if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
+            {
+                return View("AccessDenied");
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                string date = DateTime.Now.ToString();
+                date = date.Split(' ')[0];
+                int temp = DiscussionProcessor.CreateDiscussion(uid, cid, model.DiscussionTitle, model.DiscussionDesc, date);
+                return RedirectToAction("Discussions");
+            }
+        }
+        public IActionResult Discussion(int id)
+        {
+            if(id == 0)
+            {
+                id = setDiscussionClass.geDiscussData();
+            }
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+            if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                TempData["CourseName"] = BasicCI["CourseName"];
+                var DiscussData = DiscussionProcessor.RetrieveDiscussionForCourse(id);
+
+                foreach (var row in DiscussData)
+                {
+                    ViewData["DiscussionTitle"] = row.DiscussionTitle;
+                    ViewData["DiscussionDesc"] = row.DiscussionDesc;
+                    ViewData["DiscussionDate"] = row.DiscussionDate.Split(' ')[0];
+                    ViewData["DiscussionDate"] = row.DiscussionDate;
+                }
+
+                setDiscussionClass.setDiscussData(id);
+                List<DiscussionReplyModel> dRep = new List<DiscussionReplyModel>();
+                var DiscussRepData = DiscussionReplyProcessor.RetrieveDiscussionRepliesForCourse(id);
+                //save data to a model
+                foreach (var row in DiscussRepData)
+                {
+                    dRep.Add(new DiscussionReplyModel
+                    {
+                        DiscussionReplyID = row.DiscussionReplyID,
+                        DiscussionReplyDesc = row.DiscussionReplyDesc,
+                        DiscussionReplyDate = row.DiscussionReplyDate.Split(' ')[0],
+                        UserID = row.UserID,
+                        UserName = row.UserName
+
+                    });
+                }
+
+                return View(dRep);
+            }
+        }
+        [HttpGet]
+        public IActionResult DiscussionReply(int id)
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["UID"] = BasicUI["UserID"];
+            TempData["CourseName"] = BasicCI["CourseName"] + " " + BasicCI["CourseNumber"];
+            
+            if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                id = setDiscussionClass.geDiscussData();
+                TempData["CourseName"] = BasicCI["CourseName"];
+                var DiscussData = DiscussionProcessor.RetrieveDiscussionForCourse(id);
+
+                //save data to a model
+                foreach (var row in DiscussData)
+                {
+                    ViewData["DiscussionTitle"] = row.DiscussionTitle;
+                    ViewData["DiscussionDesc"] = row.DiscussionDesc;
+                    ViewData["DiscussionDate"] = row.DiscussionDate.Split(' ')[0];
+                }
+
+                return View();
+
+
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DiscussionReply(DiscussionReplyModel model)
+        {
+            //establish a dictionary that will contain user information that was set during login
+            Dictionary<string, string> BasicUI = new Dictionary<string, string>();
+            BasicUI = UserInfoClass.getUserData();
+            TempData["UT"] = BasicUI["UserType"];
+            TempData["UID"] = BasicUI["UserID"];
+            //grab daved information
+            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
+            BasicCI = SelectedCourseClass.getCourseData();
+
+            int cid = int.Parse(BasicCI["CourseID"]);
+            int uid = int.Parse(BasicUI["UserID"]);
+
+            if (BasicUI["UserType"] != "Teacher" && BasicUI["UserType"] != "Student")
+            {
+
+                return View("AccessDenied");
+
+            }
+            else if (BasicCI["CourseNumber"] == null)
+            {
+                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                return View();
+            }
+            else
+            {
+                int did = setDiscussionClass.geDiscussData();
+                string date = DateTime.Now.ToString();
+                date = date.Split(' ')[0];
+                int temp = DiscussionReplyProcessor.CreateDiscussionReply(uid,did, model.DiscussionReplyDesc, date);
+                return RedirectToAction("Discussion", did);
+            }
+        }
+        public IActionResult RemoveDiscussion(int id)
+        {
+            int temp = DiscussionProcessor.deleteDiscussions(id);
+            return RedirectToAction("Discussions");
         }
         public IActionResult AccessDenied()
         {
