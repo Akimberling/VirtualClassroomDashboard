@@ -73,8 +73,7 @@ div.discuss, div.discussboard {
 div.discussReply {
     border: 3px solid #8CC63E;
     padding: 10px;
-    width: 75%;
-    display: flow-root;
+    width: 100%;
     margin-bottom:-2px;
 
 }
@@ -274,9 +273,10 @@ div.seventyfive {
     margin-top: 10px;
     width: 75%;
 }
-
+div.discussReplySevenFive{
+    float:left;
+}
 /*Tabs for editing users from an admin standpoint*/
-
 /* Style the tab */
 .tab {
     overflow: hidden;

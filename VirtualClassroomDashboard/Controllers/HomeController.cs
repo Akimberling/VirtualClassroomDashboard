@@ -1250,7 +1250,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if(BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else { 
@@ -1333,7 +1333,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1402,7 +1402,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1471,7 +1471,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1574,7 +1574,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1658,7 +1658,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1765,7 +1765,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1802,7 +1802,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1832,7 +1832,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1866,7 +1866,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1874,13 +1874,9 @@ namespace VirtualClassroomDashboard.Controllers
                 TempData["CourseName"] = BasicCI["CourseName"];
                 var DiscussData = DiscussionProcessor.RetrieveDiscussionForCourse(id);
 
-                foreach (var row in DiscussData)
-                {
-                    ViewData["DiscussionTitle"] = row.DiscussionTitle;
-                    ViewData["DiscussionDesc"] = row.DiscussionDesc;
-                    ViewData["DiscussionDate"] = row.DiscussionDate.Split(' ')[0];
-                    ViewData["DiscussionDate"] = row.DiscussionDate;
-                }
+                ViewData["DiscussionTitle"] = DiscussData[0].DiscussionTitle;
+                ViewData["DiscussionDesc"] = DiscussData[0].DiscussionDesc;
+                ViewData["DiscussionDate"] = DiscussData[0].DiscussionDate.Split(' ')[0];
 
                 setDiscussionClass.setDiscussData(id);
                 List<DiscussionReplyModel> dRep = new List<DiscussionReplyModel>();
@@ -1923,7 +1919,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
@@ -1969,7 +1965,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else if (BasicCI["CourseNumber"] == null)
             {
-                ViewBag.Message = "Please got to the Dashboard and Select a Course. There is no active course selected.";
+                ViewBag.Message = "Please go to the Dashboard and Select a Course. There is no active course selected.";
                 return View();
             }
             else
