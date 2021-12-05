@@ -1,7 +1,7 @@
 ﻿@model VirtualClassroomDashboard.Models.AnnouncementModel
 
 @{
-    ViewData["Title"] = "CreateAnnouncement";
+    ViewData["Title"] = "Create Announcement";
     Layout = "_LayoutEducator";
 }
 
@@ -10,7 +10,7 @@
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
     @{
-        if (ViewBag.Message == "Please got to the Dashboard and Select a Course. There is no active course selected.")
+        if (ViewBag.Message == "Please go to the Dashboard and Select a Course. There is no active course selected.")
         {
             <span style="color:red">@Html.Raw(ViewBag.Message)</span>
         }
@@ -33,27 +33,27 @@
                                 <span asp-validation-for="AnnounceDesc" class="text-danger"></span>
                             </div>
                             @*<div class="form-group">
-                                <label asp-for="FileName" class="control-label"></label>
-                                <input asp-for="FileName" class="form-control" type="file" name="postedFiles" multiple />
-                                <span asp-validation-for="FileName" class="text-danger"></span>
-                            </div>
-                            <p style="color:red">If you upload a file please ensure to fill out the subject and description otherwise your file will not be uploaded.</p>
-                            <div class="form-group">
-                                <label asp-for="FileSubject" class="control-label"></label>
-                                <select asp-for="FileSubject" class="form-control">
-                                    <option value="Syllabus">Syllabus</option>
-                                    <option value="Course Material">Course Material</option>
-                                    <option value="Test">Test</option>
-                                    <option value="Quiz">Quiz</option>
-                                    <option value="Assignment">Assignment</option>
-                                </select>
-                                <span asp-validation-for="FileSubject" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="FileDesc" class="control-label"></label>
-                                <input asp-for="FileDesc" class="form-control" />
-                                <span asp-validation-for="FileDesc" class="text-danger"></span>
-                            </div>*@
+                                    <label asp-for="FileName" class="control-label"></label>
+                                    <input asp-for="FileName" class="form-control" type="file" name="postedFiles" multiple />
+                                    <span asp-validation-for="FileName" class="text-danger"></span>
+                                </div>
+                                <p style="color:red">If you upload a file please ensure to fill out the subject and description otherwise your file will not be uploaded.</p>
+                                <div class="form-group">
+                                    <label asp-for="FileSubject" class="control-label"></label>
+                                    <select asp-for="FileSubject" class="form-control">
+                                        <option value="Syllabus">Syllabus</option>
+                                        <option value="Course Material">Course Material</option>
+                                        <option value="Test">Test</option>
+                                        <option value="Quiz">Quiz</option>
+                                        <option value="Assignment">Assignment</option>
+                                    </select>
+                                    <span asp-validation-for="FileSubject" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="FileDesc" class="control-label"></label>
+                                    <input asp-for="FileDesc" class="form-control" />
+                                    <span asp-validation-for="FileDesc" class="text-danger"></span>
+                                </div>*@
                             <div class="form-group">
                                 <input type="submit" value="Upload" class="submitButton" />
                             </div>
@@ -70,3 +70,6 @@
     }
 </div>
 <div class="clear"></div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

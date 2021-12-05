@@ -53,5 +53,8 @@
             <div class="clear"></div>
         }
     }
- </div>
+</div>
 <div class="clear"></div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
