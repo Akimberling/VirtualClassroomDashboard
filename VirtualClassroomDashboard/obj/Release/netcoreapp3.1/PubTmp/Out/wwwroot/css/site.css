@@ -475,6 +475,11 @@ div.Hide{
     div.Hide {
         display: inherit;
     }
+    a.courseButton{
+        margin-top:0px;
+        margin-left:0px;
+        width:100%;
+    }
     
 }
 @media (max-width: 411px){
