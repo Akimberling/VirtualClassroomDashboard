@@ -1591,7 +1591,7 @@ namespace VirtualClassroomDashboard.Controllers
                 int userID = int.Parse(BasicUI["UserID"]);
                 //grab Announcement data
                 List<AnnouncementModel> announcements = new List<AnnouncementModel>();
-                var AnnounceData = AnnouncementProcessor.RetrieveAllCourseAnnouncements(courseID, userID);
+                var AnnounceData = AnnouncementProcessor.RetrieveAllCourseAnnouncements(courseID);
                 //save data to a model
                 foreach (var row in AnnounceData)
                 {
