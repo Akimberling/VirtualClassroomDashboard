@@ -477,6 +477,15 @@ div.Hide{
     }
 }
 @media (max-width: 411px){
+    h1{
+        font: 20px;
+    }
+    h2{
+        font: 16px;
+    }
+    h3{
+        font:12px;
+    }
     input.submitButton{
         width: 90%;
     }

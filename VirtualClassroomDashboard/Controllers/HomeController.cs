@@ -1012,6 +1012,7 @@ namespace VirtualClassroomDashboard.Controllers
             }
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditCourse(CourseUpdateModel model)
         {
             Dictionary<string, string> BasicUI = new Dictionary<string, string>();
@@ -1031,7 +1032,7 @@ namespace VirtualClassroomDashboard.Controllers
 
                 CourseProcessor.updateCourseInfo(int.Parse(BasicCI["CourseID"]), model.CourseSection, model.CourseName);
 
-                return View("ViewCourses");
+                return RedirectToAction("ViewCourses");
             }
         }
         [HttpGet]
@@ -1113,7 +1114,7 @@ namespace VirtualClassroomDashboard.Controllers
 
             CourseProcessor.AddUserToCourse(cid, id);
 
-            return View("AddStudents");
+            return RedirectToAction("AddStudents");
         }
         public IActionResult EducatorAssessments()
         {
