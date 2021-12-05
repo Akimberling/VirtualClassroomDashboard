@@ -441,7 +441,7 @@ div.Hide{
 }
 /*@ media queries for different media device sizes*/
 /*around ipad size*/
-@media (max-width: 768px) {
+@media (max-width: 770px) {
     html {
         font-size: 18px;
     }
@@ -474,6 +474,11 @@ div.Hide{
 
     div.Hide {
         display: inherit;
+    }
+    a.courseButton{
+        margin-top:0px;
+        margin-left:0px;
+        width:100%;
     }
     
 }
