@@ -480,6 +480,9 @@ div.Hide{
         margin-left:0px;
         width:100%;
     }
+    .accordDiv{
+        width:auto;
+    }
     
 }
 @media (max-width: 411px){

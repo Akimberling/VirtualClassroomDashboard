@@ -483,6 +483,9 @@ div.Hide{
     .accordDiv{
         width:auto;
     }
+    div.discussboard{
+        width: 100%;
+    }
     
 }
 @media (max-width: 411px){
