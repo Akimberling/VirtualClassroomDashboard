@@ -459,7 +459,7 @@ div.Hide{
     }
     
 }
-@media (max-width: 765px) {
+@media (max-width: 768px) {
     div.sideNav{
         border: none;
         width: 90%;
