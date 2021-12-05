@@ -457,24 +457,25 @@ div.Hide{
     div.col-md-4{
         max-width:none;
     }
-    
-}
-@media (max-width: 768px) {
-    div.sideNav{
+    div.sideNav {
         border: none;
         width: 90%;
         float: right;
     }
-    div.col-md-12{
-        width:100%;
-        display:block;
+
+    div.col-md-12 {
+        width: 100%;
+        display: block;
     }
-    table{
-        display:none;
+
+    table {
+        display: none;
     }
-    div.Hide{
-        display:inherit;
+
+    div.Hide {
+        display: inherit;
     }
+    
 }
 @media (max-width: 411px){
     h1{
