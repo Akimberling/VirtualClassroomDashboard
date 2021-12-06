@@ -21,11 +21,11 @@ a.navbar-brand {
 a.text-dark:focus, a.text-dark:hover{
     color:#8CC63E !important;
 }
-ul.secNav a.text-dark{
-    color:#8CC63E !important;
+ul.secNav a.text-dark {
+    color: #007790 !important;
 }
 ul.secNav a.text-dark:hover, ul.secNav a.text-dark:focus{
-    color: #007790 !important;
+   color: #8CC63E !important;
 }
 a {
   color: #0366d6;
