@@ -35,9 +35,10 @@ ul{
     float:left;
     display:block;
 }
-fieldset{
+legend{
     color:#007790;
     text-align:center;
+    font-weight:bold;
 }
 a.navbar-brand img{
     width: 200px;
