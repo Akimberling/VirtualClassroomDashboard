@@ -1,5 +1,8 @@
 ﻿
-
+*{
+    font-size: 14px;
+    font-weight:bold;
+}
 header{
 
     background-color: #000000;
@@ -73,8 +76,7 @@ div.discuss, div.discussboard {
 div.discussReply {
     border: 3px solid #8CC63E;
     padding: 10px;
-    width: 75%;
-    display: flow-root;
+    width: 100%;
     margin-bottom:-2px;
 
 }
@@ -154,8 +156,8 @@ a.linkButtons {
     margin-top: 20px;
     float: left;
     background-color: #007790;
-    color: #D1D2D4;
-    font-weight: bold;
+    color: #fff;
+    font-weight: bolder;
     text-align: center;
     margin-left: 30px
 }
@@ -206,7 +208,8 @@ fieldset {
 .Login .submitButton, input.submitButton {
     width: 200px;
     background-color: #007790;
-    color: #D1D2D4;
+    color: #fff;
+    font-weight:bolder;
     float:right;
     margin-bottom: 0px;
 }
@@ -274,9 +277,10 @@ div.seventyfive {
     margin-top: 10px;
     width: 75%;
 }
-
+div.discussReplySevenFive{
+    float:left;
+}
 /*Tabs for editing users from an admin standpoint*/
-
 /* Style the tab */
 .tab {
     overflow: hidden;

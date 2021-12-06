@@ -16,7 +16,7 @@
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
 
-    <h3>View/Add Files from @TempData["CourseName"]</h3>
+    <h2>View/Add Files from @TempData["CourseName"]</h2>
     @if (@TempData["UT"].ToString() == "Teacher")
     {
         <p class="linkDec">@Html.ActionLink("Add Files", "CourseFiles")</p>
@@ -39,7 +39,7 @@
                         <th>File Description</th>
                         @if (@TempData["UT"].ToString() == "Teacher")
                         {
-                            <th></th>
+                            <th>Remove</th>
                         }
                     </tr>
                     @foreach (var item in Model)

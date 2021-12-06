@@ -20,6 +20,7 @@
                 <div class="col-md-12">
                     <form asp-action="CreateAnnouncement">
                         <fieldset>
+                            <legend>Announcement Information</legend>
                             <p class="errorResponse">@ViewBag.Error</p>
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
@@ -33,27 +34,27 @@
                                 <span asp-validation-for="AnnounceDesc" class="text-danger"></span>
                             </div>
                             @*<div class="form-group">
-                                    <label asp-for="FileName" class="control-label"></label>
-                                    <input asp-for="FileName" class="form-control" type="file" name="postedFiles" multiple />
-                                    <span asp-validation-for="FileName" class="text-danger"></span>
-                                </div>
-                                <p style="color:red">If you upload a file please ensure to fill out the subject and description otherwise your file will not be uploaded.</p>
-                                <div class="form-group">
-                                    <label asp-for="FileSubject" class="control-label"></label>
-                                    <select asp-for="FileSubject" class="form-control">
-                                        <option value="Syllabus">Syllabus</option>
-                                        <option value="Course Material">Course Material</option>
-                                        <option value="Test">Test</option>
-                                        <option value="Quiz">Quiz</option>
-                                        <option value="Assignment">Assignment</option>
-                                    </select>
-                                    <span asp-validation-for="FileSubject" class="text-danger"></span>
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="FileDesc" class="control-label"></label>
-                                    <input asp-for="FileDesc" class="form-control" />
-                                    <span asp-validation-for="FileDesc" class="text-danger"></span>
-                                </div>*@
+            <label asp-for="FileName" class="control-label"></label>
+            <input asp-for="FileName" class="form-control" type="file" name="postedFiles" multiple />
+            <span asp-validation-for="FileName" class="text-danger"></span>
+        </div>
+        <p style="color:red">If you upload a file please ensure to fill out the subject and description otherwise your file will not be uploaded.</p>
+        <div class="form-group">
+            <label asp-for="FileSubject" class="control-label"></label>
+            <select asp-for="FileSubject" class="form-control">
+                <option value="Syllabus">Syllabus</option>
+                <option value="Course Material">Course Material</option>
+                <option value="Test">Test</option>
+                <option value="Quiz">Quiz</option>
+                <option value="Assignment">Assignment</option>
+            </select>
+            <span asp-validation-for="FileSubject" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FileDesc" class="control-label"></label>
+            <input asp-for="FileDesc" class="form-control" />
+            <span asp-validation-for="FileDesc" class="text-danger"></span>
+        </div>*@
                             <div class="form-group">
                                 <input type="submit" value="Upload" class="submitButton" />
                             </div>

@@ -1,5 +1,8 @@
 ﻿
-
+*{
+    font-size: 14px;
+    font-weight:bold;
+}
 header{
 
     background-color: #000000;
@@ -11,7 +14,13 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-
+.text-dark{
+    color:#ffffff !important;
+    font-size:14px;
+}
+a.text-dark:focus, a.text-dark:hover{
+    color:#8CC63E !important;
+}
 a {
   color: #0366d6;
   font-weight:bold;
@@ -153,8 +162,8 @@ a.linkButtons {
     margin-top: 20px;
     float: left;
     background-color: #007790;
-    color: #D1D2D4;
-    font-weight: bold;
+    color: #fff;
+    font-weight: bolder;
     text-align: center;
     margin-left: 30px
 }
@@ -205,7 +214,8 @@ fieldset {
 .Login .submitButton, input.submitButton {
     width: 200px;
     background-color: #007790;
-    color: #D1D2D4;
+    color: #fff;
+    font-weight:bolder;
     float:right;
     margin-bottom: 0px;
 }
