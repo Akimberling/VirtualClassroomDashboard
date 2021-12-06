@@ -1053,29 +1053,35 @@ namespace VirtualClassroomDashboard.Controllers
             }
             else
             {
+                if(id == 0)
+                {
+                    id = CourseInfoClass.getCourseID();
+                }
                 var schoolID = int.Parse(BasicUI["SchoolID"]);
 
                 List<UserModel> Students = new List<UserModel>();
                 var userData = UserProcessor.RetrieveNecessaryUsers(schoolID, "Student");
-                //user course id 
 
                 foreach (var row in userData)
                 {
-                    Students.Add(new UserModel
+                    List<int> courseCount = CourseProcessor.CheckIfUserIsInCourse(id, row.UserID);
+
+                    if(courseCount[0] == 0)
                     {
-                        UserID = row.UserID,
-                        FirstName = row.UserFname,
-                        LastName = row.UserLname,
-                        EmailAddress = row.UserEmail,
-                        PhoneNumber = row.UserPhonNum,
+                        Students.Add(new UserModel
+                        {
+                            UserID = row.UserID,
+                            FirstName = row.UserFname,
+                            LastName = row.UserLname,
+                            EmailAddress = row.UserEmail,
+                            PhoneNumber = row.UserPhonNum,
 
-                    });
-
+                        });
+                    }
                 }
 
                 List<CourseModel> Courses = new List<CourseModel>();
                 var courseData = CourseProcessor.RetrieveCourse(id);
-
                 foreach (var row in courseData)
                 {
                     Courses.Add(new CourseModel
@@ -1086,31 +1092,17 @@ namespace VirtualClassroomDashboard.Controllers
                         CourseNumber = row.CourseNumber,
                         ClassNum = row.ClassNum
 
-                    });
-                }
-                //create a new model
-                CourseModel CurrentInfo = new CourseModel();
-
-                //store the values from userData into the model
-                CurrentInfo.CourseID = Courses[0].CourseID;
-                CurrentInfo.CourseName = Courses[0].CourseName;
-                CurrentInfo.CourseSection = Courses[0].CourseSection;
-                CurrentInfo.CourseNumber = Courses[0].CourseNumber;
-                CurrentInfo.ClassNum = Courses[0].CourseNumber;
-
-                CourseInfoClass.setTempCourseData(CurrentInfo);
+                });
                 TempData["CName"] = Courses[0].CourseName;
-
+                }
+                CourseInfoClass.setCourseID(id);
                 return View(Students);
             }
         }
         public ActionResult AddStudent(int id)
         {
-            //check to ensure there are no dulicate Students
-            Dictionary<string, string> BasicCI = new Dictionary<string, string>();
-            BasicCI = SelectedCourseClass.getCourseData();
 
-            int cid = int.Parse(BasicCI["CourseID"]);
+            int cid = CourseInfoClass.getCourseID();
 
             CourseProcessor.AddUserToCourse(cid, id);
 
