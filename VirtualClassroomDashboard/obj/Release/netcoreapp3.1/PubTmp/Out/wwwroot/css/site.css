@@ -1,5 +1,8 @@
 ﻿
-
+*{
+    font-size: 14px;
+    font-weight:bold;
+}
 header{
 
     background-color: #000000;
@@ -11,9 +14,25 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-
+.text-dark{
+    color:#ffffff !important;
+    font-size:14px;
+}
+a.text-dark:focus, a.text-dark:hover{
+    color:#8CC63E !important;
+}
+ul.secNav a.text-dark {
+    color: #007790 !important;
+}
+ul.secNav a.text-dark:hover, ul.secNav a.text-dark:focus{
+   color: #8CC63E !important;
+}
 a {
   color: #0366d6;
+  font-weight:bold;
+}
+a:hover{
+    color:#8CC63E;
 }
 ul li a{
     font-weight:bold;
@@ -22,7 +41,11 @@ ul{
     float:left;
     display:block;
 }
-
+legend{
+    color:#007790;
+    text-align:center;
+    font-weight:bold;
+}
 a.navbar-brand img{
     width: 200px;
 }
@@ -53,6 +76,51 @@ img.centerDivide {
 div.clear{
     clear:both;
     display:block;
+}
+p.selected{
+    font-size: 20px;
+}
+div.discuss, div.discussboard {
+    border: 3px solid #007790;
+    padding: 10px;
+    width: 75%;
+    display: flow-root;
+    margin-bottom: 10px;
+    background-color: #000000;
+    color:#ffffff;
+}
+div.discussReply {
+    border: 3px solid #8CC63E;
+    padding: 10px;
+    width: 100%;
+    margin-bottom:-2px;
+
+}
+
+p.linkDec {
+    display: block;
+}
+p.linkDec a {
+    width: 200px;
+    background-color: #007790;
+    color: #D1D2D4;
+    padding: 8px;
+    line-height:10px;
+    margin-top: 10px;
+}
+p.linkDec a:hover {
+    background-color: #8CC63E;
+    color: #fff;
+}
+div.discussboard p.db a {
+    color: #8CC63E;
+    font-size: 20px;
+    width: 500px;
+    padding: 5px;
+}
+
+div.discussboard p.db a:hover {
+    color: #007790;
 }
 /* Side Secondary Navigation for user specific layout
 ---------------------------------------------------*/
@@ -104,8 +172,8 @@ a.linkButtons {
     margin-top: 20px;
     float: left;
     background-color: #007790;
-    color: #D1D2D4;
-    font-weight: bold;
+    color: #fff;
+    font-weight: bolder;
     text-align: center;
     margin-left: 30px
 }
@@ -156,7 +224,8 @@ fieldset {
 .Login .submitButton, input.submitButton {
     width: 200px;
     background-color: #007790;
-    color: #D1D2D4;
+    color: #fff;
+    font-weight:bolder;
     float:right;
     margin-bottom: 0px;
 }
@@ -224,9 +293,10 @@ div.seventyfive {
     margin-top: 10px;
     width: 75%;
 }
-
+div.discussReplySevenFive{
+    float:left;
+}
 /*Tabs for editing users from an admin standpoint*/
-
 /* Style the tab */
 .tab {
     overflow: hidden;
@@ -386,9 +456,72 @@ body {
 .panel a:hover {
     background-color: #8CC63E;
 }
+div.Hide{
+    display:none;
+}
 /*@ media queries for different media device sizes*/
-@media (min-width: 768px) {
+/*around ipad size*/
+@media (max-width: 770px) {
     html {
-        font-size: 16px;
+        font-size: 18px;
+    }
+    div.fiftyPercent{
+        width: 97%;
+    }
+    img.indexImages{
+        width: 100%;
+    }
+    a.linkButtons{
+        width: 85%;
+    }
+    div.col-md-4{
+        max-width:none;
+    }
+    div.sideNav {
+        border: none;
+        width: 90%;
+        float: right;
+    }
+
+    div.col-md-12 {
+        width: 100%;
+        display: block;
+    }
+
+    table {
+        display: none;
+    }
+
+    div.Hide {
+        display: inherit;
+    }
+    a.courseButton{
+        margin-top:0px;
+        margin-left:0px;
+        width:100%;
+    }
+    .accordDiv{
+        width:auto;
+    }
+    div.discussboard{
+        width: 100%;
+    }
+    
+}
+@media (max-width: 411px){
+    h1{
+        font: 20px;
+    }
+    h2{
+        font: 16px;
+    }
+    h3{
+        font:12px;
+    }
+    input.submitButton{
+        width: 90%;
+    }
+    img.indexImages {
+        display:none;
     }
 }

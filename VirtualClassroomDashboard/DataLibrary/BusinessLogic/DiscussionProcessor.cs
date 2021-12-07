@@ -33,7 +33,7 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
         }
         public static List<DiscussionModelData> RetrieveDiscussionForCourse(int DID)
         {
-            string sql = "SELECT * FROM dbo.DISCUSSION WHERE CourseID = \'" + DID + "\';";
+            string sql = "SELECT * FROM dbo.DISCUSSION WHERE DiscussionID = \'" + DID + "\';";
 
             return sqlDataAccess.LoadData<DiscussionModelData>(sql);
         }

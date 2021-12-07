@@ -47,5 +47,13 @@ namespace VirtualClassroomDashboard.Classes
 
             return BCI;
         }
+        public static void setCourseID(int cid)
+        {
+            cID = cid;
+        }
+        public static int getCourseID()
+        {
+            return cID;
+        }
     }
 }

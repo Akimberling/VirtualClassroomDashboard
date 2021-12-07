@@ -24,16 +24,17 @@
 
         <table class="tableDec">
             <tr>
-                <th>User Id</th>
+                @if (@TempData["UT"].ToString() == "Teacher")
+                {
+                    <th>User Id</th>
+                }
                 <th>First Name</th>
                 <th>Last Name </th>
                 <th>Email Address</th>
-                <th>PhoneNumber</th>
                 @if (@TempData["UT"].ToString() == "Teacher")
                 {
-                    <th></th>
+                    <th>Remove</th>
                 }
-
             </tr>
             @foreach (var item in Model)
             {
@@ -45,14 +46,6 @@
                     <td>@item.FirstName</td>
                     <td>@item.LastName</td>
                     <td>@item.EmailAddress</td>
-                    @if(item.PhoneNumber == "")
-                    {
-                        <td></td>
-                    }
-                    else
-                    {
-                        <td>@item.PhoneNumber</td>
-                    }
                     @if (@TempData["UT"].ToString() == "Teacher")
                     {
                         <td>@Html.ActionLink("Remove", "RemoveStudent", new { id = item.UserID })</td>

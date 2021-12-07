@@ -9,7 +9,7 @@
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
 
-    <h3>Delete</h3>
+    <h2>Delete</h2>
     <p class="errorResponse">@ViewBag.Error</p>
     @if (Model != null)
     {
@@ -21,7 +21,7 @@
                 <th>Last Name </th>
                 <th>Email Address</th>
                 <th>PhoneNumber</th>
-                <th></th>
+                <th>Delete</th>
             </tr>
             @foreach (var item in Model)
             {
