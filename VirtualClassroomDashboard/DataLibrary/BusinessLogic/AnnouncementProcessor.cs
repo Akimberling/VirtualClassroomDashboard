@@ -50,9 +50,9 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
             return sqlDataAccess.LoadData<AnnouncementModelData>(sql);
         }
         //retrieve all the announcements for a course
-        public static List<AnnouncementModelData> RetrieveAllCourseAnnouncements(int cid, int uid)
+        public static List<AnnouncementModelData> RetrieveAllCourseAnnouncements(int cid)
         {
-            string sql = "SELECT * FROM dbo.ANNOUNCEMENTS WHERE CourseID = \'" + cid + "\' AND UserID =  \'" + uid + "\' ;";
+            string sql = "SELECT * FROM dbo.ANNOUNCEMENTS WHERE CourseID = \'" + cid + "\';";
 
             return sqlDataAccess.LoadData<AnnouncementModelData>(sql);
         }

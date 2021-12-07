@@ -12,18 +12,19 @@
         <div class="col-md-12">
             <form asp-action="EditCourse">
                 <fieldset>
+                    <legend>Edit Course Information</legend>
                     <p class="errorResponse">@ViewBag.Error</p>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="fiftyPercent ">
                         <div class="form-group">
                             <label asp-for="CourseName" class="control-label"></label>
-                            <input asp-for="CourseName" class="form-control" value=@TempData["CName"]/>
-                            <span asp-validation-for="CourseName" class="text-danger" ></span>
+                            <input asp-for="CourseName" class="form-control" value=@TempData["CName"] />
+                            <span asp-validation-for="CourseName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="CourseSection" class="control-label"></label>
-                            <input asp-for="CourseSection" class="form-control" value=@TempData["CSec"]/>
-                            <span asp-validation-for="CourseSection" class="text-danger" ></span>
+                            <input asp-for="CourseSection" class="form-control" value=@TempData["CSec"] />
+                            <span asp-validation-for="CourseSection" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="fiftyPercent ">
@@ -47,3 +48,7 @@
             <div class="clear"></div>
         </div>
     </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

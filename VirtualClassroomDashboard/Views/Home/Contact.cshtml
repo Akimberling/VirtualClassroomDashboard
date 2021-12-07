@@ -13,28 +13,29 @@
         <div class="col-md-12">
             <form asp-action="Contact">
                 <fieldset>
+                    <legend>Contact Information</legend>
                     <div class="fiftyPercent">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="fName" class="control-label"></label>
-                            <input asp-for="fName" class="form-control" placeholder="EX: John"/>
+                            <input asp-for="fName" class="form-control" placeholder="EX: John" />
                             <span asp-validation-for="fName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="lName" class="control-label"></label>
-                            <input asp-for="lName" class="form-control" placeholder="EX: Doe"/>
+                            <input asp-for="lName" class="form-control" placeholder="EX: Doe" />
                             <span asp-validation-for="lName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="email" class="control-label"></label>
-                            <input asp-for="email" class="form-control" placeholder="EX: JohnD@johnd.com"/>
+                            <input asp-for="email" class="form-control" placeholder="EX: JohnD@johnd.com" />
                             <span asp-validation-for="email" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="fiftyPercent">
                         <div class="form-group">
                             <label asp-for="schoolName" class="control-label"></label>
-                            <input asp-for="schoolName" class="form-control" placeholder="EX: MIT"/>
+                            <input asp-for="schoolName" class="form-control" placeholder="EX: MIT" />
                             <span asp-validation-for="schoolName" class="text-danger"></span>
                         </div>
                         <div class="form-group">

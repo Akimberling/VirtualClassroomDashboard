@@ -39,6 +39,12 @@ namespace VirtualClassroomDashboard.DataLibrary.BusinessLogic
             return sqlDataAccess.SaveData(sql, data);
 
         }
+        public static List<int> CheckIfUserIsInCourse(int CID, int UID)
+        {
+            string sql = "SELECT COUNT(*) FROM dbo.USER_COURSE WHERE CourseID = \'" + CID + "\' AND UserID = \'" + UID + "\';";
+
+            return sqlDataAccess.LoadData<int>(sql);
+        }
         //retrieve the user course ID's -- Needed for studcent dash
         public static List<UserCourseModelData> RetrieveUserCourses(int UID)
         {

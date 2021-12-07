@@ -17,7 +17,7 @@
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
 
-    <h3> @TempData["CourseName"]: @ViewData["DiscussionTitle"] - @ViewData["DiscussionDate"]</h3>
+    <h2> @TempData["CourseName"]: @ViewData["DiscussionTitle"] - @ViewData["DiscussionDate"]</h2>
     <p class="errorResponse">@ViewBag.Error</p>
     <div class="discuss">
         @ViewData["DiscussionDesc"]
@@ -27,6 +27,7 @@
         <div class="col-md-12">
             <form asp-action="DiscussionReply">
                 <fieldset>
+                    <legend>Reply to Discussion Prompt</legend>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="DiscussionReplyDesc" class="control-label"></label>
@@ -45,3 +46,6 @@
     </div>
     <div class="clear"></div>
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

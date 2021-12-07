@@ -17,19 +17,21 @@
     <p>If you would like to format your own email of concern please contact: <a class="basicLinks" href="mailto: support@virtualclassroomdashboard.azurewebsites.net?subject=Issues or Concerns (Add your information here)&body=Message">Support. </a>If you would like to format your own comment emil please contact: <a class="basicLinks" href="mailto: info@virtualclassroomdashboard.azurewebsites.net?subject=IFeedback or Comments (Add your information here)&body=Message">Info.</a></p>
     <img class="centerDivide" src="~/images/centerDividers.png" alt="Virtual Classroom Dashboard Center Divider" />
 
-    <h3> @TempData["CourseName"]: @ViewData["DiscussionTitle"] - @ViewData["DiscussionDate"]</h3>
+    <h2> @TempData["CourseName"]: @ViewData["DiscussionTitle"] - @ViewData["DiscussionDate"]</h2>
     <p class="errorResponse">@ViewBag.Error</p>
     <div class="discuss">
         <p>@ViewData["DiscussionDesc"]</p>
         <p class="linkDec">@Html.ActionLink("Reply", "DiscussionReply", new { id = ViewData["DiscussionID"] })</p>
     </div>
-    @foreach (var item in Model)
-    {
-        <div class="discussReply">
-            <h5>@item.UserName - @item.DiscussionReplyDate</h5>
-            <p>@item.DiscussionReplyDesc</p>
-        </div>
-    }
+    <div class="seventyfive discussReplySevenFive">
+        @foreach (var item in Model)
+        {
+            <div class="discussReply">
+                <h3>@item.UserName - @item.DiscussionReplyDate</h3>
+                <p>@item.DiscussionReplyDesc</p>
+            </div>
+        }
+    </div>
     <div class="clear"></div>
 </div>
 <div class="clear"></div>

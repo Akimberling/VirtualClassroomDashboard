@@ -1,5 +1,8 @@
 ﻿
-
+*{
+    font-size: 14px;
+    font-weight:bold;
+}
 header{
 
     background-color: #000000;
@@ -11,7 +14,19 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-
+.text-dark{
+    color:#ffffff !important;
+    font-size:14px;
+}
+a.text-dark:focus, a.text-dark:hover{
+    color:#8CC63E !important;
+}
+ul.secNav a.text-dark {
+    color: #007790 !important;
+}
+ul.secNav a.text-dark:hover, ul.secNav a.text-dark:focus{
+   color: #8CC63E !important;
+}
 a {
   color: #0366d6;
   font-weight:bold;
@@ -26,7 +41,11 @@ ul{
     float:left;
     display:block;
 }
-
+legend{
+    color:#007790;
+    text-align:center;
+    font-weight:bold;
+}
 a.navbar-brand img{
     width: 200px;
 }
@@ -73,8 +92,7 @@ div.discuss, div.discussboard {
 div.discussReply {
     border: 3px solid #8CC63E;
     padding: 10px;
-    width: 75%;
-    display: flow-root;
+    width: 100%;
     margin-bottom:-2px;
 
 }
@@ -154,8 +172,8 @@ a.linkButtons {
     margin-top: 20px;
     float: left;
     background-color: #007790;
-    color: #D1D2D4;
-    font-weight: bold;
+    color: #fff;
+    font-weight: bolder;
     text-align: center;
     margin-left: 30px
 }
@@ -206,7 +224,8 @@ fieldset {
 .Login .submitButton, input.submitButton {
     width: 200px;
     background-color: #007790;
-    color: #D1D2D4;
+    color: #fff;
+    font-weight:bolder;
     float:right;
     margin-bottom: 0px;
 }
@@ -274,9 +293,10 @@ div.seventyfive {
     margin-top: 10px;
     width: 75%;
 }
-
+div.discussReplySevenFive{
+    float:left;
+}
 /*Tabs for editing users from an admin standpoint*/
-
 /* Style the tab */
 .tab {
     overflow: hidden;
@@ -441,7 +461,7 @@ div.Hide{
 }
 /*@ media queries for different media device sizes*/
 /*around ipad size*/
-@media (max-width: 768px) {
+@media (max-width: 770px) {
     html {
         font-size: 18px;
     }
@@ -457,26 +477,47 @@ div.Hide{
     div.col-md-4{
         max-width:none;
     }
-    
-}
-@media (max-width: 765px) {
-    div.sideNav{
+    div.sideNav {
         border: none;
         width: 90%;
         float: right;
     }
-    div.col-md-12{
+
+    div.col-md-12 {
+        width: 100%;
+        display: block;
+    }
+
+    table {
+        display: none;
+    }
+
+    div.Hide {
+        display: inherit;
+    }
+    a.courseButton{
+        margin-top:0px;
+        margin-left:0px;
         width:100%;
-        display:block;
     }
-    table{
-        display:none;
+    .accordDiv{
+        width:auto;
     }
-    div.Hide{
-        display:inherit;
+    div.discussboard{
+        width: 100%;
     }
+    
 }
 @media (max-width: 411px){
+    h1{
+        font: 20px;
+    }
+    h2{
+        font: 16px;
+    }
+    h3{
+        font:12px;
+    }
     input.submitButton{
         width: 90%;
     }
