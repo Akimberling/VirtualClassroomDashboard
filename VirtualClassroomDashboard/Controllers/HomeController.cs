@@ -1189,9 +1189,8 @@ namespace VirtualClassroomDashboard.Controllers
                 
                 //set the path
                 List<CourseFileModel> CourseFile = new List<CourseFileModel>();
-                string filepath = directoryName + "/";
                 int cid = int.Parse(BasicCI["CourseID"]);
-                var courseFileData = FileProcessor.RetrieveCourseFile("Syllabus", filepath, userId, cid);
+                var courseFileData = FileProcessor.RetrieveCourseFile("Syllabus", "/" + directoryName + "/", userId, cid);
 
                 if (courseFileData.Count > 0)
                 {
@@ -1210,10 +1209,10 @@ namespace VirtualClassroomDashboard.Controllers
                     //store the values from userData into the model
                     fileInfo.FileName = CourseFile[0].FileName;
 
-                    System.IO.FileInfo fileP = new FileInfo(Path.Combine(filepath, fileInfo.FileName));
+                    System.IO.FileInfo fileP = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", directoryName + "/", fileInfo.FileName));
 
                     if (fileP.Exists)
-                      ViewBag.Message += string.Format("<p>Current Syllabus: </p><a href= \"" + fileP + "\" target=\"_blank\" download>" + fileInfo.FileName + "</a>");
+                      ViewBag.Message += string.Format("<p>Current Syllabus: </p><a href= \"/" + directoryName + "/" + fileInfo.FileName + "\" target=\"_blank\" download>" + fileInfo.FileName + "</a>");
                 }
 
                 return View();
@@ -1246,9 +1245,8 @@ namespace VirtualClassroomDashboard.Controllers
                 return View();
             }
             else { 
-
                 //designate the path that the file will be saved
-                string path = Path.Combine(directoryName + "/");
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot",  directoryName + "/");
                 //check if that directory already exists. if it does create the path
                 if (!Directory.Exists(path))
                 {
@@ -1256,7 +1254,6 @@ namespace VirtualClassroomDashboard.Controllers
                 }
                 //create a list of strings called uploded files
                 List<string> uploadedFiles = new List<string>();
-
                 //foreach of the file being uploaded
                 foreach (IFormFile postedFile in postedFiles)
                 {
@@ -1276,15 +1273,14 @@ namespace VirtualClassroomDashboard.Controllers
                     //if the file exists
                     if (fi.Exists)
                     {
-                        string filepath = directoryName + "/";
                         int cid = int.Parse(BasicCI["CourseID"]);
                         //check the database
                         List<int> dupFiles = FileProcessor.CheckForDuplicates(directoryName + "." + fileEnd, userId, cid, "Syllabus");
                         //if the database contains the file
-                        if(dupFiles[0] != 0)
+                        if(dupFiles[0] > 0)
                         {
                             //remove the file
-                            int fileDel = FileProcessor.deleteCourseFileData(directoryName + "." + fileEnd, path, userId, cid);
+                            int fileDel = FileProcessor.deleteCourseFileData(directoryName + "." + fileEnd, directoryName + "/", userId, cid);
                             //remove the file from server
                             System.IO.FileInfo fileP = new FileInfo(Path.Combine(path, directoryName + "." + fileEnd));
                             if (fileP.Exists)
@@ -1292,21 +1288,23 @@ namespace VirtualClassroomDashboard.Controllers
                         }
                         //change the file name
                         fi.MoveTo(Path.Combine(path, directoryName + "." + fileEnd));
+                        string FilePathName = "/" + directoryName + "/" + directoryName + "." + fileEnd;
+
                         //inform the user that the file was uploaded and the name change
                         ViewBag.Message += string.Format("<b>{0}</b> uploaded.<br />", directoryName + "." + fileEnd);
-                        ViewBag.Message += string.Format("<p>New Syllabus: </p><a href= " + path + "/" + directoryName + "." + fileEnd + " taget=\"_blank\" download>" + directoryName + "." + fileEnd + "</a>");
+                        ViewBag.Message += string.Format("<p>New Syllabus: </p><a href= \"" + FilePathName + "\" taget=\"_blank\" download>" + directoryName + "." + fileEnd + "</a>");
                         //set the syllabus 
                         SelectedCourseClass.setSyllabus(directoryName + "." + fileEnd);
                         string NewFile = directoryName + "." + fileEnd;
                         //save the file to the database
-                        int fileRec = FileProcessor.CreateFile(NewFile, path, "Syllabus", directoryName + "Syllabus", userId, cid);
+                        int fileRec = FileProcessor.CreateFile(NewFile, "/" + directoryName + "/", "Syllabus", directoryName + "Syllabus", userId, cid);
                     }
                     
                 }
                 return View();
             }
         }
-
+        
         [HttpGet]
         public IActionResult Roster()
         {
@@ -1439,7 +1437,8 @@ namespace VirtualClassroomDashboard.Controllers
             FileProcessor.deleteCourseFileData(fname, fpath, id, cid);
 
             //remove the file from server
-            System.IO.FileInfo fileP = new FileInfo(Path.Combine(fpath, fname));
+            System.IO.FileInfo fileP = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", fpath, fname));
+
             if (fileP.Exists)
                 fileP.Delete();
 
@@ -1497,7 +1496,7 @@ namespace VirtualClassroomDashboard.Controllers
             {
                 string directoryName = BasicUI["FirstName"] + BasicUI["LastName"] + "_" + BasicCI["CourseNumber"];
                 //designate the path that the file will be saved
-                string path = Path.Combine(directoryName);
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", directoryName + "/");
                 //check if that directory already exists. if it does create the path
                 if (!Directory.Exists(path))
                 {
@@ -1531,13 +1530,25 @@ namespace VirtualClassroomDashboard.Controllers
                             fi.MoveTo(Path.Combine(path, newFile));
                             //set the syllabus 
                             SelectedCourseClass.setSyllabus(newFile);
-                            //save the file to the database
-                            int fileRec = FileProcessor.CreateFile(newFile, path + "/", "Syllabus", directoryName + "Syllabus", int.Parse(BasicUI["UserID"]), cid);
+
+                            List<int> dupFile = FileProcessor.CheckForDuplicates(newFile, int.Parse(BasicUI["UserID"]), cid, "Syllabus");
+
+                            if(dupFile[0] > 0)
+                            {
+                                //save the file to the database
+                                int fileRec = FileProcessor.CreateFile(newFile, "/" + directoryName + "/", "Syllabus", directoryName + "Syllabus", int.Parse(BasicUI["UserID"]), cid);
+                            }
+                            else
+                            {
+                                FileProcessor.updateSyllabusFileInfo(newFile, "/" + directoryName + "/", int.Parse(BasicUI["UserID"]), cid);
+                            }
+                            
                         }
+                        
                     }
                     else
                     {
-                        int fileRec = FileProcessor.CreateFile(fileName, path + "/", model.FileSubject, model.FileDesc, int.Parse(BasicUI["UserID"]), cid);
+                        int fileRec = FileProcessor.CreateFile(fileName, "/" + directoryName + "/", model.FileSubject, model.FileDesc, int.Parse(BasicUI["UserID"]), cid);
                     }
 
                 }

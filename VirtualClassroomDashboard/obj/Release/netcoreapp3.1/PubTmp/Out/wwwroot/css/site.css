@@ -484,10 +484,12 @@ div.Hide{
     }
 
     div.col-md-12 {
-        width: 100%;
+        max-width:none;
         display: block;
     }
-
+    div.col-md-12 fieldset {
+        width: 100%;
+    }
     table {
         display: none;
     }
@@ -501,7 +503,7 @@ div.Hide{
         width:100%;
     }
     .accordDiv{
-        width:auto;
+        width:100%;
     }
     div.discussboard{
         width: 100%;
